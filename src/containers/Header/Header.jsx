@@ -1,39 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Login = () => {
-  return <div>Login Page</div>;
-};
-
-const Register = () => {
-  return <div>Register Page</div>;
-};
-
-const LoginOrLogout = () => {
-  if (this.props.loggedIn) {
-    return (
-      <div className="logged-out">
-        <Link to="/login">
-          <button>Login</button>
-        </Link>
-
-        <Link to="/register">
-          <button>Register</button>
-        </Link>
-
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-      </div>
-    );
-  } else {
-    return (
-      <div className="logged-in">
-        Welcome, {this.props.username}
-        <button onClick="this.props.logout">Logout</button>
-      </div>
-    );
-  }
-};
+import HeaderLogin from '../../components/HeaderLogin';
+import { logout } from '../../actions';
 
 class Header extends Component {
   constructor(props) {
@@ -81,10 +50,32 @@ class Header extends Component {
           </button>
         </form>
 
-        <LoginOrLogout />
+        <HeaderLogin
+          currentUser={this.props.currentUser}
+          logout={this.props.logout}
+        />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => {
+      dispatch(logout());
+    }
+  };
+};
+
+Header = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);
 
 export default Header;
