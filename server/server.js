@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const redis = require('connect-redis')(session);
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const LocalStrategy = 'passport-local';
 const User = require('../database/models/User');
 
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
@@ -35,8 +36,44 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
+  console.log('deserializing');
   new User({ id: user.id })
-})
+    .fetch()
+    .then(user => {
+      user = user.toJSON();
+      return done(null, {
+        id: user.id,
+        username: user.username
+      });
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
+passport.use(
+  new LocalStrategy(function(username, passsword, done) {
+    return new User({ username: username })
+      .fetch()
+      .then(user => {
+        user = user.toJSON();
+        if (user === null) {
+          return done(null, false, { message: 'bad username or password' });
+        } else {
+          bcrypt.compare(password, user.password).then(res => {
+            if (res) {
+              return done(null, user);
+            } else {
+              return done(null, false, { message: 'bad username or password' });
+            }
+          });
+        }
+      })
+      .catch(err => {
+        return done(err);
+      });
+  })
+);
 
 if (!PORT) {
   throw new Error('PORT not set');
