@@ -2,6 +2,9 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const redis = require('connect-redis')(session);
+const passport = require('passport');
+const bcrypt = require('bcryptjs');
+const User = require('../database/models/User');
 
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'squirtle';
@@ -30,6 +33,10 @@ passport.serializeUser((user, done) => {
     username: user.username
   });
 });
+
+passport.deserializeUser((user, done) => {
+  new User({ id: user.id })
+})
 
 if (!PORT) {
   throw new Error('PORT not set');
