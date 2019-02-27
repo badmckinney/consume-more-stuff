@@ -6,6 +6,7 @@ const Role = require('./Role');
 class User extends bookshelf.Model {
   get tableName() { return 'users'; }
   get hasTimestamps() { return true; }
+  get hidden() { return ['id', 'password']; }
   items() { return this.hasMany('Item', 'items'); }
   status() { return this.hasOne('UserStatus', 'id', 'status_id'); }
   role() { return this.hasOne('Role', 'id', 'role_id'); }
