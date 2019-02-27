@@ -7,13 +7,24 @@ import './App.scss';
 
 // import actions here
 
-//Component for router test
+// placeholders for login and register components
+const Login = () => {
+  return <div>Login Page</div>;
+};
+
+const Register = () => {
+  return <div>Register Page</div>;
+};
+// /placeholders
 
 class App extends Component {
   render() {
     return (
       <div>
         <Header />
+
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </div>
     );
   }
