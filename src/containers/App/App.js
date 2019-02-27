@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './App.css';
+import Header from '../Header';
+
+import './App.scss';
 
 // import actions here
 
-//Component for router test
-const Home = () => {
-  return (
-    <div>
-      <h1> Home</h1>
-    </div>
-  );
+// placeholders for login and register components
+const Login = () => {
+  return <div>Login Page</div>;
 };
 
-const Test = () => {
-  return (
-    <div>
-      <h1> Test</h1>
-    </div>
-  );
+const Register = () => {
+  return <div>Register Page</div>;
 };
+// /placeholders
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Link to="/test">test</Link>
+        <Header />
 
-        <Route path="/" exact component={Home} />
-        <Route path="/test" component={Test} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </div>
     );
   }
