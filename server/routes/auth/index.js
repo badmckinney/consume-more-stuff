@@ -34,3 +34,10 @@ router.post('/register'),
 router.post('/login', passport.authenticate('local'), (req, res) => {
   res.json({ success: true, username: req.user.username, id: req.user.id });
 });
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.send({ success: true });
+});
+
+module.exports = router;
