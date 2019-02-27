@@ -3,7 +3,8 @@ require('dotenv').config();
 module.exports = {
   client: 'pg',
   connection: {
-    host: process.env.PG_HOST_PORT,
+    port: process.env.PG_HOST_PORT,
+    host: process.env.PG_HOSTNAME,
     user: process.env.PG_USER,
     password: process.env.PG_PASSWORD,
     database: process.env.PG_DATABASE
