@@ -22,7 +22,7 @@ services:
     volumes:
       - pg-data-volume:/var/lib/postgresql/data
     ports:
-      - '${PG_HOST_PORT}:${PG_CONTAINER_PORT}'
+      - '${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}'
     networks:
       - my-app-network
   redis-server:
