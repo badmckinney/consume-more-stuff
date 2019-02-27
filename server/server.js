@@ -6,6 +6,7 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const LocalStrategy = 'passport-local';
 const User = require('../database/models/User');
+const { auth } = require('./routes')
 
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'squirtle';
@@ -86,6 +87,9 @@ if (!ENV) {
 if (!SESSION_SECRET) {
   throw new Error('SESSION_SECRET not set');
 }
+
+
+app.use('/api', auth);
 
 app.listen(PORT, () => {
   console.log(`Server is hot and ready on: ${PORT}`);
