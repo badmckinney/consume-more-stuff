@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReduxThunk from 'redux-thunk';
-import './index.css';
+import './index.scss';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './containers/App';
 
