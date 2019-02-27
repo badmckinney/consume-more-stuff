@@ -5,6 +5,36 @@ const Login = () => {
   return <div>Login Page</div>;
 };
 
+const Register = () => {
+  return <div>Register Page</div>;
+};
+
+const LoginOrLogout = () => {
+  if (this.props.loggedIn) {
+    return (
+      <div className="logged-out">
+        <Link to="/login">
+          <button>Login</button>
+        </Link>
+
+        <Link to="/register">
+          <button>Register</button>
+        </Link>
+
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+      </div>
+    );
+  } else {
+    return (
+      <div className="logged-in">
+        Welcome, {this.props.username}
+        <button onClick="this.props.logout">Logout</button>
+      </div>
+    );
+  }
+};
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -50,11 +80,8 @@ class Header extends Component {
             Search
           </button>
         </form>
-        <Link to="/login">
-          <button>Login</button>
-        </Link>
 
-        <Route path="/login" component={Login} />
+        <LoginOrLogout />
       </div>
     );
   }
