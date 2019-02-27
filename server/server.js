@@ -23,6 +23,14 @@ app.use(
   })
 );
 
+passport.serializeUser((user, done) => {
+  console.log('serializing');
+  return done(null, {
+    id: user.id,
+    username: user.username
+  });
+});
+
 if (!PORT) {
   throw new Error('PORT not set');
 }
