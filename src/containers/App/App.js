@@ -7,7 +7,7 @@ import Header from '../Header';
 import Login from '../Login';
 // import actions here
 
-// placeholders for login and register components
+// placeholders for register components
 
 const Register = () => {
   return <div>Register Page</div>;
