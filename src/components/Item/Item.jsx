@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Item.scss';
 
 const Item = props => {
   const { item } = props;
