@@ -421,3 +421,5 @@ router.delete('/items/:id', (req, res) => {
         })
     })
 });
+
+module.exports = router;
