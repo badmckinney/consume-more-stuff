@@ -19,12 +19,12 @@ class App extends Component {
         <Sidebar />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/" component={} />
+        {/* <Route path="/" component={} />
         <Route path="/profile" component={} />
         <Route path="/messages" component={} />
         <Route path="/items/new" component={} />
         <Route path="/items" component={} />
-        <Route path="/category/:category" component={} />
+        <Route path="/category/:category" component={} /> */}
       </div>
     );
   }

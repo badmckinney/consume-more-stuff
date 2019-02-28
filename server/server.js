@@ -65,7 +65,7 @@ passport.deserializeUser((user, done) => {
       });
     })
     .catch(err => {
-      res.status(500).json(err);
+      return done(err);
     });
 });
 
