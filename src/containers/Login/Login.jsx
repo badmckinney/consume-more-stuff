@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { login } from '../../actions';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -65,5 +67,21 @@ class Login extends Component {
     );
   }
 }
+
+// could use mapState to props here to update
+// state with login error messages to display
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login: user => {
+      dispatch(login(user));
+    }
+  };
+};
+
+Login = connect(
+  null,
+  mapDispatchToProps
+)(Login);
 
 export default Login;
