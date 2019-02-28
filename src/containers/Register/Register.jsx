@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-// import { register } from '../../actions'
+import { register, resetRedirect } from '../../actions';
 
 class Register extends Component {
   constructor(props) {
@@ -15,7 +16,18 @@ class Register extends Component {
       password: ''
     };
 
+    this.redirect = this.redirect.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  redirect() {
+    if (this.props.redirect) {
+      this.props.resetRedirect();
+      return true;
+    }
+
+    return false;
   }
 
   handleInputChange(e) {
@@ -48,7 +60,27 @@ class Register extends Component {
     }
   }
 
+  handleSubmit(e) {
+    const { first_name, last_name, email, username, password } = this.state;
+    const newUser = { first_name, last_name, email, username, password };
+
+    e.preventDefault();
+    this.props.register(newUser);
+
+    this.setState({
+      first_name: '',
+      last_name: '',
+      email: '',
+      username: '',
+      password: ''
+    });
+  }
+
   render() {
+    if (this.redirect()) {
+      return <Redirect to="/login" />;
+    }
+
     return (
       <div>
         <form>
@@ -96,19 +128,41 @@ class Register extends Component {
             <label htmlFor="password">Password:</label>
           </div>
           <input
-            type="text"
+            type="password"
             name="password"
             value={this.state.password}
             onChange={this.handleInputChange}
           />
 
           <div>
-            <button>Register</button>
+            <button onClick={this.handleSubmit}>Register</button>
           </div>
         </form>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    redirect: state.redirect
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    register: newUser => {
+      dispatch(register(newUser));
+    },
+    resetRedirect: () => {
+      dispatch(resetRedirect());
+    }
+  };
+};
+
+Register = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register);
 
 export default Register;

@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import { login } from '../../actions';
+import { login, resetRedirect } from '../../actions';
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      loginRedirect: this.props.loginRedirect,
       username: '',
       password: ''
     };
 
+    this.redirect = this.redirect.bind(this);
     this.handleUsernameOnChange = this.handleUsernameOnChange.bind(this);
     this.handlePasswordOnChange = this.handlePasswordOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  redirect() {
+    if (this.props.redirect) {
+      this.props.resetRedirect();
+      return true;
+    }
+
+    return false;
   }
 
   handleUsernameOnChange(e) {
@@ -44,6 +56,10 @@ class Login extends Component {
   }
 
   render() {
+    if (this.redirect()) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <form>
         <div>Username:</div>
@@ -70,19 +86,25 @@ class Login extends Component {
   }
 }
 
-// could use mapState to props here to update
-// state with login error messages to display
+const mapStateToProps = state => {
+  return {
+    redirect: state.redirect
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     login: user => {
       dispatch(login(user));
+    },
+    resetRedirect: () => {
+      dispatch(resetRedirect());
     }
   };
 };
 
 Login = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);
 
