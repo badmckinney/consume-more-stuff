@@ -1,5 +1,5 @@
 // import actions here
-import { LOGOUT } from '../actions';
+import { LOGOUT, ADD_POST } from '../actions';
 
 const initialState = {
   items: [],
@@ -11,6 +11,10 @@ const itemReducer = (state = initialState, action) => {
     case LOGOUT:
       return Object.assign({}, state, {
         currentUser: ''
+      });
+    case ADD_POST:
+      return Object.assign({}, state, {
+        items: [...state.items.action.payload]
       });
     default:
       return state;
