@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './App.scss';
 
 import Sidebar from '../../components/Sidebar';
