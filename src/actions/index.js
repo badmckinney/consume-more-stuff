@@ -76,7 +76,7 @@ export const login = user => {
 
 export const logout = () => {
   return dispatch => {
-    return fetch('api/logout', { method: 'POST' })
+    return fetch('/api/logout', { method: 'POST' })
       .then(res => {
         return res.json();
       })
