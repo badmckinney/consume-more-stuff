@@ -36,12 +36,12 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.json({ success: true, username: req.user.username, id: req.user.id });
+  res.json({ success: true, username: req.user.username });
 });
 
 router.post('/logout', (req, res) => {
   req.logout();
-  req.send({ success: true });
+  res.send({ success: true });
 });
 
 module.exports = router;
