@@ -20,6 +20,10 @@ router.get('users/:profile', (req, res) => {
       }
 
       res.json(user.attributes);
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json(err);
     });
 });
 
@@ -55,7 +59,8 @@ router.put('/users/profile/edit', (req, res) => {
           res.json(user);
         })
         .catch((err) => {
-          throw new Error(err);
+          res.status(500);
+          res.json(err);
         });
     });
   });

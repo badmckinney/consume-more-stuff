@@ -48,7 +48,10 @@ router.get('/items', (req, res) => {
         items.push(itemData);
       });
       res.json(items);
-    })
+    }).catch((err) => {
+      res.status(500);
+      res.json(err);
+    });
 });
 
 router.get('/items/:id', (req, res) => {
@@ -90,7 +93,10 @@ router.get('/items/:id', (req, res) => {
       }
 
       res.json(itemData);
-    })
+    }).catch((err) => {
+      res.status(500);
+      res.json(err);
+    });
 });
 
 router.get('items/category/:category', (req, res) => {
@@ -133,7 +139,10 @@ router.get('items/category/:category', (req, res) => {
         items.push(itemData);
       });
       res.json(items);
-    })
+    }).catch((err) => {
+      res.status(500);
+      res.json(err);
+    });
 });
 
 router.get('/items/status/:status', (req, res) => {
@@ -176,7 +185,10 @@ router.get('/items/status/:status', (req, res) => {
         items.push(itemData);
       });
       res.json(items);
-    })
+    }).catch((err) => {
+      res.status(500);
+      res.json(err);
+    });
 });
 
 router.get('/items/search/:term', (req, res) => {
@@ -226,7 +238,10 @@ router.get('/items/search/:term', (req, res) => {
         items.push(itemData);
       });
       res.json(items);
-    })
+    }).catch((err) => {
+      res.status(500);
+      res.json(err);
+    });
 });
 
 /************************
@@ -288,6 +303,9 @@ router.post('/items/new', (req, res) => {
           }
 
           res.json(itemData);
+        }).catch((err) => {
+          res.status(500);
+          res.json(err);
         })
     })
 });
@@ -332,8 +350,9 @@ router.put('/items/:id/edit', (req, res) => {
           res.json(updated);
         })
         .catch((err) => {
-          throw new Error(err);
-        });
+          res.status(500);
+          res.json(err);
+        })
     })
 });
 
@@ -396,6 +415,9 @@ router.delete('/items/:id', (req, res) => {
             items.push(itemData);
           });
           res.json(items);
+        }).catch((err) => {
+          res.status(500);
+          res.json(err);
         })
     })
 });
