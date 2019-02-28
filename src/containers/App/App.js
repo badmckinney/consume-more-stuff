@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+// import { connect } from 'react-redux';
 import Header from '../Header';
 import Sidebar from '../../components/Sidebar';
 
@@ -16,6 +16,10 @@ const Login = () => {
 const Register = () => {
   return <div>Register Page</div>;
 };
+
+const AddPost = () => {
+  return <div> Create New Post Page</div>
+}
 // /placeholders
 
 class App extends Component {
@@ -26,12 +30,12 @@ class App extends Component {
         <Sidebar />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/" component={} />
-        <Route path="/profile" component={} />
-        <Route path="/messages" component={} />
-        <Route path="/items/new" component={} />
-        <Route path="/items" component={} />
-        <Route path="/category/:category" component={} />
+        <Route path="/" component={AddPost} />
+        <Route path="/profile" component={Login} />
+        <Route path="/messages" component={Login} />
+        <Route path="/items/new" component={Login} />
+        <Route path="/items" component={Login} />
+        <Route path="/category/:category" component={Login} />
       </div>
     );
   }
