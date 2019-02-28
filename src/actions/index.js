@@ -2,7 +2,7 @@ export const REGISTER = 'REGISTER';
 export const RESET_REDIRECT = 'RESET_REDIRECT';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const ADD_POST = 'ADDPOST';
+export const NEW_ITEM = 'NEWITEM';
 
 export const resetRedirect = () => {
   return {
@@ -27,7 +27,6 @@ export const register = newUser => {
             success: true
           });
         }
-
         return dispatch({
           type: REGISTER,
           success: false
@@ -103,11 +102,11 @@ export const logout = () => {
   };
 };
 
-export const addPost = newPost => {
+export const newItem = newItem => {
   return dispatch => {
-    return fetch('api/items/new', {
+    return fetch('/api/items/new', {
       method: 'POST',
-      body: JSON.stringify(newPost),
+      body: JSON.stringify(newItem),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -117,8 +116,8 @@ export const addPost = newPost => {
       })
       .then(res => {
         return dispatch({
-          type: ADD_POST,
-          payload: newPost
+          type: NEW_ITEM,
+          payload: newItem
         }).catch(err => {
           res.status(500).json(err);
         });
