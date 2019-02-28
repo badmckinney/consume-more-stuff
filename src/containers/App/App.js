@@ -5,14 +5,9 @@ import './App.scss';
 
 import Header from '../Header';
 import Login from '../Login';
+import Register from '../Register';
+
 // import actions here
-
-// placeholders for register components
-
-const Register = () => {
-  return <div>Register Page</div>;
-};
-// /placeholders
 
 class App extends Component {
   render() {
