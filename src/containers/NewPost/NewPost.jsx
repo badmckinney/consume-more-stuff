@@ -41,6 +41,7 @@ class NewPost extends Component {
         break;
       case 'condition_id':
         this.setState({ condition_id: value });
+        break;
       case 'name':
         this.setState({ name: value });
         break;
@@ -74,6 +75,8 @@ class NewPost extends Component {
       case 'views':
         this.setState({ views: value });
         break;
+      default:
+      break;
     }
   }
 
@@ -98,7 +101,7 @@ class NewPost extends Component {
       views
     } = this.state;
 
-    this.props.newPost({
+    this.props.NewPost({
       created_by,
       status_id,
       category_id,
@@ -119,87 +122,99 @@ class NewPost extends Component {
   render() {
     return (
       <form className="form-container">
-        <label>Name:</label>
+        <div>
+          <label>Name:</label>
+        </div>
         <input
           type="text"
           name="name"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Image:</label>
+        <div>
+          <label>Image:</label>
+        </div>
         <input
           type="text"
           name="image"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Description:</label>
+        <div>
+          <label>Description:</label>
+        </div>
         <input
           type="text"
           name="description"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Pice:</label>
+        <div>
+          <label>Price:</label>
+        </div>
         <input
           type="text"
           name="price"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Manufacturer:</label>
+        <div>
+          <label>Manufacturer:</label>
+        </div>
         <input
           type="text"
           name="manufacturer"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Model:</label>
+        <div>
+          <label>Model:</label>
+        </div>
         <input
           type="text"
           name="model"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Length:</label>
+        <div>
+          <label>Length:</label>
+        </div>
         <input
           type="text"
           name="length"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Width:</label>
+        <div>
+          <label>Width:</label>
+        </div>
         <input
           type="text"
           name="width"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Height:</label>
+        <div>
+          <label>Height:</label>
+        </div>
         <input
           type="text"
           name="height"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Notes:</label>
+        <div>
+          <label>Notes:</label>
+        </div>
         <input
           type="text"
           name="notes"
           value={this.state.body}
           onChange={this.handleInputChange}
         />
-
-        <label>Views:</label>
+        <div>
+          <label>Views:</label>
+        </div>
         <input
           type="text"
           name="views"
@@ -207,7 +222,7 @@ class NewPost extends Component {
           onChange={this.handleInputChange}
         />
 
-        <button onCLick={this.handleSubmit}>Create New Post</button>
+        <button onClick={this.handleSubmit}>Create New Post</button>
       </form>
     );
   }
