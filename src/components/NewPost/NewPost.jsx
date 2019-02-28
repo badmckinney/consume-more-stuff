@@ -222,7 +222,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     NewPost: task => {
-      dispatch(newPost(task));
+      dispatch(NewPost(task));
     }
   };
 };
