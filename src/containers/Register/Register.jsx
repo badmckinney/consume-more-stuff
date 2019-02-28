@@ -17,7 +17,7 @@ class Register extends Component {
     };
 
     this.redirect = this.redirect.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -30,7 +30,7 @@ class Register extends Component {
     return false;
   }
 
-  handleInputChange(e) {
+  handleInputOnChange(e) {
     const name = e.target.name;
     const value = e.target.value;
 
@@ -91,7 +91,7 @@ class Register extends Component {
             type="text"
             name="first_name"
             value={this.state.first_name}
-            onChange={this.handleInputChange}
+            onChange={this.handleInputOnChange}
           />
 
           <div>
@@ -101,7 +101,7 @@ class Register extends Component {
             type="text"
             name="last_name"
             value={this.state.last_name}
-            onChange={this.handleInputChange}
+            onChange={this.handleInputOnChange}
           />
 
           <div>
@@ -111,7 +111,7 @@ class Register extends Component {
             type="text"
             name="email"
             value={this.state.email}
-            onChange={this.handleInputChange}
+            onChange={this.handleInputOnChange}
           />
 
           <div>
@@ -121,7 +121,7 @@ class Register extends Component {
             type="text"
             name="username"
             value={this.state.username}
-            onChange={this.handleInputChange}
+            onChange={this.handleInputOnChange}
           />
 
           <div>
@@ -131,7 +131,7 @@ class Register extends Component {
             type="password"
             name="password"
             value={this.state.password}
-            onChange={this.handleInputChange}
+            onChange={this.handleInputOnChange}
           />
 
           <div>

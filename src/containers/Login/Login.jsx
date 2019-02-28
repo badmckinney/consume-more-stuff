@@ -14,8 +14,7 @@ class Login extends Component {
     };
 
     this.redirect = this.redirect.bind(this);
-    this.handleUsernameOnChange = this.handleUsernameOnChange.bind(this);
-    this.handlePasswordOnChange = this.handlePasswordOnChange.bind(this);
+    this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -28,18 +27,22 @@ class Login extends Component {
     return false;
   }
 
-  handleUsernameOnChange(e) {
+  handleInputOnChange(e) {
+    const name = e.target.name;
     const value = e.target.value;
-    this.setState({
-      username: value
-    });
-  }
 
-  handlePasswordOnChange(e) {
-    const value = e.target.value;
-    this.setState({
-      password: value
-    });
+    switch (name) {
+      case 'username':
+        return this.setState({
+          username: value
+        });
+      case 'password':
+        return this.setState({
+          password: value
+        });
+      default:
+        return;
+    }
   }
 
   handleSubmit(e) {
@@ -66,7 +69,7 @@ class Login extends Component {
           type="text"
           name="username"
           value={this.state.username}
-          onChange={this.handleUsernameOnChange}
+          onChange={this.handleInputOnChange}
         />
 
         <div>Password:</div>
@@ -74,7 +77,7 @@ class Login extends Component {
           type="password"
           name="password"
           value={this.state.password}
-          onChange={this.handlePasswordOnChange}
+          onChange={this.handleInputOnChange}
         />
 
         <div>
