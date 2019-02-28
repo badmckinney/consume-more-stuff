@@ -30,6 +30,7 @@ class App extends Component {
         <Route path="/profile" component={} />
         <Route path="/messages" component={} />
         <Route path="/items/new" component={} />
+        <Route path="/items" component={} />
         <Route path="/category/:category" component={} />
       </div>
     );
