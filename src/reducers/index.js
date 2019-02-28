@@ -3,7 +3,7 @@ import { REGISTER, LOGIN, LOGOUT, RESET_REDIRECT } from '../actions';
 
 const initialState = {
   items: [],
-  currentUser: '',
+  currentUser: localStorage.getItem('user'),
   redirect: false
 };
 
@@ -20,6 +20,7 @@ const itemReducer = (state = initialState, action) => {
       }
     case LOGIN:
       if (action.success) {
+        localStorage.setItem('user', action.payload);
         return Object.assign({}, state, {
           currentUser: action.payload,
           redirect: true
@@ -30,6 +31,7 @@ const itemReducer = (state = initialState, action) => {
       }
     case LOGOUT:
       if (action.success) {
+        localStorage.removeItem('user');
         return Object.assign({}, state, {
           currentUser: ''
         });
