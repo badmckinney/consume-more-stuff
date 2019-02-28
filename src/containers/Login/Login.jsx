@@ -9,7 +9,6 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      loginRedirect: this.props.loginRedirect,
       username: '',
       password: ''
     };

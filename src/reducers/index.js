@@ -10,21 +10,33 @@ const initialState = {
 const itemReducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER:
-      if (action.payload) {
+      if (action.success) {
         return Object.assign({}, state, {
           redirect: true
         });
+      } else {
+        return;
+        //add error handling
       }
-      return;
     case LOGIN:
-      return Object.assign({}, state, {
-        currentUser: action.payload,
-        redirect: true
-      });
+      if (action.success) {
+        return Object.assign({}, state, {
+          currentUser: action.payload,
+          redirect: true
+        });
+      } else {
+        return;
+        //error handling
+      }
     case LOGOUT:
-      return Object.assign({}, state, {
-        currentUser: ''
-      });
+      if (action.success) {
+        return Object.assign({}, state, {
+          currentUser: ''
+        });
+      } else {
+        return;
+        //error handling
+      }
     case RESET_REDIRECT:
       return Object.assign({}, state, {
         redirect: false

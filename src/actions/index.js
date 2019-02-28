@@ -23,15 +23,14 @@ export const register = newUser => {
         if (res.success) {
           return dispatch({
             type: REGISTER,
-            payload: true
+            success: true
           });
         }
-        return;
       })
       .catch(err => {
         return dispatch({
           type: REGISTER,
-          payload: false
+          success: false
         });
       });
   };
@@ -51,12 +50,16 @@ export const login = user => {
         if (res.success) {
           return dispatch({
             type: LOGIN,
+            success: true,
             payload: user.username
           });
         }
       })
       .catch(err => {
-        console.log(err);
+        return dispatch({
+          type: LOGIN,
+          success: false
+        });
       });
   };
 };
@@ -70,15 +73,16 @@ export const logout = () => {
       .then(res => {
         if (res.success) {
           return dispatch({
-            type: LOGOUT
+            type: LOGOUT,
+            success: true
           });
         }
-        return;
-        // add Error handling here for
-        // unsuccessful logout
       })
       .catch(err => {
-        console.log(err);
+        return dispatch({
+          type: LOGOUT,
+          success: false
+        });
       });
   };
 };
