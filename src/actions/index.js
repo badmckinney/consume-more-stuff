@@ -26,6 +26,11 @@ export const register = newUser => {
             success: true
           });
         }
+
+        return dispatch({
+          type: REGISTER,
+          success: false
+        });
       })
       .catch(err => {
         return dispatch({
@@ -54,6 +59,11 @@ export const login = user => {
             payload: user.username
           });
         }
+
+        return dispatch({
+          type: LOGIN,
+          success: false
+        });
       })
       .catch(err => {
         return dispatch({
@@ -77,6 +87,11 @@ export const logout = () => {
             success: true
           });
         }
+
+        return dispatch({
+          type: LOGOUT,
+          success: false
+        });
       })
       .catch(err => {
         return dispatch({

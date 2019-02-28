@@ -15,7 +15,7 @@ const itemReducer = (state = initialState, action) => {
           redirect: true
         });
       } else {
-        return;
+        return state;
         //add error handling
       }
     case LOGIN:
@@ -25,7 +25,7 @@ const itemReducer = (state = initialState, action) => {
           redirect: true
         });
       } else {
-        return;
+        return state;
         //error handling
       }
     case LOGOUT:
@@ -34,7 +34,7 @@ const itemReducer = (state = initialState, action) => {
           currentUser: ''
         });
       } else {
-        return;
+        return state;
         //error handling
       }
     case RESET_REDIRECT:
