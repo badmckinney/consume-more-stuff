@@ -12,7 +12,7 @@ const Sidebar = props => {
           <button>Apparel</button>
         </Link>
         <Link to="/category/appliances">
-          <button>Applianes</button>
+          <button>Appliances</button>
         </Link>
         <Link to="/category/automotive">
           <button>Automotive</button>
@@ -72,7 +72,7 @@ const Sidebar = props => {
           </Link>
         </div>
         <div className="HL"></div>
-        {enerateItemLinks()}
+        {generateItemLinks()}
       </div>
     )
   }
