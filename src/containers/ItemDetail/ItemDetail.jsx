@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './ItemDetail.scss';
+import { loadSingleItem } from '../../actions';
 
 class ItemDetail extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class ItemDetail extends Component {
 
 componentWillMount(){
   const item = this.props.match.params.id
-  this.props.getItems(item);
+  this.props.loadItem(item);
 }
 
   
@@ -77,8 +78,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getItems: item => {
-      dispatch(fetchItems(item));
+    loadItem: item => {
+      dispatch(loadSingleItem(item));
     }
   };
 };
