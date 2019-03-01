@@ -16,7 +16,11 @@ exports.seed = function(knex, Promise) {
         width: 2,
         height: 6,
         notes: "buggah cherry",
-        views: 0
+        views: 0,
+        created_by: 1,
+        status_id: 1,
+        category_id: 1,
+        condition_id: 1
         },
         { 
         name: "item2",
@@ -29,7 +33,11 @@ exports.seed = function(knex, Promise) {
         width: 5,
         height: 6,
         notes: "buggah not so cherry",
-        views: 99
+        views: 99,
+        created_by: 2,
+        status_id: 2,
+        category_id: 2,
+        condition_id: 2
         },
         { 
         name: "item3",
@@ -42,7 +50,11 @@ exports.seed = function(knex, Promise) {
         width: 2,
         height: 0,
         notes: "buggah is prime",
-        views: 0
+        views: 0,
+        created_by:5,
+        status_id: 1,
+        category_id: 2,
+        condition_id: 2
         },
         { 
         name: "item4",
@@ -55,7 +67,11 @@ exports.seed = function(knex, Promise) {
         width: 2,
         height: 6,
         notes: "small kine bus up",
-        views: 123123
+        views: 123123,
+        created_by: 2,
+        status_id: 2,
+        category_id: 2,
+        condition_id: 3
         },
       ]);
     });

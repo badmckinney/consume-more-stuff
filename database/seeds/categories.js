@@ -6,20 +6,35 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('categories').insert([
         {
-          name:"cars"
+          name:"Apparel"
         },
         {
-          name:"boats"
+          name:"Appliances"
         },
         {
-          name:"surfboards"
+          name:"Automotive"
         },
         {
-          name:"golfclubs"
+          name:"Electronics"
         },
         {
-          name:"Runescape"
+          name:"Furniture"
         },
+        {
+          name:"Jewelry"
+        },
+        {
+          name:"Musical_Instruments"
+        },
+        {
+          name:"Sporting_goods"
+        },
+        {
+          name:"View_All"
+        },
+        {
+          name:"Wanted"
+        }
       ]);
     });
 };
