@@ -38,6 +38,11 @@ const Sidebar = props => {
         <Link to="/items/category/wanted">
           <button>Wanted</button>
         </Link>
+        <Link to="items/new">
+        <button> Create New 
+          <div>+</div>
+        </button>
+        </Link>
       </div>
     );
   };
