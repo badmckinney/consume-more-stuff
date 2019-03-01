@@ -161,7 +161,7 @@ export const fetchItems = category => {
   };
 };
 
-export const loadSingleItem = item => {
+export const loadSingleItem = id => {
   return dispatch => {
     return fetch(`api/items/${id}`)
       .then(res => {

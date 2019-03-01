@@ -255,35 +255,22 @@ router.get('/items/:id', (req, res) => {
 
 router.post('/items/new', (req, res) => {
   const user = req.user;
-  const {
-    category_id,
-    name,
-    price,
-    image,
-    description,
-    manufacturer,
-    model,
-    condition_id,
-    length,
-    width,
-    height,
-    notes
-  } = req.body;
 
   const newItem = {
     created_by: user.id,
-    category_id: parseInt(category_id),
-    name,
-    price: price ? parseInt(price) : null,
-    image,
-    description,
-    manufacturer,
-    model,
-    condition_id: parseInt(condition_id),
-    length: length ? parseInt(length) : null,
-    width: width ? parseInt(width) : null,
-    height: height ? parseInt(height) : null,
-    notes,
+    category_id: parseInt(req.body.category_id),
+    name: req.body.name,
+    price: req.body.price ? parseInt(req.body.price) : null,
+    image: req.body.image,
+    description: req.body.description,
+    manufacturer: req.body.manufacturer,
+    model: req.body.manufacturer,
+    condition_id: parseInt(req.body.condition_id),
+    length: req.body.length ? parseInt(req.body.length) : null,
+    width: req.body.width ? parseInt(req.body.width) : null,
+    height: req.body.height ? parseInt(req.body.height) : null,
+    notes: req.body.notes,
+    status_id: 1,
     views: 0
   };
 

@@ -19,8 +19,7 @@ class NewItem extends Component {
       length: '',
       width: '',
       height: '',
-      notes: '',
-      status: 1
+      notes: ''
     };
 
     this.redirect = this.redirect.bind(this);
@@ -194,7 +193,7 @@ class NewItem extends Component {
               <label htmlFor="dimensions">Size / Dimensions</label>
             </div>
             <div className="dimensions">
-            L:
+              L:
               <input
                 type="text"
                 name="length"
