@@ -39,7 +39,7 @@ const Sidebar = props => {
           <button>Wanted</button>
         </Link>
       </div>
-    )
+    );
   };
 
   if (!currentUser) {
@@ -50,10 +50,10 @@ const Sidebar = props => {
             <button>Home</button>
           </Link>
         </div>
-        <div className="HL"></div>
+        <div className="HL" />
         {generateItemLinks()}
       </div>
-    )
+    );
   } else {
     return (
       <div className="logged-in-nav">
@@ -71,10 +71,10 @@ const Sidebar = props => {
             <button>Create a posting</button>
           </Link>
         </div>
-        <div className="HL"></div>
+        <div className="HL" />
         {generateItemLinks()}
       </div>
-    )
+    );
   }
 };
 
