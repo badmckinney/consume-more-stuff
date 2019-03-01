@@ -2,6 +2,7 @@ export const REGISTER = 'REGISTER';
 export const RESET_REDIRECT = 'RESET_REDIRECT';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+export const LOAD_ITEM = 'LOADITEM';
 
 export const resetRedirect = () => {
   return {
@@ -101,3 +102,12 @@ export const logout = () => {
       });
   };
 };
+
+export const loadItem = (item) => {
+  return dispatch => {
+    return fetch('/api/items/:id')
+    .then(res => {
+      return res.json();
+    })
+  }
+}
