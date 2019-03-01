@@ -203,7 +203,6 @@ router.get('/items/search/:term', (req, res) => {
 
 router.get('/items/:id', (req, res) => {
   const id = req.params.id;
-
   Item.where({ id: id })
     .fetch({
       withRelated: ['createdBy', 'category', 'condition', 'status']
@@ -211,38 +210,41 @@ router.get('/items/:id', (req, res) => {
     .then(item => {
       if (!item) {
         res.status(400);
-        res.json({ error: 'That item does not exist' });
+        return res.json({ error: 'That item does not exist' });
       }
 
-      item = item.attributes;
-      const relations = item.relations;
-      const condition = relations.condition.attributes;
-      const category = relations.category.attributes;
-      const createdBy = relations.createdBy.attributes;
-      const status = relations.status.attributes;
+      item = item.toJSON();
 
       const itemData = {
         id: item.id,
-        created_by: createdBy.username,
-        status: status.name,
-        category: category.name,
-        condition: condition.name,
+        createdBy: item.createdBy.username,
+        status: item.status.name,
+        status_id: item.status_id,
+        category: item.category.name,
+        category_id: item.category_id,
+        condition: item.condition.name,
+        condition_id: item.condition_id,
         name: item.name,
         image: item.image,
         description: item.description,
         price: item.price,
         manufacturer: item.manufacturer,
         model: item.model,
-        dimensions: item.dimensions,
+        length: item.length,
+        width: item.width,
+        height: item.height,
         created_at: item.created_at,
         updated_at: item.updated_at,
-        notes: item.notes,
-        views: item.views
+        notes: item.notes
       };
 
-      res.json(itemData);
+      res.json({
+        success: true,
+        item: itemData
+      });
     })
     .catch(err => {
+      console.log(err);
       res.status(500);
       res.json(err);
     });
@@ -304,10 +306,24 @@ router.post('/items/new', (req, res) => {
  * PUT
  ************************/
 
-router.put('/items/:id/edit', (req, res) => {
-  const itemData = req.body.attributes;
+router.put('/items/:id', (req, res) => {
   const item_id = req.params.id;
   const user_id = req.user.id;
+  const editedItem = {
+    category_id: req.body.category_id,
+    name: req.body.name,
+    price: req.body.price,
+    image: req.body.image,
+    description: req.body.description,
+    manufacturer: req.body.manufacturer,
+    model: req.body.model,
+    condition_id: req.body.condition_id,
+    length: req.body.length,
+    width: req.body.width,
+    height: req.body.height,
+    notes: req.body.notes,
+    status_id: req.body.status_id
+  };
 
   Item.where({ id: item_id })
     .fetch()
@@ -316,32 +332,18 @@ router.put('/items/:id/edit', (req, res) => {
         res.status(400);
         res.json({ error: "That item doesn't exist" });
       }
+
       if (item.attributes.created_by !== user_id) {
         res.status(400);
         res.json({ error: "You don't own that item" });
       }
 
-      Item.where({ id: item_id })
-        .save(
-          {
-            status: status.name,
-            category: category.name,
-            condition: condition.name,
-            name: item.name,
-            image: item.image,
-            description: item.description,
-            price: item.price,
-            manufacturer: item.manufacturer,
-            model: item.model,
-            height: itemData.height,
-            length: itemData.length,
-            width: itemData.width,
-            notes: item.notes
-          },
-          { patch: true }
-        )
-        .then(updated => {
-          res.json(updated);
+      item
+        .save(editedItem, { patch: true })
+        .then(() => {
+          res.json({
+            success: true
+          });
         })
         .catch(err => {
           res.status(500);

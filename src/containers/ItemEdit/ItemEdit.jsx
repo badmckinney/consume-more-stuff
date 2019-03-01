@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import './ItemEdit.scss';
 
 class ItemEdit extends Component {
@@ -7,6 +8,7 @@ class ItemEdit extends Component {
     super(props);
 
     this.state = {
+      redirect: false,
       id: '',
       category_id: '',
       name: '',
@@ -23,8 +25,50 @@ class ItemEdit extends Component {
       status_id: ''
     };
 
+    this.editItem = this.editItem.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    axios.get(`/api/items/${id}`).then(res => {
+      if (res.data.success) {
+        const item = res.data.item;
+
+        this.setState({
+          id: item.id,
+          category_id: item.category_id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          description: item.description,
+          manufacturer: item.manufacturer,
+          model: item.model,
+          condition_id: item.condition_id,
+          length: item.length,
+          width: item.width,
+          height: item.height,
+          notes: item.notes,
+          status_id: item.status_id
+        });
+      }
+
+      //error handling for unsuccessful fetch;
+    });
+  }
+
+  editItem() {
+    const editedItem = this.state;
+
+    axios.put(`/api/items/${editedItem.id}`, editedItem).then(res => {
+      if (res.data.success) {
+        this.setState({
+          redirect: true
+        });
+      }
+      // error handling here
+    });
   }
 
   handleInputOnChange(e) {
@@ -32,46 +76,33 @@ class ItemEdit extends Component {
     const name = e.target.name;
     switch (name) {
       case 'category_id':
-        this.setState({ category_id: value });
-        break;
+        return this.setState({ category_id: value });
       case 'name':
-        this.setState({ name: value });
-        break;
+        return this.setState({ name: value });
       case 'price':
-        this.setState({ price: value });
-        break;
+        return this.setState({ price: value });
       case 'image':
-        this.setState({ image: value });
-        break;
+        return this.setState({ image: value });
       case 'description':
-        this.setState({ description: value });
-        break;
+        return this.setState({ description: value });
       case 'manufacturer':
-        this.setState({ manufacturer: value });
-        break;
+        return this.setState({ manufacturer: value });
       case 'model':
-        this.setState({ model: value });
-        break;
+        return this.setState({ model: value });
       case 'condition_id':
-        this.setState({ condition_id: value });
-        break;
+        return this.setState({ condition_id: value });
       case 'length':
-        this.setState({ length: value });
-        break;
+        return this.setState({ length: value });
       case 'width':
-        this.setState({ width: value });
-        break;
+        return this.setState({ width: value });
       case 'height':
-        this.setState({ height: value });
-        break;
+        return this.setState({ height: value });
       case 'notes':
-        this.setState({ notes: value });
-        break;
+        return this.setState({ notes: value });
       case 'status_id':
-        this.setState({ status_id: value });
-        break;
+        return this.setState({ status_id: value });
       default:
-        break;
+        return;
     }
   }
 
@@ -79,29 +110,14 @@ class ItemEdit extends Component {
     const editedItem = this.state;
 
     e.preventDefault();
-    // this.props.editItem(editedItem);
-
-    this.setState({
-      id: '',
-      category_id: '',
-      name: '',
-      price: '',
-      image: '',
-      description: '',
-      manufacturer: '',
-      model: '',
-      condition_id: '',
-      length: '',
-      width: '',
-      height: '',
-      notes: '',
-      status_id: ''
-    });
-
-    return console.log(editedItem);
+    this.editItem(editedItem);
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={`/items/${this.state.id}`} />;
+    }
+
     return (
       <div>
         <form>
@@ -113,8 +129,15 @@ class ItemEdit extends Component {
             value={this.state.category_id}
             onChange={this.handleInputOnChange}
           >
-            <option value="1">AutoMotive</option>
-            <option value="2">value 2</option>
+            <option value="1">Automotive</option>
+            <option value="2">Furniture</option>
+            <option value="3">Appliances</option>
+            <option value="4">Electronics</option>
+            <option value="5">Sporting Goods</option>
+            <option value="6">Jewelry</option>
+            <option value="7">Apparel</option>
+            <option value="8">Musical Instruments</option>
+            <option value="9">Wanted</option>
           </select>
 
           <div className="title-price">
