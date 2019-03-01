@@ -65,7 +65,7 @@ class ItemDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    item: state
+    item: state.item
   };
 };
 
