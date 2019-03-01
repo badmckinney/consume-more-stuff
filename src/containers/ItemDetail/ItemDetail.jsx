@@ -9,7 +9,10 @@ class ItemDetail extends Component {
     this.state = {};
   }
 
-
+componentWillMount(){
+  const item = this.props.match.params.id
+  this.props.getItems(item);
+}
 
   
   render() {
@@ -68,15 +71,15 @@ class ItemDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    item: state.item
+    items: state.items
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    // onOpenDetail: item => {
-    //   dispatch(onOpenDetail(item));
-    // }
+    getItems: item => {
+      dispatch(fetchItems(item));
+    }
   };
 };
 
