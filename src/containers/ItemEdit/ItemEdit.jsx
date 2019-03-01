@@ -1,53 +1,79 @@
 import React, { Component } from 'react';
-import { addItem, resetRedirect, resetRedirectId } from '../../actions';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import './NewItem.scss';
+import axios from 'axios';
+import './ItemEdit.scss';
 
-class NewItem extends Component {
+class ItemEdit extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      category_id: 1,
+      redirect: false,
+      id: '',
+      category_id: '',
       name: '',
       price: '',
       image: '',
       description: '',
       manufacturer: '',
       model: '',
-      condition_id: 1,
+      condition_id: '',
       length: '',
       width: '',
       height: '',
       notes: '',
-      status: 1
+      status_id: ''
     };
 
-    this.redirect = this.redirect.bind(this);
-    this.redirectId = this.redirectId.bind(this);
+    this.editItem = this.editItem.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  redirect() {
-    if (this.props.redirect) {
-      this.props.resetRedirect();
-      return true;
-    }
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    axios.get(`/api/items/${id}`).then(res => {
+      if (res.data.success) {
+        const item = res.data.item;
 
-    return false;
+        this.setState({
+          id: item.id,
+          category_id: item.category_id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          description: item.description,
+          manufacturer: item.manufacturer,
+          model: item.model,
+          condition_id: item.condition_id,
+          length: item.length,
+          width: item.width,
+          height: item.height,
+          notes: item.notes,
+          status_id: item.status_id
+        });
+      }
+
+      //error handling for unsuccessful fetch;
+    });
   }
 
-  redirectId() {
-    const id = this.props.redirectId;
-    this.props.resetRedirectId();
-    return id;
+  editItem() {
+    const editedItem = this.state;
+
+    axios.put(`/api/items/${editedItem.id}`, editedItem).then(res => {
+      if (res.data.success) {
+        this.setState({
+          redirect: true
+        });
+      }
+      // error handling here
+    });
   }
 
   handleInputOnChange(e) {
     const value = e.target.value;
     const name = e.target.name;
-
     switch (name) {
       case 'category_id':
         return this.setState({ category_id: value });
@@ -73,41 +99,27 @@ class NewItem extends Component {
         return this.setState({ height: value });
       case 'notes':
         return this.setState({ notes: value });
+      case 'status_id':
+        return this.setState({ status_id: value });
       default:
         return;
     }
   }
 
   handleSubmit(e) {
-    const newItem = this.state;
+    const editedItem = this.state;
 
     e.preventDefault();
-    this.props.addItem(newItem);
-
-    this.setState({
-      category_id: '',
-      name: '',
-      price: '',
-      image: '',
-      description: '',
-      manufacturer: '',
-      model: '',
-      condition_id: '',
-      length: '',
-      width: '',
-      height: '',
-      notes: ''
-    });
+    this.editItem(editedItem);
   }
 
   render() {
-    if (this.redirect()) {
-      return <Redirect to={`/items/${this.redirectId()}`} />;
+    if (this.state.redirect) {
+      return <Redirect to={`/items/${this.state.id}`} />;
     }
 
     return (
       <div>
-        <h2>Create Post:</h2>
         <form>
           <div>
             <label htmlFor="category_id">Category:</label>
@@ -194,7 +206,6 @@ class NewItem extends Component {
               <label htmlFor="dimensions">Size / Dimensions</label>
             </div>
             <div className="dimensions">
-            L:
               <input
                 type="text"
                 name="length"
@@ -202,7 +213,7 @@ class NewItem extends Component {
                 value={this.state.length}
                 onChange={this.handleInputOnChange}
               />
-              W:
+              x
               <input
                 type="text"
                 name="width"
@@ -210,7 +221,7 @@ class NewItem extends Component {
                 value={this.state.width}
                 onChange={this.handleInputOnChange}
               />
-              H:
+              x
               <input
                 type="text-area"
                 name="height"
@@ -219,6 +230,19 @@ class NewItem extends Component {
                 onChange={this.handleInputOnChange}
               />
             </div>
+
+            <div>
+              <lable htmlFor="status_id">Status</lable>
+            </div>
+            <select
+              name="status_id"
+              value={this.status}
+              onChange={this.handleInputOnChange}
+            >
+              <option value="1">For Sale</option>
+              <option value="2">Pending</option>
+              <option value="3">Sold</option>
+            </select>
 
             <div>
               <label htmlFor="condition_id">Condition</label>
@@ -245,39 +269,11 @@ class NewItem extends Component {
             />
           </div>
 
-          <button onClick={this.handleSubmit}>Create Post</button>
+          <button onClick={this.handleSubmit}>Edit Post</button>
         </form>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    redirect: state.redirect,
-    redirectId: state.redirectId
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addItem: item => {
-      dispatch(addItem(item));
-    },
-
-    resetRedirect: () => {
-      dispatch(resetRedirect());
-    },
-
-    resetRedirectId: () => {
-      dispatch(resetRedirectId());
-    }
-  };
-};
-
-NewItem = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewItem);
-
-export default NewItem;
+export default ItemEdit;
