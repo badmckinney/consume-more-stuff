@@ -24,7 +24,7 @@ class Header extends Component {
   }
 
   handleSubmit(e) {
-    const { search } = this.state;
+    // const { search } = this.state;
 
     e.preventDefault();
     // this.props.search(search)
