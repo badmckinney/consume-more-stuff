@@ -163,7 +163,7 @@ export const fetchItems = category => {
 
 export const loadSingleItem = item => {
   return dispatch => {
-    return fetch('/api/items/:id')
+    return fetch(`api/items/${id}`)
       .then(res => {
         return res.json();
       })
