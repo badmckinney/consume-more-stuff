@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './ItemDetail.scss';
 
 class ItemDetail extends Component {
@@ -11,81 +11,52 @@ class ItemDetail extends Component {
 
   render() {
     if (this.redirect()) {
-      return <Redirect to="/items/detail" />
+      return <Redirect to="/items/detail" />;
     }
     return (
       <div className="detail-container">
+        <div className="detail-header">
+          <div className="detail-name">
+            <h3> {this.props.name} </h3>
+          </div>
+
+          <div className="detail-price">
+            <h3> ${this.props.price} </h3>
+          </div>
+        </div>
+
         <div className="detail-image">
           <img>{this.props.image}</img>
         </div>
 
         <div className="detail-wrapper">
           <div className="detail">
-            <div>
-              <label> Name: </label>
-            </div>
-            <div>{this.props.name}</div>
+            <p>Manufacurer: {this.props.manufacturer} </p>
           </div>
 
           <div className="detail">
-            <div>
-              <label> Description </label>
-            </div>
-            <div>{this.props.description}</div>
+            <p>Model: {this.props.model} </p>
           </div>
 
           <div className="detail">
-            <div>
-              <label> Price: </label>
-            </div>
-            <div>{this.props.price}</div>
+            <p> Dimensions </p>
+            <p>
+              L: {this.props.length} W:{this.props.width} H:{this.props.height}
+            </p>
           </div>
 
           <div className="detail">
-            <div>
-              <label> Manufacturer: </label>
-            </div>
-            <div>{this.props.manufacturer}</div>
+            <p> Additional information</p>
+            <p> {this.props.notes} </p>
           </div>
 
           <div className="detail">
-            <div>
-              <label> Model: </label>
-            </div>
-            <div> {this.props.model} </div>
+            <p> Views: {this.props.view} </p>
           </div>
+        </div>
 
-          <div className="detail">
-            <div>
-              <label> Length: </label>
-            </div>
-            <div> {this.props.length} </div>
-          </div>
-
-          <div className="detail">
-            <div>
-              <label> Width: </label>
-            </div>
-            <div> {this.props.width} </div>
-          </div>
-
-          <div className="detail">
-            <div>
-              <label> Height: </label>
-            </div>
-            <div> {this.props.height} </div>
-          </div>
-
-          <div className="detail">
-            <div>
-              <label> Notes: </label>
-            </div>
-            <div> {this.props.detail} </div>
-          </div>
-
-          <div className="detail">
-              <label> Views: {this.props.view} </label>
-          </div>
+        <div className="detail-description">
+          <div>{this.props.description}</div>
         </div>
       </div>
     );
@@ -101,7 +72,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onOpenDetail: item => {
-      dispatch(onOpenDetail(item))
+      dispatch(onOpenDetail(item));
     }
   };
 };
