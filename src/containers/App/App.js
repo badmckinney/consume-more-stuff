@@ -9,6 +9,7 @@ import Header from '../Header';
 import Login from '../Login';
 import Register from '../Register';
 import ItemEdit from '../ItemEdit';
+import ItemDetail from '../ItemDetail';
 import NewItem from '../NewItem';
 import Category from '../Category';
 
@@ -24,6 +25,7 @@ class App extends Component {
         <Route path="/register" component={Register} />
         <Route path="/items/new" component={NewItem} />
         <Route path="/items/:id/edit" component={ItemEdit} />
+        <Route path="/items/:id/details" component={ItemDetail} />
         {/* <Route path="/" component={} />
         <Route path="/profile" component={} />
         <Route path="/messages" component={} />

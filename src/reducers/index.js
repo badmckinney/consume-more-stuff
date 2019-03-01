@@ -6,7 +6,8 @@ import {
   RESET_REDIRECT,
   ADD_ITEM,
   FETCH_ITEMS,
-  RESET_REDIRECT_ID
+  RESET_REDIRECT_ID,
+  LOAD_SINGLE_ITEM
 } from '../actions';
 
 const initialState = {
@@ -68,6 +69,8 @@ const itemReducer = (state = initialState, action) => {
       });
     case FETCH_ITEMS:
       return Object.assign({}, state, { items: action.payload });
+    case LOAD_SINGLE_ITEM:
+    return Object.assign({}, state, {items: action.payload } )
     default:
       return state;
   }
