@@ -4,7 +4,6 @@ import {
   LOGIN,
   LOGOUT,
   RESET_REDIRECT,
-  ADD_ITEM,
   FETCH_ITEMS,
   RESET_REDIRECT_ID,
   LOAD_SINGLE_ITEM
@@ -53,16 +52,6 @@ const itemReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         redirect: false
       });
-    case ADD_ITEM:
-      if (action.success) {
-        return Object.assign({}, state, {
-          redirect: true,
-          redirectId: action.payload
-        });
-      } else {
-        return state;
-        //error handling
-      }
     case RESET_REDIRECT_ID:
       return Object.assign({}, state, {
         redirectId: null
@@ -70,7 +59,7 @@ const itemReducer = (state = initialState, action) => {
     case FETCH_ITEMS:
       return Object.assign({}, state, { items: action.payload });
     case LOAD_SINGLE_ITEM:
-    return Object.assign({}, state, {items: action.payload } )
+      return Object.assign({}, state, { items: action.payload });
     default:
       return state;
   }

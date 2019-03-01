@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { addItem, resetRedirect, resetRedirectId } from '../../actions';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import './NewItem.scss';
 
 class NewItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      redirect: false,
+      redirect_id: '',
       category_id: 1,
       name: '',
       price: '',
@@ -22,25 +23,22 @@ class NewItem extends Component {
       notes: ''
     };
 
-    this.redirect = this.redirect.bind(this);
-    this.redirectId = this.redirectId.bind(this);
+    this.addItem = this.addItem.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  redirect() {
-    if (this.props.redirect) {
-      this.props.resetRedirect();
-      return true;
-    }
+  addItem(newItem) {
+    axios.post('/api/items/new', newItem).then(res => {
+      if (res.data.success) {
+        this.setState({
+          redirect: true,
+          redirect_id: res.data.id
+        });
+      }
 
-    return false;
-  }
-
-  redirectId() {
-    const id = this.props.redirectId;
-    this.props.resetRedirectId();
-    return id;
+      //error handling here
+    });
   }
 
   handleInputOnChange(e) {
@@ -81,27 +79,12 @@ class NewItem extends Component {
     const newItem = this.state;
 
     e.preventDefault();
-    this.props.addItem(newItem);
-
-    this.setState({
-      category_id: '',
-      name: '',
-      price: '',
-      image: '',
-      description: '',
-      manufacturer: '',
-      model: '',
-      condition_id: '',
-      length: '',
-      width: '',
-      height: '',
-      notes: ''
-    });
+    this.addItem(newItem);
   }
 
   render() {
-    if (this.redirect()) {
-      return <Redirect to={`/items/${this.redirectId()}`} />;
+    if (this.state.redirect) {
+      return <Redirect to={`/items/${this.state.redirect_id}`} />;
     }
 
     return (
@@ -250,33 +233,5 @@ class NewItem extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    redirect: state.redirect,
-    redirectId: state.redirectId
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addItem: item => {
-      dispatch(addItem(item));
-    },
-
-    resetRedirect: () => {
-      dispatch(resetRedirect());
-    },
-
-    resetRedirectId: () => {
-      dispatch(resetRedirectId());
-    }
-  };
-};
-
-NewItem = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewItem);
 
 export default NewItem;
