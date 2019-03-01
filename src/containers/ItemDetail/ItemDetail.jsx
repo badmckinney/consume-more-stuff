@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import './ItemDetail.scss';
 
 class ItemDetail extends Component {
@@ -9,6 +10,9 @@ class ItemDetail extends Component {
   }
 
   render() {
+    if (this.redirect()) {
+      return <Redirect to="/items/detail" />
+    }
     return (
       <div className="detail-container">
         <div className="detail-image">
@@ -80,10 +84,7 @@ class ItemDetail extends Component {
           </div>
 
           <div className="detail">
-            <div>
-              <label> Views: </label>
-            </div>
-            <div> {this.props.views} </div>
+              <label> Views: {this.props.view} </label>
           </div>
         </div>
       </div>
