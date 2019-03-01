@@ -194,6 +194,7 @@ class NewItem extends Component {
               <label htmlFor="dimensions">Size / Dimensions</label>
             </div>
             <div className="dimensions">
+            L:
               <input
                 type="text"
                 name="length"
@@ -201,7 +202,7 @@ class NewItem extends Component {
                 value={this.state.length}
                 onChange={this.handleInputOnChange}
               />
-              x
+              W:
               <input
                 type="text"
                 name="width"
@@ -209,7 +210,7 @@ class NewItem extends Component {
                 value={this.state.width}
                 onChange={this.handleInputOnChange}
               />
-              x
+              H:
               <input
                 type="text-area"
                 name="height"
