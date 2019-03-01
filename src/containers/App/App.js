@@ -25,8 +25,8 @@ class App extends Component {
 
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/items/:id/details" component={ItemDetail}/>
         <Route path="/items/new" component={NewItem} />
+        <Route path="/items/:id/details" component={ItemDetail}/>
         {/* <Route path="/" component={} />
         <Route path="/profile" component={} />
         <Route path="/messages" component={} />
