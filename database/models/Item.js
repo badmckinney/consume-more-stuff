@@ -10,7 +10,7 @@ class Item extends bookshelf.Model {
   createdBy() { return this.hasOne('User', 'id', 'created_by'); }
   status() { return this.hasOne('ItemStatus', 'id', 'status_id'); }
   condition() { return this.hasOne('Condition', 'id', 'condition_id'); }
-  category() { return this.hasOne('Category', 'category_id'); }
+  category() { return this.hasOne('Category', 'id', 'category_id'); }
 }
 
 module.exports = bookshelf.model('Item', Item);

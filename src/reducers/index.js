@@ -1,5 +1,5 @@
 // import actions here
-import { REGISTER, LOGIN, LOGOUT, RESET_REDIRECT } from '../actions';
+import { REGISTER, LOGIN, LOGOUT, RESET_REDIRECT, FETCH_ITEMS } from '../actions';
 
 const initialState = {
   items: [],
@@ -43,6 +43,8 @@ const itemReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         redirect: false
       });
+    case FETCH_ITEMS:
+      return Object.assign({}, state, { items: action.payload });
     default:
       return state;
   }

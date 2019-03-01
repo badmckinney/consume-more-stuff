@@ -2,6 +2,7 @@ export const REGISTER = 'REGISTER';
 export const RESET_REDIRECT = 'RESET_REDIRECT';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+export const FETCH_ITEMS = 'FETCH_ITEMS';
 
 export const resetRedirect = () => {
   return {
@@ -100,4 +101,20 @@ export const logout = () => {
         });
       });
   };
+};
+
+export const fetchItems = (category) => {
+  return dispatch => {
+    console.log('action', category);
+    return fetch(`/api/items/category/${category}`)
+      .then(res => {
+        return res.json();
+      })
+      .then(items => {
+        return dispatch({
+          type: FETCH_ITEMS,
+          payload: items
+        });
+      });
+  }
 };
