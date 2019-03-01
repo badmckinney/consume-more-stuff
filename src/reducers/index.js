@@ -1,5 +1,5 @@
 // import actions here
-import { LOGOUT } from '../actions';
+import { LOGOUT, FETCH_ITEMS } from '../actions';
 
 const initialState = {
   items: [],
@@ -12,6 +12,8 @@ const itemReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         currentUser: ''
       });
+    case FETCH_ITEMS:
+      return Object.assign({}, state, { items: action.payload });
     default:
       return state;
   }
