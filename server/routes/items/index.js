@@ -55,98 +55,48 @@ router.get('/items', (req, res) => {
     });
 });
 
-router.get('/items/:id', (req, res) => {
-  const id = req.params.id;
+router.get('/items/category/:category', (req, res) => {
+  const category_name = req.params.category;
+  new Category({ name: category_name }).fetch()
+    .then(category => {
+      category = category.toJSON();
 
-  Item.where({ id: id })
-    .fetch({
-      withRelated: ['createdBy', 'category', 'condition', 'status']
-    })
-    .then(item => {
-      if (!item) {
-        res.status(400);
-        res.json({ error: 'That item does not exist' });
-      }
+      new Item({ category_id: category.id }).fetchAll({
+        withRelated: ['createdBy', 'category', 'condition', 'status']
+      })
+        .then(items => {
+          itemList = items.toJSON();
+          items = [];
 
-      item = item.attributes;
-      const relations = item.relations;
-      const condition = relations.condition.attributes;
-      const category = relations.category.attributes;
-      const createdBy = relations.createdBy.attributes;
-      const status = relations.status.attributes;
+          itemList.forEach(item => {
 
-      const itemData = {
-        id: item.id,
-        created_by: createdBy.username,
-        status: status.name,
-        category: category.name,
-        condition: condition.name,
-        name: item.name,
-        image: item.image,
-        description: item.description,
-        price: item.price,
-        manufacturer: item.manufacturer,
-        model: item.model,
-        dimensions: item.dimensions,
-        created_at: item.created_at,
-        updated_at: item.updated_at,
-        notes: item.notes,
-        views: item.views
-      };
+            const itemData = {
+              id: item.id,
+              created_by: item.created_by.username,
+              status: item.status.name,
+              category: item.category.name,
+              condition: item.condition.name,
+              name: item.name,
+              image: item.image,
+              description: item.description,
+              price: item.price,
+              manufacturer: item.manufacturer,
+              model: item.model,
+              dimensions: item.dimensions,
+              created_at: item.created_at,
+              updated_at: item.updated_at,
+              notes: item.notes,
+              views: item.views
+            }
 
-      res.json(itemData);
-    })
-    .catch(err => {
-      res.status(500);
-      res.json(err);
-    });
-});
-
-router.get('items/category/:category', (req, res) => {
-  const category_id = req.params.category;
-
-  Item.where({ category_id: category_id })
-    .fetchAll({
-      withRelated: ['createdBy', 'category', 'condition', 'status']
-    })
-    .then(items => {
-      itemList = items.models;
-      items = [];
-
-      itemList.forEach(item => {
-        item = item.attributes;
-        const relations = item.relations;
-        const condition = relations.condition.attributes;
-        const category = relations.category.attributes;
-        const createdBy = relations.createdBy.attributes;
-        const status = relations.status.attributes;
-
-        const itemData = {
-          id: item.id,
-          created_by: createdBy.username,
-          status: status.name,
-          category: category.name,
-          condition: condition.name,
-          name: item.name,
-          image: item.image,
-          description: item.description,
-          price: item.price,
-          manufacturer: item.manufacturer,
-          model: item.model,
-          dimensions: item.dimensions,
-          created_at: item.created_at,
-          updated_at: item.updated_at,
-          notes: item.notes,
-          views: item.views
-        };
-
-        items.push(itemData);
-      });
-      res.json(items);
-    })
-    .catch(err => {
-      res.status(500);
-      res.json(err);
+            items.push(itemData);
+          });
+          res.json(items);
+        })
+        .catch(err => {
+          res.status(500);
+          res.json(err);
+        });
     });
 });
 
@@ -252,16 +202,61 @@ router.get('/items/search/:term', (req, res) => {
     });
 });
 
+router.get('/items/:id', (req, res) => {
+  const id = req.params.id;
+
+  Item.where({ id: id }).fetch({
+    withRelated: ['createdBy', 'category', 'condition', 'status']
+  })
+    .then((item) => {
+      if (!item) {
+        res.status(400);
+        res.json({ error: 'That item does not exist' });
+      }
+
+      item = item.attributes;
+      const relations = item.relations;
+      const condition = relations.condition.attributes;
+      const category = relations.category.attributes;
+      const createdBy = relations.createdBy.attributes;
+      const status = relations.status.attributes;
+
+      const itemData = {
+        id: item.id,
+        created_by: createdBy.username,
+        status: status.name,
+        category: category.name,
+        condition: condition.name,
+        name: item.name,
+        image: item.image,
+        description: item.description,
+        price: item.price,
+        manufacturer: item.manufacturer,
+        model: item.model,
+        dimensions: item.dimensions,
+        created_at: item.created_at,
+        updated_at: item.updated_at,
+        notes: item.notes,
+        views: item.views
+      }
+
+      res.json(itemData);
+    }).catch((err) => {
+      res.status(500);
+      res.json(err);
+    });
+});
+
 /************************
  * POST
  ************************/
 
 router.post('/items/new', (req, res) => {
-  const user = req.user.id;
+  // const user = req.user.id;
   const item = req.body;
 
   Item.forge({
-    created_by: user,
+    created_by: item.created_by,
     status_id: item.status,
     category_id: item.category,
     condition_id: item.condition,
@@ -286,12 +281,14 @@ router.post('/items/new', (req, res) => {
           withRelated: ['createdBy', 'category', 'condition', 'status']
         })
         .then(item => {
-          item = item.attributes;
           const relations = item.relations;
+          item = item.attributes;
+
           const condition = relations.condition.attributes;
           const category = relations.category.attributes;
           const createdBy = relations.createdBy.attributes;
           const status = relations.status.attributes;
+
 
           const itemData = {
             id: item.id,
@@ -305,9 +302,9 @@ router.post('/items/new', (req, res) => {
             price: item.price,
             manufacturer: item.manufacturer,
             model: item.model,
-            height: itemData.height,
-            length: itemData.length,
-            width: itemData.width,
+            height: item.height,
+            length: item.length,
+            width: item.width,
             notes: item.notes,
             views: item.views
           };
@@ -435,8 +432,8 @@ router.delete('/items/:id', (req, res) => {
         .catch(err => {
           res.status(500);
           res.json(err);
-        });
-    });
+        })
+    })
 });
 
 module.exports = router;

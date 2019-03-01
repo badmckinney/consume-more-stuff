@@ -8,34 +8,34 @@ const Sidebar = props => {
     return (
       <div className="item-links">
         <h3>For Sale</h3>
-        <Link to="/category/apparel">
+        <Link to="items/category/apparel">
           <button>Apparel</button>
         </Link>
         <Link to="/category/appliances">
           <button>Appliances</button>
         </Link>
-        <Link to="/category/automotive">
+        <Link to="items/category/automotive">
           <button>Automotive</button>
         </Link>
-        <Link to="/category/electronics">
+        <Link to="items/category/electronics">
           <button>Electronics</button>
         </Link>
-        <Link to="/category/furniture">
+        <Link to="items/category/furniture">
           <button>Furniture</button>
         </Link>
-        <Link to="/category/jewelry">
+        <Link to="items/category/jewelry">
           <button>Jewelry</button>
         </Link>
-        <Link to="/category/musicical-instruments">
+        <Link to="items/category/musicical-instruments">
           <button>Musical Instruments</button>
         </Link>
-        <Link to="/category/sporting-goods">
+        <Link to="items/category/sporting-goods">
           <button>Sporting Goods</button>
         </Link>
-        <Link to="/items">
+        <Link to="/items/all">
           <button>View All</button>
         </Link>
-        <Link to="/category/wanted">
+        <Link to="items/category/wanted">
           <button>Wanted</button>
         </Link>
       </div>

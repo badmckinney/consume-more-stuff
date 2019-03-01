@@ -3,6 +3,7 @@ export const RESET_REDIRECT = 'RESET_REDIRECT';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const ADD_ITEM = 'ADD_ITEM';
+export const FETCH_ITEMS = 'FETCH_ITEMS';
 
 export const resetRedirect = () => {
   return {
@@ -76,7 +77,7 @@ export const login = user => {
 
 export const logout = () => {
   return dispatch => {
-    return fetch('api/logout', { method: 'POST' })
+    return fetch('/api/logout', { method: 'POST' })
       .then(res => {
         return res.json();
       })
@@ -131,6 +132,22 @@ export const addItem = newItem => {
         return dispatch({
           type: ADD_ITEM,
           success: false
+        });
+      });
+  };
+};
+
+export const fetchItems = category => {
+  return dispatch => {
+    console.log('action', category);
+    return fetch(`/api/items/category/${category}`)
+      .then(res => {
+        return res.json();
+      })
+      .then(items => {
+        return dispatch({
+          type: FETCH_ITEMS,
+          payload: items
         });
       });
   };
