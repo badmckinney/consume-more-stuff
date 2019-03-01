@@ -8,6 +8,7 @@ import Sidebar from '../../components/Sidebar';
 import Header from '../Header';
 import Login from '../Login';
 import Register from '../Register';
+import NewItem from '../NewItem';
 import Category from '../Category';
 
 // import actions here
@@ -18,8 +19,12 @@ class App extends Component {
       <div>
         <Header />
         <Sidebar />
+
+        <NewItem />
+
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        {/* <Route path="/items/new" component={NewItem} /> */}
         {/* <Route path="/" component={} />
         <Route path="/profile" component={} />
         <Route path="/messages" component={} />
