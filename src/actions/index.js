@@ -2,7 +2,7 @@ export const REGISTER = 'REGISTER';
 export const RESET_REDIRECT = 'RESET_REDIRECT';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const NEW_ITEM = 'NEWITEM';
+export const ADD_ITEM = 'ADD_ITEM';
 
 export const resetRedirect = () => {
   return {
@@ -102,7 +102,7 @@ export const logout = () => {
   };
 };
 
-export const newItem = newItem => {
+export const addItem = newItem => {
   return dispatch => {
     return fetch('/api/items/new', {
       method: 'POST',
@@ -115,11 +115,22 @@ export const newItem = newItem => {
         return res.json();
       })
       .then(res => {
+        if (res.success) {
+          return dispatch({
+            type: ADD_ITEM,
+            success: true
+          });
+        }
+
         return dispatch({
-          type: NEW_ITEM,
-          payload: newItem
-        }).catch(err => {
-          res.status(500).json(err);
+          type: ADD_ITEM,
+          success: false
+        });
+      })
+      .catch(err => {
+        return dispatch({
+          type: ADD_ITEM,
+          success: false
         });
       });
   };

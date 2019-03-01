@@ -1,5 +1,5 @@
 // import actions here
-import { REGISTER, LOGIN, LOGOUT, RESET_REDIRECT,  NEW_ITEM } from '../actions';
+import { REGISTER, LOGIN, LOGOUT, RESET_REDIRECT, ADD_ITEM } from '../actions';
 
 const initialState = {
   items: [],
@@ -43,10 +43,15 @@ const itemReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         redirect: false
       });
-    case NEW_ITEM:
-      return Object.assign({}, state, {
-        items: [...state.items.action.payload]
-      });
+    case ADD_ITEM:
+      if (action.success) {
+        return Object.assign({}, state, {
+          redirect: true
+        });
+      } else {
+        return state;
+        //error handling
+      }
     default:
       return state;
   }
