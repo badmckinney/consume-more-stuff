@@ -3,11 +3,18 @@ export const RESET_REDIRECT = 'RESET_REDIRECT';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const ADD_ITEM = 'ADD_ITEM';
+export const RESET_REDIRECT_ID = 'RESET_REDIRECT_ID';
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 
 export const resetRedirect = () => {
   return {
     type: RESET_REDIRECT
+  };
+};
+
+export const resetRedirectId = () => {
+  return {
+    type: RESET_REDIRECT_ID
   };
 };
 
@@ -119,7 +126,8 @@ export const addItem = newItem => {
         if (res.success) {
           return dispatch({
             type: ADD_ITEM,
-            success: true
+            success: true,
+            payload: res.id
           });
         }
 
@@ -139,7 +147,6 @@ export const addItem = newItem => {
 
 export const fetchItems = category => {
   return dispatch => {
-    console.log('action', category);
     return fetch(`/api/items/category/${category}`)
       .then(res => {
         return res.json();

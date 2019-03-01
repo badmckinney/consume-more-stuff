@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addItem } from '../../actions';
+import { addItem, resetRedirect, resetRedirectId } from '../../actions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './NewItem.scss';
@@ -8,14 +8,14 @@ class NewItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category_id: '',
+      category_id: 1,
       name: '',
       price: '',
       image: '',
       description: '',
       manufacturer: '',
       model: '',
-      condition_id: '',
+      condition_id: 1,
       length: '',
       width: '',
       height: '',
@@ -24,6 +24,7 @@ class NewItem extends Component {
     };
 
     this.redirect = this.redirect.bind(this);
+    this.redirectId = this.redirectId.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -37,48 +38,43 @@ class NewItem extends Component {
     return false;
   }
 
+  redirectId() {
+    const id = this.props.redirectId;
+    this.props.resetRedirectId();
+    return id;
+  }
+
   handleInputOnChange(e) {
     const value = e.target.value;
     const name = e.target.name;
+
     switch (name) {
       case 'category_id':
-        this.setState({ category_id: value });
-        break;
+        return this.setState({ category_id: value });
       case 'name':
-        this.setState({ name: value });
-        break;
+        return this.setState({ name: value });
       case 'price':
-        this.setState({ price: value });
-        break;
+        return this.setState({ price: value });
       case 'image':
-        this.setState({ image: value });
-        break;
+        return this.setState({ image: value });
       case 'description':
-        this.setState({ description: value });
-        break;
+        return this.setState({ description: value });
       case 'manufacturer':
-        this.setState({ manufacturer: value });
-        break;
+        return this.setState({ manufacturer: value });
       case 'model':
-        this.setState({ model: value });
-        break;
+        return this.setState({ model: value });
       case 'condition_id':
-        this.setState({ condition_id: value });
-        break;
+        return this.setState({ condition_id: value });
       case 'length':
-        this.setState({ length: value });
-        break;
+        return this.setState({ length: value });
       case 'width':
-        this.setState({ width: value });
-        break;
+        return this.setState({ width: value });
       case 'height':
-        this.setState({ height: value });
-        break;
+        return this.setState({ height: value });
       case 'notes':
-        this.setState({ notes: value });
-        break;
+        return this.setState({ notes: value });
       default:
-        break;
+        return;
     }
   }
 
@@ -106,7 +102,7 @@ class NewItem extends Component {
 
   render() {
     if (this.redirect()) {
-      return <Redirect to="/" />;
+      return <Redirect to={`/items/${this.redirectId()}`} />;
     }
 
     return (
@@ -121,8 +117,15 @@ class NewItem extends Component {
             value={this.state.category_id}
             onChange={this.handleInputOnChange}
           >
-            <option value="1">AutoMotive</option>
-            <option value="2">value 2</option>
+            <option value="1">Automotive</option>
+            <option value="2">Furniture</option>
+            <option value="3">Appliances</option>
+            <option value="4">Electronics</option>
+            <option value="5">Sporting Goods</option>
+            <option value="6">Jewelry</option>
+            <option value="7">Apparel</option>
+            <option value="8">Musical Instruments</option>
+            <option value="9">Wanted</option>
           </select>
 
           <div className="title-price">
@@ -250,7 +253,8 @@ class NewItem extends Component {
 
 const mapStateToProps = state => {
   return {
-    redirect: state.redirect
+    redirect: state.redirect,
+    redirectId: state.redirectId
   };
 };
 
@@ -258,6 +262,14 @@ const mapDispatchToProps = dispatch => {
   return {
     addItem: item => {
       dispatch(addItem(item));
+    },
+
+    resetRedirect: () => {
+      dispatch(resetRedirect());
+    },
+
+    resetRedirectId: () => {
+      dispatch(resetRedirectId());
     }
   };
 };

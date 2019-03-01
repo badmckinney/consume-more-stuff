@@ -5,13 +5,15 @@ import {
   LOGOUT,
   RESET_REDIRECT,
   ADD_ITEM,
-  FETCH_ITEMS
+  FETCH_ITEMS,
+  RESET_REDIRECT_ID
 } from '../actions';
 
 const initialState = {
   items: [],
   currentUser: localStorage.getItem('user'),
-  redirect: false
+  redirect: false,
+  redirectId: null
 };
 
 const itemReducer = (state = initialState, action) => {
@@ -53,12 +55,17 @@ const itemReducer = (state = initialState, action) => {
     case ADD_ITEM:
       if (action.success) {
         return Object.assign({}, state, {
-          redirect: true
+          redirect: true,
+          redirectId: action.payload
         });
       } else {
         return state;
         //error handling
       }
+    case RESET_REDIRECT_ID:
+      return Object.assign({}, state, {
+        redirectId: null
+      });
     case FETCH_ITEMS:
       return Object.assign({}, state, { items: action.payload });
     default:

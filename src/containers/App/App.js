@@ -19,9 +19,12 @@ class App extends Component {
       <div>
         <Header />
         <Sidebar />
+
+        <NewItem />
+
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/items/new" component={NewItem} />
+        {/* <Route path="/items/new" component={NewItem} /> */}
         {/* <Route path="/" component={} />
         <Route path="/profile" component={} />
         <Route path="/messages" component={} />

@@ -21,18 +21,17 @@ class Category extends Component {
       <div className="category">
         <ItemList items={this.props.items} />
       </div>
-    )
+    );
   }
-};
-
-const mapStateToProps = (state) => {
-  return { items: state.items };
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = state => {
+  return { items: state.items };
+};
+
+const mapDispatchToProps = dispatch => {
   return {
-    getItems: (category) => {
-      console.log('mapDispatch', category);
+    getItems: category => {
       dispatch(fetchItems(category));
     }
   };
