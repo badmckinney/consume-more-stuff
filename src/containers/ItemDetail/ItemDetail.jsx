@@ -9,6 +9,9 @@ class ItemDetail extends Component {
     this.state = {};
   }
 
+
+
+  
   render() {
     if (this.redirect()) {
       return <Redirect to="/items/detail" />;
@@ -26,7 +29,7 @@ class ItemDetail extends Component {
         </div>
 
         <div className="detail-image">
-          <img>{this.props.image}</img>
+          <img alt={this.props.name}> {this.props.image} </img>
         </div>
 
         <div className="detail-wrapper">
@@ -71,9 +74,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOpenDetail: item => {
-      dispatch(onOpenDetail(item));
-    }
+    // onOpenDetail: item => {
+    //   dispatch(onOpenDetail(item));
+    // }
   };
 };
 
