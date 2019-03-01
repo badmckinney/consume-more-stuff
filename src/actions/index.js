@@ -5,6 +5,7 @@ export const LOGOUT = 'LOGOUT';
 export const ADD_ITEM = 'ADD_ITEM';
 export const RESET_REDIRECT_ID = 'RESET_REDIRECT_ID';
 export const FETCH_ITEMS = 'FETCH_ITEMS';
+export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
 
 export const resetRedirect = () => {
   return {
@@ -144,7 +145,7 @@ export const addItem = newItem => {
       });
   };
 };
-
+//should probably name this differently, as it's specific to loading items/category not just items
 export const fetchItems = category => {
   return dispatch => {
     return fetch(`/api/items/category/${category}`)
@@ -155,6 +156,21 @@ export const fetchItems = category => {
         return dispatch({
           type: FETCH_ITEMS,
           payload: items
+        });
+      });
+  };
+};
+
+export const loadSingleItem = item => {
+  return dispatch => {
+    return fetch('/api/items/:id')
+      .then(res => {
+        return res.json();
+      })
+      .then(item => {
+        return dispatch({
+          type: LOAD_SINGLE_ITEM,
+          payload: item
         });
       });
   };
