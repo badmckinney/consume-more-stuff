@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/badmckinney/consume-more-stuff#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bookshelf": "^0.14.2",
