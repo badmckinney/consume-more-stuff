@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.scss';
 
@@ -16,25 +16,38 @@ import Category from '../Category';
 // import actions here
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <div>
-        <Header />
-        <Sidebar />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/items/new" component={NewItem} />
-        <Route path="/items/:id/edit" component={ItemEdit} />
-        <Route path="/items/:id/details" component={ItemDetail} />
-        {/* <Route path="/" component={} />
-        <Route path="/profile" component={} />
-        <Route path="/messages" component={} />
-        <Route path="/items/new" component={} />
-        <Route path="/items" component={} /> */}
-        <Route path="/items/category/:category" component={Category} />
-      </div>
+      <Router>
+        <>
+          <Header />
+          <Sidebar currentUser={this.props.currentUser} />
+
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/items/new" component={NewItem} />
+          <Route path="/items/category/:category" component={Category} />
+          <Route path="/items/:id/edit" component={ItemEdit} />
+          <Route path="/items/:id/details" component={ItemDetail} />
+        </>
+      </Router>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
+App = connect(
+  mapStateToProps,
+  null
+)(App);
 
 export default App;
