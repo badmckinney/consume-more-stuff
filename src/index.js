@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReduxThunk from 'redux-thunk';
 import './index.scss';
-import { BrowserRouter as Router } from 'react-router-dom';
 import App from './containers/App';
 
 import { Provider } from 'react-redux';
@@ -22,9 +21,7 @@ const store = createStore(itemReducer, enhancer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+    <App />
   </Provider>,
   document.getElementById('root')
 );
