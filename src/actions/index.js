@@ -1,7 +1,11 @@
+import { resolveSoa } from 'dns';
+
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
+export const FETCHED_SEARCH = 'FETCHED_SEARCH';
+export const ERROR = 'ERROR';
 
 export const login = username => {
   return {
@@ -43,6 +47,32 @@ export const loadSingleItem = id => {
           type: LOAD_SINGLE_ITEM,
           payload: item
         });
+      });
+  };
+};
+
+export const searchItems = searchTerm => {
+  return dispatch => {
+    return fetch(`/api/items/search/${searchTerm}`, {
+      method: 'POST',
+      body: JSON.stringify(searchTerm),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (!res.items) {
+          throw new Error('No results found.');
+        }
+
+        return dispatch({
+          type: FETCHED_SEARCH,
+          payload: res.items
+        });
+      })
+      .catch(err => {
+        dispatch({ type: ERROR });
       });
   };
 };

@@ -1,9 +1,10 @@
 // import actions here
-import { LOGIN, LOGOUT, FETCH_ITEMS } from '../actions';
+import { LOGIN, LOGOUT, FETCH_ITEMS, FETCHED_SEARCH } from '../actions';
 
 const initialState = {
   items: [],
-  currentUser: localStorage.getItem('user')
+  currentUser: localStorage.getItem('user'),
+  searchResults: []
 };
 
 const itemReducer = (state = initialState, action) => {
@@ -20,8 +21,10 @@ const itemReducer = (state = initialState, action) => {
       });
     case FETCH_ITEMS:
       return Object.assign({}, state, { items: action.payload });
-    // case LOAD_SINGLE_ITEM:
-    //   return Object.assign({}, state, { items: action.payload });
+    case FETCHED_SEARCH:
+      return Object.assign({}, state, {
+        searchResults: action.payload
+      });
     default:
       return state;
   }
