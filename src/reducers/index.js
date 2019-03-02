@@ -4,8 +4,7 @@ import {
   LOGOUT,
   RESET_REDIRECT,
   FETCH_ITEMS,
-  RESET_REDIRECT_ID,
-  LOAD_SINGLE_ITEM
+  RESET_REDIRECT_ID
 } from '../actions';
 
 const initialState = {
@@ -18,26 +17,15 @@ const initialState = {
 const itemReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
-      if (action.success) {
-        localStorage.setItem('user', action.payload);
-        return Object.assign({}, state, {
-          currentUser: action.payload,
-          redirect: true
-        });
-      } else {
-        return state;
-        //error handling
-      }
+      localStorage.setItem('user', action.payload);
+      return Object.assign({}, state, {
+        currentUser: action.payload
+      });
     case LOGOUT:
-      if (action.success) {
-        localStorage.removeItem('user');
-        return Object.assign({}, state, {
-          currentUser: ''
-        });
-      } else {
-        return state;
-        //error handling
-      }
+      localStorage.removeItem('user');
+      return Object.assign({}, state, {
+        currentUser: ''
+      });
     case RESET_REDIRECT:
       return Object.assign({}, state, {
         redirect: false
@@ -48,8 +36,8 @@ const itemReducer = (state = initialState, action) => {
       });
     case FETCH_ITEMS:
       return Object.assign({}, state, { items: action.payload });
-    case LOAD_SINGLE_ITEM:
-      return Object.assign({}, state, { items: action.payload });
+    // case LOAD_SINGLE_ITEM:
+    //   return Object.assign({}, state, { items: action.payload });
     default:
       return state;
   }

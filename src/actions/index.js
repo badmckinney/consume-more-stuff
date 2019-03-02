@@ -17,64 +17,16 @@ export const resetRedirectId = () => {
   };
 };
 
-export const login = user => {
-  return dispatch => {
-    return fetch('/api/login', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(user)
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        if (res.success) {
-          return dispatch({
-            type: LOGIN,
-            success: true,
-            payload: user.username
-          });
-        }
-
-        return dispatch({
-          type: LOGIN,
-          success: false
-        });
-      })
-      .catch(err => {
-        return dispatch({
-          type: LOGIN,
-          success: false
-        });
-      });
+export const login = username => {
+  return {
+    type: LOGIN,
+    payload: username
   };
 };
 
 export const logout = () => {
-  return dispatch => {
-    return fetch('/api/logout', { method: 'POST' })
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        if (res.success) {
-          return dispatch({
-            type: LOGOUT,
-            success: true
-          });
-        }
-
-        return dispatch({
-          type: LOGOUT,
-          success: false
-        });
-      })
-      .catch(err => {
-        return dispatch({
-          type: LOGOUT,
-          success: false
-        });
-      });
+  return {
+    type: LOGOUT
   };
 };
 
