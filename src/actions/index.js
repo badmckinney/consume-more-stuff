@@ -1,4 +1,3 @@
-export const REGISTER = 'REGISTER';
 export const RESET_REDIRECT = 'RESET_REDIRECT';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
@@ -15,37 +14,6 @@ export const resetRedirect = () => {
 export const resetRedirectId = () => {
   return {
     type: RESET_REDIRECT_ID
-  };
-};
-
-export const register = newUser => {
-  return dispatch => {
-    return fetch('/api/register', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(newUser)
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        if (res.success) {
-          return dispatch({
-            type: REGISTER,
-            success: true
-          });
-        }
-        return dispatch({
-          type: REGISTER,
-          success: false
-        });
-      })
-      .catch(err => {
-        return dispatch({
-          type: REGISTER,
-          success: false
-        });
-      });
   };
 };
 

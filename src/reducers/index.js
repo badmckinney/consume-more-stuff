@@ -1,6 +1,5 @@
 // import actions here
 import {
-  REGISTER,
   LOGIN,
   LOGOUT,
   RESET_REDIRECT,
@@ -18,15 +17,6 @@ const initialState = {
 
 const itemReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REGISTER:
-      if (action.success) {
-        return Object.assign({}, state, {
-          redirect: true
-        });
-      } else {
-        return state;
-        //add error handling
-      }
     case LOGIN:
       if (action.success) {
         localStorage.setItem('user', action.payload);
