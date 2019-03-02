@@ -11,7 +11,7 @@ const Sidebar = props => {
         <Link to="/items/category/apparel">
           <button>Apparel</button>
         </Link>
-        <Link to="/category/appliances">
+        <Link to="/items/category/appliances">
           <button>Appliances</button>
         </Link>
         <Link to="/items/category/automotive">
@@ -26,10 +26,10 @@ const Sidebar = props => {
         <Link to="/items/category/jewelry">
           <button>Jewelry</button>
         </Link>
-        <Link to="/items/category/musicical-instruments">
+        <Link to="/items/category/musical_instruments">
           <button>Musical Instruments</button>
         </Link>
-        <Link to="/items/category/sporting-goods">
+        <Link to="/items/category/sporting_goods">
           <button>Sporting Goods</button>
         </Link>
         <Link to="/items/all">

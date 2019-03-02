@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ItemList from '../../components/ItemList';
 import { fetchItems } from '../../actions';
+import { withRouter } from 'react-router-dom';
 
 import './Category.scss';
 
@@ -37,9 +38,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-Category = connect(
+Category = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Category);
+)(Category));
 
 export default Category;

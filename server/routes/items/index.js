@@ -75,16 +75,16 @@ router.get('/items/category/:category/top', (req, res) => {
 
 router.get('/items/category/:category', (req, res) => {
   const category_name = req.params.category;
-  console.log(category_name);
   new Category({ name: category_name }).fetch().then(category => {
     category = category.toJSON();
-
+    console.log(category.id);
     new Item({ category_id: category.id })
       .fetchAll({
         withRelated: ['createdBy', 'category', 'condition', 'status']
       })
       .then(items => {
         itemList = items.toJSON();
+        console.log(itemList);
         items = [];
 
         itemList.forEach(item => {
