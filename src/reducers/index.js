@@ -1,17 +1,9 @@
 // import actions here
-import {
-  LOGIN,
-  LOGOUT,
-  RESET_REDIRECT,
-  FETCH_ITEMS,
-  RESET_REDIRECT_ID
-} from '../actions';
+import { LOGIN, LOGOUT, FETCH_ITEMS } from '../actions';
 
 const initialState = {
   items: [],
-  currentUser: localStorage.getItem('user'),
-  redirect: false,
-  redirectId: null
+  currentUser: localStorage.getItem('user')
 };
 
 const itemReducer = (state = initialState, action) => {
@@ -25,14 +17,6 @@ const itemReducer = (state = initialState, action) => {
       localStorage.removeItem('user');
       return Object.assign({}, state, {
         currentUser: ''
-      });
-    case RESET_REDIRECT:
-      return Object.assign({}, state, {
-        redirect: false
-      });
-    case RESET_REDIRECT_ID:
-      return Object.assign({}, state, {
-        redirectId: null
       });
     case FETCH_ITEMS:
       return Object.assign({}, state, { items: action.payload });
