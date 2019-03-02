@@ -12,6 +12,7 @@ import ItemEdit from '../ItemEdit';
 import ItemDetail from '../ItemDetail';
 import NewItem from '../NewItem';
 import Category from '../Category';
+import SearchDisplay from '../SearchDisplay/SearchDisplay';
 
 // import actions here
 
@@ -33,6 +34,7 @@ class App extends Component {
           <Route path="/items/category/:category" component={Category} />
           <Route path="/items/:id/edit" component={ItemEdit} />
           <Route path="/items/:id/details" component={ItemDetail} />
+          <Route path="/search/:term" component={SearchDisplay} />
         </>
       </Router>
     );

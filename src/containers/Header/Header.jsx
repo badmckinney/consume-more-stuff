@@ -11,7 +11,7 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      search: ''
+      searchTerm: ''
     };
 
     this.logout = this.logout.bind(this);
@@ -33,12 +33,13 @@ class Header extends Component {
   handleSearchOnChange(e) {
     let value = e.target.value;
     this.setState({
-      search: value
+      searchTerm: value
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    this.props.history.push(`/search/${this.state.searchTerm}`);
   }
 
   render() {

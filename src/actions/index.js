@@ -1,5 +1,3 @@
-import { resolveSoa } from 'dns';
-
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const FETCH_ITEMS = 'FETCH_ITEMS';
@@ -51,15 +49,9 @@ export const loadSingleItem = id => {
   };
 };
 
-export const searchItems = searchTerm => {
+export const searchItems = term => {
   return dispatch => {
-    return fetch(`/api/items/search/${searchTerm}`, {
-      method: 'POST',
-      body: JSON.stringify(searchTerm),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    return fetch(`/api/items/search/${term}`)
       .then(res => res.json())
       .then(res => {
         if (!res.items) {
