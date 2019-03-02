@@ -58,9 +58,7 @@ class ItemEdit extends Component {
     });
   }
 
-  editItem() {
-    const editedItem = this.state;
-
+  editItem(editedItem) {
     axios.put(`/api/items/${editedItem.id}`, editedItem).then(res => {
       if (res.data.success) {
         this.setState({
