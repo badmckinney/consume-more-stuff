@@ -13,7 +13,7 @@ const Item = props => {
     <Link to={`/items/${item.id}`}>
       <div className="item">
         <div className="img-container">
-          <img src={item.image} className="item-image" />
+          <img src={item.image} className="item-image" alt={item.name} />
         </div>
         <p className="post-date">{item.created_at}</p>
         <h4 className="item-name">{item.name}</h4>

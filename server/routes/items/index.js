@@ -75,6 +75,7 @@ router.get('/items/category/:category/top', (req, res) => {
 
 router.get('/items/category/:category', (req, res) => {
   const category_name = req.params.category;
+  console.log(category_name);
   new Category({ name: category_name }).fetch().then(category => {
     category = category.toJSON();
 
