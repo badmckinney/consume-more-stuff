@@ -1,30 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
-import { login, resetRedirect } from '../../actions';
+import { login } from '../../actions';
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      redirect: false,
       username: '',
       password: ''
     };
 
-    this.redirect = this.redirect.bind(this);
+    this.login = this.login.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  redirect() {
-    if (this.props.redirect) {
-      this.props.resetRedirect();
-      return true;
-    }
+  login(user) {
+    axios.post('/api/login', user).then(res => {
+      if (res.data.success) {
+        this.props.dispatchLogin(res.data.username);
+        this.setState({
+          redirect: true
+        });
+      }
 
-    return false;
+      //error handle
+    });
   }
 
   handleInputOnChange(e) {
@@ -33,13 +39,9 @@ class Login extends Component {
 
     switch (name) {
       case 'username':
-        return this.setState({
-          username: value
-        });
+        return this.setState({ username: value });
       case 'password':
-        return this.setState({
-          password: value
-        });
+        return this.setState({ password: value });
       default:
         return;
     }
@@ -50,15 +52,11 @@ class Login extends Component {
     const user = { username, password };
 
     e.preventDefault();
-    this.props.login(user);
-    this.setState({
-      username: '',
-      password: ''
-    });
+    this.login(user);
   }
 
   render() {
-    if (this.redirect()) {
+    if (this.state.redirect) {
       return <Redirect to="/" />;
     }
 
@@ -88,25 +86,16 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    redirect: state.redirect
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
-    login: user => {
+    dispatchLogin: user => {
       dispatch(login(user));
-    },
-    resetRedirect: () => {
-      dispatch(resetRedirect());
     }
   };
 };
 
 Login = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Login);
 

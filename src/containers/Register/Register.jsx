@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-
-import { register, resetRedirect } from '../../actions';
 
 class Register extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      redirect: false,
       first_name: '',
       last_name: '',
       email: '',
@@ -16,18 +15,20 @@ class Register extends Component {
       password: ''
     };
 
-    this.redirect = this.redirect.bind(this);
+    this.register = this.register.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  redirect() {
-    if (this.props.redirect) {
-      this.props.resetRedirect();
-      return true;
-    }
-
-    return false;
+  register(newUser) {
+    axios.post('/api/register', newUser).then(res => {
+      if (res.data.success) {
+        this.setState({
+          redirect: true
+        });
+      }
+      // error handling;
+    });
   }
 
   handleInputOnChange(e) {
@@ -36,48 +37,29 @@ class Register extends Component {
 
     switch (name) {
       case 'first_name':
-        return this.setState({
-          first_name: value
-        });
+        return this.setState({ first_name: value });
       case 'last_name':
-        return this.setState({
-          last_name: value
-        });
+        return this.setState({ last_name: value });
       case 'email':
-        return this.setState({
-          email: value
-        });
+        return this.setState({ email: value });
       case 'username':
-        return this.setState({
-          username: value
-        });
+        return this.setState({ username: value });
       case 'password':
-        return this.setState({
-          password: value
-        });
+        return this.setState({ password: value });
       default:
         return;
     }
   }
 
   handleSubmit(e) {
-    const { first_name, last_name, email, username, password } = this.state;
-    const newUser = { first_name, last_name, email, username, password };
+    const newUser = this.state;
 
     e.preventDefault();
-    this.props.register(newUser);
-
-    this.setState({
-      first_name: '',
-      last_name: '',
-      email: '',
-      username: '',
-      password: ''
-    });
+    this.register(newUser);
   }
 
   render() {
-    if (this.redirect()) {
+    if (this.state.redirect) {
       return <Redirect to="/login" />;
     }
 
@@ -142,27 +124,5 @@ class Register extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    redirect: state.redirect
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    register: newUser => {
-      dispatch(register(newUser));
-    },
-    resetRedirect: () => {
-      dispatch(resetRedirect());
-    }
-  };
-};
-
-Register = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Register);
 
 export default Register;
