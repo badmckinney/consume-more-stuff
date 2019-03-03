@@ -10,7 +10,7 @@ class ItemDetail extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const item = this.props.match.params.id;
     this.props.loadItem(item);
   }
