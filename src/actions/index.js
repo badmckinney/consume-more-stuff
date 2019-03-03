@@ -6,6 +6,8 @@ export const ADD_ITEM = 'ADD_ITEM';
 export const RESET_REDIRECT_ID = 'RESET_REDIRECT_ID';
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
+export const FETCHED_SEARCH = 'FETCHED_SEARCH';
+export const ERROR = 'ERROR';
 export const LOAD_TOP = 'LOAD_TOP';
 
 export const resetRedirect = () => {
@@ -173,6 +175,26 @@ export const loadSingleItem = id => {
           type: LOAD_SINGLE_ITEM,
           payload: item
         });
+      });
+  };
+};
+
+export const searchItems = term => {
+  return dispatch => {
+    return fetch(`/api/items/search/${term}`)
+      .then(res => res.json())
+      .then(res => {
+        if (!res.items) {
+          throw new Error('No results found.');
+        }
+
+        return dispatch({
+          type: FETCHED_SEARCH,
+          payload: res.items
+        });
+      })
+      .catch(err => {
+        return dispatch({ type: ERROR });
       });
   };
 };

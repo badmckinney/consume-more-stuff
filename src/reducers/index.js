@@ -4,12 +4,14 @@ import {
   LOGOUT,
   FETCH_ITEMS,
   LOAD_SINGLE_ITEM,
-  LOAD_TOP
+  LOAD_TOP,
+  FETCHED_SEARCH
 } from '../actions';
 
 const initialState = {
   items: [],
   currentUser: localStorage.getItem('user'),
+  searchResults: [],
   redirect: false,
   redirectId: null,
   topTen: {}
@@ -29,11 +31,19 @@ const itemReducer = (state = initialState, action) => {
       });
     case FETCH_ITEMS:
       return Object.assign({}, state, { items: action.payload });
+    case FETCHED_SEARCH:
+      return Object.assign({}, state, {
+        searchResults: action.payload
+      });
     case LOAD_SINGLE_ITEM:
       return Object.assign({}, state, { items: action.payload });
     case LOAD_TOP:
       const category = action.payload.category;
-      return Object.assign({}, state, { topTen: Object.assign({}, state.topTen, { [category]: action.payload.items }) })
+      return Object.assign({}, state, {
+        topTen: Object.assign({}, state.topTen, {
+          [category]: action.payload.items
+        })
+      });
     default:
       return state;
   }

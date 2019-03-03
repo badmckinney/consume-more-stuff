@@ -4,14 +4,14 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 import HeaderLogin from '../../components/HeaderLogin';
-import { logout } from '../../actions';
+import { logout, searchItems } from '../../actions';
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      search: ''
+      searchTerm: ''
     };
 
     this.logout = this.logout.bind(this);
@@ -33,12 +33,16 @@ class Header extends Component {
   handleSearchOnChange(e) {
     let value = e.target.value;
     this.setState({
-      search: value
+      searchTerm: value
     });
   }
 
   handleSubmit(e) {
+    const { searchTerm } = this.state;
     e.preventDefault();
+    this.props.searchItems(searchTerm).then(() => {
+      this.props.history.push(`/search/${searchTerm}`);
+    });
   }
 
   render() {
@@ -77,6 +81,10 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatchLogout: () => {
       dispatch(logout());
+    },
+
+    searchItems: term => {
+      return dispatch(searchItems(term));
     }
   };
 };
