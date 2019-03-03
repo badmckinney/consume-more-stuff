@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ItemList from '../../components/ItemList';
 import { fetchItems } from '../../actions';
+import { withRouter } from 'react-router-dom';
 
 import './Category.scss';
 
@@ -14,6 +15,13 @@ class Category extends Component {
   componentWillMount() {
     const category = this.props.match.params.category;
     this.props.getItems(category);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.category !== prevProps.match.params.category) {
+      const category = this.props.match.params.category;
+      this.props.getItems(category);
+    }
   }
 
   render() {
@@ -37,9 +45,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-Category = connect(
+Category = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Category);
+)(Category));
 
 export default Category;

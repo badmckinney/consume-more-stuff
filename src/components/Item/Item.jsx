@@ -10,17 +10,18 @@ const Item = props => {
   }
 
   return (
-    <Link to={`/items/${item.id}`}>
-      <div className="item">
-        <div className="img-container">
-          <img src={item.image} className="item-image" />
+    <>
+      <Link to={`/items/${item.id}`}>
+        <div className="item">
+          <div className="img-container">
+            <img src={item.image} className="item-image" alt={item.name} />
+          </div>
+          <p className="post-date">{item.created_at}</p>
+          <h4 className="item-name">{item.name}</h4>
+          <p className="item-price">{item.price}</p>
+          <p className="item-condition">{item.condition.name ? item.condition.name : item.condition}</p>
         </div>
-        <p className="post-date">{item.created_at}</p>
-        <h4 className="item-name">{item.name}</h4>
-        <p className="item-price">{item.price}</p>
-        <p className="item-condition">{item.condition}</p>
-      </div>
-    </Link>
+      </Link></>
   )
 };
 

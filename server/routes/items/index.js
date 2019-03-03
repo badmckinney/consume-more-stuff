@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bookshelf = require('../../../database/models/bookshelf');
 const Item = require('../../../database/models/Item');
 const Category = require('../../../database/models/Category');
 const Condition = require('../../../database/models/Condition');
@@ -19,8 +20,8 @@ router.get('/items', (req, res) => {
       items = [];
 
       itemList.forEach(item => {
-        item = item.attributes;
         const relations = item.relations;
+        item = item.attributes;
         const condition = relations.condition.attributes;
         const category = relations.category.attributes;
         const createdBy = relations.createdBy.attributes;
@@ -55,12 +56,30 @@ router.get('/items', (req, res) => {
     });
 });
 
+router.get('/items/category/:category/top', (req, res) => {
+  const category_name = req.params.category;
+  new Category({ name: category_name }).fetch()
+    .then(category => {
+
+      category = category.toJSON();
+
+      Item.where('category_id', '=', category.id).orderBy('views', 'DESC')
+        .fetchAll({
+          withRelated: ['createdBy', 'category', 'condition', 'status'],
+        })
+        .then(items => {
+          itemList = items.toJSON().slice(0, 10);
+          res.json(itemList);
+        })
+    })
+});
+
 router.get('/items/category/:category', (req, res) => {
+
   const category_name = req.params.category;
   new Category({ name: category_name }).fetch().then(category => {
     category = category.toJSON();
-
-    new Item({ category_id: category.id })
+    Item.where('category_id', '=', category.id)
       .fetchAll({
         withRelated: ['createdBy', 'category', 'condition', 'status']
       })
