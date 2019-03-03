@@ -194,7 +194,7 @@ export const searchItems = term => {
         });
       })
       .catch(err => {
-        dispatch({ type: ERROR });
+        return dispatch({ type: ERROR });
       });
   };
 };

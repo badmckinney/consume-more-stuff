@@ -12,7 +12,7 @@ import ItemEdit from '../ItemEdit';
 import ItemDetail from '../ItemDetail';
 import NewItem from '../NewItem';
 import Category from '../Category';
-import SearchDisplay from '../SearchDisplay/SearchDisplay';
+import SearchDisplay from '../../components/SearchDisplay';
 import Home from '../Home';
 
 // import actions here
@@ -31,7 +31,15 @@ class App extends Component {
           <Route path="/items/category/:category" component={Category} />
           <Route path="/items/:id/edit" component={ItemEdit} />
           <Route path="/items/:id/details" component={ItemDetail} />
-          <Route path="/search/:term" component={SearchDisplay} />
+          <Route
+            path="/search/:term"
+            render={props => (
+              <SearchDisplay
+                {...props}
+                searchResults={this.props.searchResults}
+              />
+            )}
+          />
           <Route exact path="/" component={Home} />
         </>
       </Router>
@@ -41,7 +49,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    searchResults: state.searchResults
   };
 };
 
