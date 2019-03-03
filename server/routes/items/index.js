@@ -79,14 +79,12 @@ router.get('/items/category/:category', (req, res) => {
   const category_name = req.params.category;
   new Category({ name: category_name }).fetch().then(category => {
     category = category.toJSON();
-    console.log(category.id);
     Item.where('category_id', '=', category.id)
       .fetchAll({
         withRelated: ['createdBy', 'category', 'condition', 'status']
       })
       .then(items => {
         itemList = items.toJSON();
-        console.log(itemList);
         items = [];
 
         itemList.forEach(item => {
