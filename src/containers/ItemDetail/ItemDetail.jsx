@@ -121,7 +121,7 @@ class ItemDetail extends Component {
         </div>
       );
     }
-    return (<> </>)
+    return <> </>;
   }
 }
 
