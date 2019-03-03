@@ -58,24 +58,22 @@ router.get('/items', (req, res) => {
 
 router.get('/items/category/:category/top', (req, res) => {
   const category_name = req.params.category;
-  new Category({ name: category_name }).fetch()
-    .then(category => {
+  new Category({ name: category_name }).fetch().then(category => {
+    category = category.toJSON();
 
-      category = category.toJSON();
-
-      Item.where('category_id', '=', category.id).orderBy('views', 'DESC')
-        .fetchAll({
-          withRelated: ['createdBy', 'category', 'condition', 'status'],
-        })
-        .then(items => {
-          itemList = items.toJSON().slice(0, 10);
-          res.json(itemList);
-        })
-    })
+    Item.where('category_id', '=', category.id)
+      .orderBy('views', 'DESC')
+      .fetchAll({
+        withRelated: ['createdBy', 'category', 'condition', 'status']
+      })
+      .then(items => {
+        itemList = items.toJSON().slice(0, 10);
+        res.json(itemList);
+      });
+  });
 });
 
 router.get('/items/category/:category', (req, res) => {
-
   const category_name = req.params.category;
   new Category({ name: category_name }).fetch().then(category => {
     category = category.toJSON();
@@ -168,7 +166,6 @@ router.get('/items/status/:status', (req, res) => {
 
 router.get('/items/search/:term', (req, res) => {
   let term = req.params.term;
-  console.log(term);
 
   Item.query(qb => {
     qb.whereRaw('LOWER(name) LIKE ?', '%' + term.toLowerCase() + '%')
