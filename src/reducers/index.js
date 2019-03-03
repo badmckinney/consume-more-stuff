@@ -1,5 +1,5 @@
 // import actions here
-import { LOGIN, LOGOUT, FETCH_ITEMS } from '../actions';
+import { LOGIN, LOGOUT, FETCH_ITEMS, LOAD_SINGLE_ITEM } from '../actions';
 
 const initialState = {
   items: [],
@@ -20,8 +20,8 @@ const itemReducer = (state = initialState, action) => {
       });
     case FETCH_ITEMS:
       return Object.assign({}, state, { items: action.payload });
-    // case LOAD_SINGLE_ITEM:
-    //   return Object.assign({}, state, { items: action.payload });
+    case LOAD_SINGLE_ITEM:
+      return Object.assign({}, state, { detail: action.payload });
     default:
       return state;
   }
