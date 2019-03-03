@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 import HeaderLogin from '../../components/HeaderLogin';
-import { logout } from '../../actions';
+import { logout, searchItems } from '../../actions';
 
 class Header extends Component {
   constructor(props) {
@@ -38,8 +38,11 @@ class Header extends Component {
   }
 
   handleSubmit(e) {
+    const { searchTerm } = this.state;
     e.preventDefault();
-    this.props.history.push(`/search/${this.state.searchTerm}`);
+    this.props.searchItems(searchTerm).then(() => {
+      this.props.history.push(`/search/${searchTerm}`);
+    });
   }
 
   render() {
@@ -78,6 +81,10 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatchLogout: () => {
       dispatch(logout());
+    },
+
+    searchItems: term => {
+      return dispatch(searchItems(term));
     }
   };
 };

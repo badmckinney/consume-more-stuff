@@ -149,51 +149,20 @@ router.get('/items/status/:status', (req, res) => {
 
 router.get('/items/search/:term', (req, res) => {
   let term = req.params.term;
+  console.log(term);
 
-  Item.whereRaw('LOWER(name) LIKE ?', '%' + term.toLowerCase() + '%')
-    .orWhereRaw('LOWER(description) LIKE ?', '%' + term.toLowerCase() + '%')
-    .orWhereRaw('LOWER(manufacturer) LIKE ?', '%' + term.toLowerCase() + '%')
-    .orWhereRaw('LOWER(model) LIKE ?', '%' + term.toLowerCase() + '%')
-    .orWhereRaw('LOWER(notes) LIKE ?', '%' + term.toLowerCase() + '%')
+  Item.query(qb => {
+    qb.whereRaw('LOWER(name) LIKE ?', '%' + term.toLowerCase() + '%')
+      .orWhereRaw('LOWER(description) LIKE ?', '%' + term.toLowerCase() + '%')
+      .orWhereRaw('LOWER(manufacturer) LIKE ?', '%' + term.toLowerCase() + '%')
+      .orWhereRaw('LOWER(model) LIKE ?', '%' + term.toLowerCase() + '%')
+      .orWhereRaw('LOWER(notes) LIKE ?', '%' + term.toLowerCase() + '%');
+  })
     .fetchAll({
       withRelated: ['createdBy', 'category', 'condition', 'status']
     })
     .then(items => {
-      itemList = items.models;
-      items = [];
-
-      itemList.forEach(item => {
-        item = item.attributes;
-        const relations = item.relations;
-        const condition = relations.condition.attributes;
-        const category = relations.category.attributes;
-        const createdBy = relations.createdBy.attributes;
-        const status = relations.status.attributes;
-
-        const itemData = {
-          id: item.id,
-          created_by: createdBy.username,
-          status: status.name,
-          category: category.name,
-          condition: condition.name,
-          name: item.name,
-          image: item.image,
-          description: item.description,
-          price: item.price,
-          manufacturer: item.manufacturer,
-          model: item.model,
-          length: item.length,
-          width: item.width,
-          height: item.height,
-          created_at: item.created_at,
-          updated_at: item.updated_at,
-          notes: item.notes,
-          views: item.views
-        };
-
-        items.push(itemData);
-      });
-      res.json(items);
+      res.json({ items: items });
     })
     .catch(err => {
       res.status(500);
