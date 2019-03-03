@@ -20,8 +20,8 @@ router.get('/items', (req, res) => {
       items = [];
 
       itemList.forEach(item => {
-        item = item.attributes;
         const relations = item.relations;
+        item = item.attributes;
         const condition = relations.condition.attributes;
         const category = relations.category.attributes;
         const createdBy = relations.createdBy.attributes;
@@ -60,9 +60,10 @@ router.get('/items/category/:category/top', (req, res) => {
   const category_name = req.params.category;
   new Category({ name: category_name }).fetch()
     .then(category => {
+
       category = category.toJSON();
 
-      new Item({ category_id: category.id }).orderBy('views', 'DESC')
+      Item.where('category_id', '=', category.id).orderBy('views', 'DESC')
         .fetchAll({
           withRelated: ['createdBy', 'category', 'condition', 'status'],
         })
@@ -74,11 +75,12 @@ router.get('/items/category/:category/top', (req, res) => {
 });
 
 router.get('/items/category/:category', (req, res) => {
+
   const category_name = req.params.category;
   new Category({ name: category_name }).fetch().then(category => {
     category = category.toJSON();
     console.log(category.id);
-    new Item({ category_id: category.id })
+    Item.where('category_id', '=', category.id)
       .fetchAll({
         withRelated: ['createdBy', 'category', 'condition', 'status']
       })

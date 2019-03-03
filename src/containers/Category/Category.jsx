@@ -17,6 +17,13 @@ class Category extends Component {
     this.props.getItems(category);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.category !== prevProps.match.params.category) {
+      const category = this.props.match.params.category;
+      this.props.getItems(category);
+    }
+  }
+
   render() {
     return (
       <div className="category">

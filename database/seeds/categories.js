@@ -24,13 +24,13 @@ exports.seed = function (knex, Promise) {
           name: "jewelry"
         },
         {
-          name: "musical_Instruments"
+          name: "musical_instruments"
         },
         {
           name: "sporting_goods"
         },
         {
-          name: "view_All"
+          name: "view_all"
         },
         {
           name: "wanted"
