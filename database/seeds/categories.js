@@ -1,39 +1,39 @@
 
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
   return knex('categories').del()
     .then(function () {
       // Inserts seed entries
       return knex('categories').insert([
         {
-          name:"Apparel"
+          name: "apparel"
         },
         {
-          name:"Appliances"
+          name: "appliances"
         },
         {
-          name:"Automotive"
+          name: "automotive"
         },
         {
-          name:"Electronics"
+          name: "electronics"
         },
         {
-          name:"Furniture"
+          name: "furniture"
         },
         {
-          name:"Jewelry"
+          name: "jewelry"
         },
         {
-          name:"Musical_Instruments"
+          name: "musical_instruments"
         },
         {
-          name:"Sporting_goods"
+          name: "sporting_goods"
         },
         {
-          name:"View_All"
+          name: "view_all"
         },
         {
-          name:"Wanted"
+          name: "wanted"
         }
       ]);
     });

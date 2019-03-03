@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.scss';
 
@@ -13,14 +13,11 @@ import ItemDetail from '../ItemDetail';
 import NewItem from '../NewItem';
 import Category from '../Category';
 import SearchDisplay from '../SearchDisplay/SearchDisplay';
+import Home from '../Home';
 
 // import actions here
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Router>
@@ -35,6 +32,7 @@ class App extends Component {
           <Route path="/items/:id/edit" component={ItemEdit} />
           <Route path="/items/:id/details" component={ItemDetail} />
           <Route path="/search/:term" component={SearchDisplay} />
+          <Route exact path="/" component={Home} />
         </>
       </Router>
     );
