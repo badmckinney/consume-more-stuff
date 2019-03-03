@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import './ItemDetail.scss';
 import { loadSingleItem } from '../../actions';
+import { Link } from 'react-router-dom';
 
 class ItemDetail extends Component {
   constructor(props) {
@@ -10,69 +10,125 @@ class ItemDetail extends Component {
     this.state = {};
   }
 
-componentWillMount(){
-  const item = this.props.match.params.id
-  this.props.loadItem(item);
-}
+  componentWillMount() {
+    const item = this.props.match.params.id;
+    this.props.loadItem(item);
+  }
 
-  
   render() {
-    if (this.redirect()) {
-      return <Redirect to="/items/detail" />;
+    const detail = this.props.detail;
+    if (detail) {
+      if (this.props.detail.item.createdBy === this.props.currentUser) {
+        return (
+          <div className="detail-container">
+            <div className="detail-header">
+              <div className="detail-name">
+                <h3> {detail.item.name} </h3>
+              </div>
+
+              <div className="detail-price">
+                <h3> ${detail.item.price} </h3>
+              </div>
+            </div>
+
+            <div className="detail-image">
+              <img alt={detail.item.name} src="" />
+            </div>
+
+            <div className="detail-wrapper">
+              <div className="detail">
+                <p>Manufacurer: {detail.item.manufacturer} </p>
+              </div>
+
+              <div className="detail">
+                <p>Model: {detail.item.model} </p>
+              </div>
+
+              <div className="detail">
+                <p> Dimensions </p>
+                <p>
+                  L: {detail.item.length} W:{detail.item.width} H:
+                  {detail.item.height}
+                </p>
+              </div>
+
+              <div className="detail">
+                <p> Additional information</p>
+                <p> {detail.notes} </p>
+              </div>
+
+              <div className="detail">
+                <p> Views: {detail.item.views} </p>
+              </div>
+            </div>
+
+            <div className="detail-description">
+              <div>{detail.item.description}</div>
+            </div>
+
+            <Link to={`/items/${this.state.id}/edit`}>
+              <button>Edit</button>
+            </Link>
+          </div>
+        );
+      }
+      return (
+        <div className="detail-container">
+          <div className="detail-header">
+            <div className="detail-name">
+              <h3> {detail.item.name} </h3>
+            </div>
+
+            <div className="detail-price">
+              <h3> ${detail.item.price} </h3>
+            </div>
+          </div>
+
+          <div className="detail-image">
+            <img alt={detail.item.name} src="" />
+          </div>
+
+          <div className="detail-wrapper">
+            <div className="detail">
+              <p>Manufacurer: {detail.item.manufacturer} </p>
+            </div>
+
+            <div className="detail">
+              <p>Model: {detail.item.model} </p>
+            </div>
+
+            <div className="detail">
+              <p> Dimensions </p>
+              <p>
+                L: {detail.item.length} W:{detail.item.width} H:
+                {detail.item.height}
+              </p>
+            </div>
+
+            <div className="detail">
+              <p> Additional information</p>
+              <p> {detail.item.notes} </p>
+            </div>
+
+            <div className="detail">
+              <p> Views: {detail.item.views} </p>
+            </div>
+          </div>
+
+          <div className="detail-description">
+            <div>{detail.item.description}</div>
+          </div>
+        </div>
+      );
     }
-    return (
-      <div className="detail-container">
-        <div className="detail-header">
-          <div className="detail-name">
-            <h3> {this.props.name} </h3>
-          </div>
-
-          <div className="detail-price">
-            <h3> ${this.props.price} </h3>
-          </div>
-        </div>
-
-        <div className="detail-image">
-          <img alt={this.props.name}> {this.props.image} </img>
-        </div>
-
-        <div className="detail-wrapper">
-          <div className="detail">
-            <p>Manufacurer: {this.props.manufacturer} </p>
-          </div>
-
-          <div className="detail">
-            <p>Model: {this.props.model} </p>
-          </div>
-
-          <div className="detail">
-            <p> Dimensions </p>
-            <p>
-              L: {this.props.length} W:{this.props.width} H:{this.props.height}
-            </p>
-          </div>
-
-          <div className="detail">
-            <p> Additional information</p>
-            <p> {this.props.notes} </p>
-          </div>
-
-          <div className="detail">
-            <p> Views: {this.props.view} </p>
-          </div>
-        </div>
-
-        <div className="detail-description">
-          <div>{this.props.description}</div>
-        </div>
-      </div>
-    );
+    return (<> </>)
   }
 }
 
 const mapStateToProps = state => {
   return {
-    items: state.items
+    detail: state.detail,
+    currentUser: state.currentUser
   };
 };
 
