@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 import HeaderLogin from '../../components/HeaderLogin';
 import { logout } from '../../actions';
@@ -12,8 +14,20 @@ class Header extends Component {
       search: ''
     };
 
+    this.logout = this.logout.bind(this);
     this.handleSearchOnChange = this.handleSearchOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  logout() {
+    axios.post('/api/logout', null).then(res => {
+      if (res.data.success) {
+        this.props.dispatchLogout();
+        this.props.history.push('/');
+      }
+
+      //error handling
+    });
   }
 
   handleSearchOnChange(e) {
@@ -24,13 +38,7 @@ class Header extends Component {
   }
 
   handleSubmit(e) {
-    // const { search } = this.state;
-
     e.preventDefault();
-    // this.props.search(search)
-    // this.setState({
-    //   search: ''
-    // })
   }
 
   render() {
@@ -52,7 +60,7 @@ class Header extends Component {
 
         <HeaderLogin
           currentUser={this.props.currentUser}
-          logout={this.props.logout}
+          logout={this.logout}
         />
       </div>
     );
@@ -67,15 +75,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logout: () => {
+    dispatchLogout: () => {
       dispatch(logout());
     }
   };
 };
 
-Header = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+Header = withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
+);
 
 export default Header;
