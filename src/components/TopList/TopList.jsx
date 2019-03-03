@@ -19,12 +19,9 @@ class TopList extends Component {
     const category = this.props.category;
     if (this.props.topTen[category]) {
       this.props.topTen[category].forEach((item) => {
-        console.log(item);
         items.push((<Item key={item.id} item={item} />));
       });
     }
-    console.log(category);
-    console.log(items);
     return (
       <div className={`top-${this.props.category}`}>
         {items}
