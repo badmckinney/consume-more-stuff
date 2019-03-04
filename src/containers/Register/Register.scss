@@ -1,11 +1,13 @@
+$primary-gradient: linear-gradient(#2db8f5, #5c49e6 );
+
 .register-wrapper {
   margin: auto;
   width: 30%;
   max-width: 30%;
   margin-top: 5%;
-  background-color: #ddd;
-  border-radius: 50px;
-  box-shadow: 10px 10px 2px 2px #eee;
+background: $primary-gradient;
+  border-radius: 10px;
+  box-shadow: 10px 10px 2px 2px #ddd;
 
   form {
     margin: auto;
@@ -32,7 +34,7 @@
     .btn-container {
       width: 100%;
       .btn {
-        background: indigo;
+        background:#2db8f5;
         font-size: 30px;
         width: 90%;
         max-width: 90%;
@@ -43,4 +45,7 @@
       }
     }
   }
+}
+.btn:hover{
+  cursor:pointer;
 }
