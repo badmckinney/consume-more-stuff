@@ -10,7 +10,7 @@ class ItemEdit extends Component {
 
     this.state = {
       notFound: false,
-      notOwned: false,
+      isOwner: false,
       editError: false,
       id: '',
       category_id: '',
@@ -53,11 +53,11 @@ class ItemEdit extends Component {
     }
 
     if (item.createdBy !== this.props.currentUser) {
-      return this.setState({ notOwned: true });
+      return this.setState({ isOwner: true });
     }
 
     return this.setState({
-      notOwned: false,
+      isOwner: false,
       id: item.id,
       category_id: item.category_id,
       name: item.name,
@@ -137,7 +137,7 @@ class ItemEdit extends Component {
       return <div className="error">Item not found</div>;
     }
 
-    if (this.state.notOwned) {
+    if (this.state.isOwner) {
       return <div className="error">Denied: user does not own this post</div>;
     }
 
