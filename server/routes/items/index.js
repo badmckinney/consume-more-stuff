@@ -58,19 +58,31 @@ router.get('/items', (req, res) => {
 
 router.get('/items/category/:category/top', (req, res) => {
   const category_name = req.params.category;
-  new Category({ name: category_name }).fetch().then(category => {
-    category = category.toJSON();
+  new Category({ name: category_name })
+    .fetch()
+    .then(category => {
+      if (!category) {
+        res.status(404);
+        return res.send([]);
+      }
 
-    Item.where('category_id', '=', category.id)
-      .orderBy('views', 'DESC')
-      .fetchAll({
-        withRelated: ['createdBy', 'category', 'condition', 'status']
-      })
-      .then(items => {
-        itemList = items.toJSON().slice(0, 10);
-        res.json(itemList);
-      });
-  });
+      category = category.toJSON();
+
+      Item.where('category_id', '=', category.id)
+        .orderBy('views', 'DESC')
+        .fetchAll({
+          withRelated: ['createdBy', 'category', 'condition', 'status']
+        })
+        .then(items => {
+          itemList = items.toJSON().slice(0, 10);
+          res.json(itemList);
+        });
+    })
+    .catch(err => {
+      res.status(500);
+      //sending empty object to render for now
+      res.send([]);
+    });
 });
 
 router.get('/items/category/:category', (req, res) => {
