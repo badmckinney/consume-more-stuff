@@ -1,26 +1,12 @@
 export const REGISTER = 'REGISTER';
-export const RESET_REDIRECT = 'RESET_REDIRECT';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const ADD_ITEM = 'ADD_ITEM';
-export const RESET_REDIRECT_ID = 'RESET_REDIRECT_ID';
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
 export const FETCHED_SEARCH = 'FETCHED_SEARCH';
 export const ERROR = 'ERROR';
 export const LOAD_TOP = 'LOAD_TOP';
-
-export const resetRedirect = () => {
-  return {
-    type: RESET_REDIRECT
-  };
-};
-
-export const resetRedirectId = () => {
-  return {
-    type: RESET_REDIRECT_ID
-  };
-};
 
 export const register = newUser => {
   return dispatch => {
@@ -61,28 +47,21 @@ export const login = user => {
       body: JSON.stringify(user)
     })
       .then(res => {
+        if (res.status === 401) {
+          throw new Error('Unauthorized');
+        }
+
         return res.json();
       })
       .then(res => {
-        if (res.success) {
-          return dispatch({
-            type: LOGIN,
-            success: true,
-            payload: user.username
-          });
-        }
+        dispatch({
+          type: LOGIN,
+          payload: res.username
+        });
 
-        return dispatch({
-          type: LOGIN,
-          success: false
-        });
+        return true;
       })
-      .catch(err => {
-        return dispatch({
-          type: LOGIN,
-          success: false
-        });
-      });
+      .catch(err => false);
   };
 };
 
@@ -184,18 +163,12 @@ export const searchItems = term => {
     return fetch(`/api/items/search/${term}`)
       .then(res => res.json())
       .then(res => {
-        if (!res.items) {
-          throw new Error('No results found.');
-        }
-
         return dispatch({
           type: FETCHED_SEARCH,
           payload: res.items
         });
       })
-      .catch(err => {
-        return dispatch({ type: ERROR });
-      });
+      .catch(err => dispatch({ type: ERROR }));
   };
 };
 
