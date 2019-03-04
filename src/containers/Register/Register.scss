@@ -1,0 +1,46 @@
+.register-wrapper {
+  margin: auto;
+  width: 30%;
+  max-width: 30%;
+  margin-top: 5%;
+  background-color: #ddd;
+  border-radius: 50px;
+  box-shadow: 10px 10px 2px 2px #eee;
+
+  form {
+    margin: auto;
+    padding: 10px 10px 10px 10px;
+    width: 80%;
+    max-width: 80%;
+    div {
+      margin-top: 10px;
+    }
+    input {
+      width: 90%;
+      max-width: 90%;
+      padding: 15px;
+      border-radius: 10px;
+      border: 0px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .login-here {
+      margin-top: 40px;
+      width: 100;
+      text-align: center;
+    }
+    .btn-container {
+      width: 100%;
+      .btn {
+        background: indigo;
+        font-size: 30px;
+        width: 90%;
+        max-width: 90%;
+        margin-left: 15px;
+        height: 60px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
