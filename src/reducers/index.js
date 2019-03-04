@@ -12,8 +12,6 @@ const initialState = {
   items: [],
   currentUser: localStorage.getItem('user'),
   searchResults: [],
-  redirect: false,
-  redirectId: null,
   topTen: {}
 };
 
