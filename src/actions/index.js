@@ -9,33 +9,20 @@ export const ERROR = 'ERROR';
 export const LOAD_TOP = 'LOAD_TOP';
 
 export const register = newUser => {
-  return dispatch => {
+  return () => {
     return fetch('/api/register', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newUser)
     })
       .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        if (res.success) {
-          return dispatch({
-            type: REGISTER,
-            success: true
-          });
+        if (res.status !== 200) {
+          throw new Error('Error creating account');
         }
-        return dispatch({
-          type: REGISTER,
-          success: false
-        });
+
+        return true;
       })
-      .catch(err => {
-        return dispatch({
-          type: REGISTER,
-          success: false
-        });
-      });
+      .catch(err => false);
   };
 };
 
