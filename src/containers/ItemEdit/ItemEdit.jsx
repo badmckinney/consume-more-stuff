@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { loadSingleItem, editItem } from '../../actions';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './ItemEdit.scss';
 
 class ItemEdit extends Component {
@@ -8,7 +9,9 @@ class ItemEdit extends Component {
     super(props);
 
     this.state = {
-      redirect: false,
+      notFound: false,
+      notOwned: false,
+      editError: false,
       id: '',
       category_id: '',
       name: '',
@@ -25,48 +28,59 @@ class ItemEdit extends Component {
       status_id: ''
     };
 
-    this.editItem = this.editItem.bind(this);
+    this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    axios.get(`/api/items/${id}`).then(res => {
-      if (res.data.success) {
-        const item = res.data.item;
 
-        this.setState({
-          id: item.id,
-          category_id: item.category_id,
-          name: item.name,
-          price: item.price,
-          image: item.image,
-          description: item.description,
-          manufacturer: item.manufacturer,
-          model: item.model,
-          condition_id: item.condition_id,
-          length: item.length,
-          width: item.width,
-          height: item.height,
-          notes: item.notes,
-          status_id: item.status_id
-        });
+    this.props.loadItem(id).then(data => {
+      if (!data) {
+        return this.setState({ notFound: true });
       }
 
-      //error handling for unsuccessful fetch;
+      return this.setState({ notFound: false });
     });
   }
 
-  editItem(editedItem) {
-    axios.put(`/api/items/${editedItem.id}`, editedItem).then(res => {
-      if (res.data.success) {
-        this.setState({
-          redirect: true
-        });
-      }
-      // error handling here
+  componentDidUpdate(prevProps) {
+    const item = this.props.item;
+
+    if (prevProps === this.props) {
+      return;
+    }
+
+    if (item.createdBy !== this.props.currentUser) {
+      return this.setState({ notOwned: true });
+    }
+
+    return this.setState({
+      notOwned: false,
+      id: item.id,
+      category_id: item.category_id,
+      name: item.name,
+      price: item.price ? item.price : '',
+      image: item.image ? item.image : '',
+      description: item.description,
+      manufacturer: item.manufacturer ? item.description : '',
+      model: item.model ? item.model : '',
+      condition_id: item.condition_id,
+      length: item.length ? item.length : '',
+      width: item.width ? item.width : '',
+      height: item.height ? item.height : '',
+      notes: item.notes ? item.notes : '',
+      status_id: item.status_id
     });
+  }
+
+  error() {
+    if (this.state.editError) {
+      return <div className="error">error editing post</div>;
+    }
+
+    return <></>;
   }
 
   handleInputOnChange(e) {
@@ -108,16 +122,28 @@ class ItemEdit extends Component {
     const editedItem = this.state;
 
     e.preventDefault();
-    this.editItem(editedItem);
+    this.props.editItem(editedItem).then(data => {
+      if (!data) {
+        return this.setState({ editError: true });
+      }
+
+      this.setState({ editError: false });
+      return this.props.history.push(`/items/${editedItem.id}`);
+    });
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={`/items/${this.state.id}`} />;
+    if (this.state.notFound) {
+      return <div className="error">Item not found</div>;
+    }
+
+    if (this.state.notOwned) {
+      return <div className="error">Denied: user does not own this post</div>;
     }
 
     return (
-      <div>
+      <div className="edit-item-page">
+        {this.error()}
         <form>
           <div>
             <label htmlFor="category_id">Category:</label>
@@ -267,11 +293,33 @@ class ItemEdit extends Component {
             />
           </div>
 
+          <Link to={`/item/${this.state.id}`}>
+            <button>Cancel Edit</button>
+          </Link>
           <button onClick={this.handleSubmit}>Edit Post</button>
         </form>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    item: state.item,
+    currentUser: state.currentUser
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadItem: id => dispatch(loadSingleItem(id)),
+    editItem: item => dispatch(editItem(item))
+  };
+};
+
+ItemEdit = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ItemEdit);
 
 export default ItemEdit;

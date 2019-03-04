@@ -7,6 +7,7 @@ export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
 export const FETCHED_SEARCH = 'FETCHED_SEARCH';
 export const ERROR = 'ERROR';
 export const LOAD_TOP = 'LOAD_TOP';
+export const EDIT_ITEM = 'EDIT_ITEM';
 
 export const register = newUser => {
   return () => {
@@ -120,14 +121,21 @@ export const loadSingleItem = id => {
   return dispatch => {
     return fetch(`/api/items/${id}`)
       .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error fetching item');
+        }
+
         return res.json();
       })
-      .then(item => {
-        return dispatch({
+      .then(res => {
+        dispatch({
           type: LOAD_SINGLE_ITEM,
-          payload: item
+          payload: res.item
         });
-      });
+
+        return true;
+      })
+      .catch(err => false);
   };
 };
 
@@ -157,5 +165,23 @@ export const loadTop = category => {
           payload: { category: category, items: items }
         });
       });
+  };
+};
+
+export const editItem = item => {
+  return () => {
+    return fetch(`/api/items/${item.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(item)
+    })
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error editing item');
+        }
+
+        return true;
+      })
+      .catch(err => false);
   };
 };
