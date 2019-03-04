@@ -46,15 +46,10 @@ class Login extends Component {
 
     this.props.login(user).then(data => {
       if (!data) {
-        return this.setState({
-          isError: true
-        });
+        return this.setState({ isError: true });
       }
 
-      this.setState({
-        isError: false
-      });
-
+      this.setState({ isError: false });
       return this.props.history.push('/');
     });
   }
