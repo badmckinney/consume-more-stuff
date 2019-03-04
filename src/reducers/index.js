@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   items: [],
+  item: {},
   currentUser: localStorage.getItem('user'),
   searchResults: [],
   topTen: {}
@@ -34,7 +35,7 @@ const itemReducer = (state = initialState, action) => {
         searchResults: action.payload
       });
     case LOAD_SINGLE_ITEM:
-      return Object.assign({}, state, { items: action.payload });
+      return Object.assign({}, state, { item: action.payload });
     case LOAD_TOP:
       const category = action.payload.category;
       return Object.assign({}, state, {
