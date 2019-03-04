@@ -275,7 +275,6 @@ router.post('/items/new', (req, res) => {
     .save(null, { method: 'insert' })
     .then(newItem => {
       return res.json({
-        success: true,
         id: newItem.id
       });
     })

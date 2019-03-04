@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { addItem } from '../../actions';
+import { connect } from 'react-redux';
 import './NewItem.scss';
 
 class NewItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: false,
-      redirect_id: '',
+      isError: false,
       category_id: 1,
       name: '',
       price: '',
@@ -23,22 +22,17 @@ class NewItem extends Component {
       notes: ''
     };
 
-    this.addItem = this.addItem.bind(this);
+    this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  addItem(newItem) {
-    axios.post('/api/items/new', newItem).then(res => {
-      if (res.data.success) {
-        this.setState({
-          redirect: true,
-          redirect_id: res.data.id
-        });
-      }
+  error() {
+    if (this.state.isError) {
+      return <div className="error">error creating post</div>;
+    }
 
-      //error handling here
-    });
+    return <></>;
   }
 
   handleInputOnChange(e) {
@@ -79,16 +73,20 @@ class NewItem extends Component {
     const newItem = this.state;
 
     e.preventDefault();
-    this.addItem(newItem);
+    this.props.addItem(newItem).then(data => {
+      if (!data) {
+        return this.setState({ isError: true });
+      }
+
+      this.setState({ isError: false });
+      return this.props.history.push(`/items/${data}`);
+    });
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={`/items/${this.state.redirect_id}`} />;
-    }
-
     return (
-      <div>
+      <div className="add-item-page">
+        {this.error()}
         <h2>Create Post:</h2>
         <form>
           <div>
@@ -233,5 +231,16 @@ class NewItem extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addItem: item => dispatch(addItem(item))
+  };
+};
+
+NewItem = connect(
+  null,
+  mapDispatchToProps
+)(NewItem);
 
 export default NewItem;

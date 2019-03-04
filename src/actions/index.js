@@ -81,7 +81,7 @@ export const logout = () => {
 };
 
 export const addItem = newItem => {
-  return dispatch => {
+  return () => {
     return fetch('/api/items/new', {
       method: 'POST',
       body: JSON.stringify(newItem),
@@ -90,28 +90,14 @@ export const addItem = newItem => {
       }
     })
       .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        if (res.success) {
-          return dispatch({
-            type: ADD_ITEM,
-            success: true,
-            payload: res.id
-          });
+        if (res.status !== 200) {
+          throw new Error('error creating new post');
         }
 
-        return dispatch({
-          type: ADD_ITEM,
-          success: false
-        });
+        return res.json();
       })
-      .catch(err => {
-        return dispatch({
-          type: ADD_ITEM,
-          success: false
-        });
-      });
+      .then(res => res.id)
+      .catch(err => false);
   };
 };
 
