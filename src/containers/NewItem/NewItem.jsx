@@ -84,6 +84,10 @@ class NewItem extends Component {
   }
 
   render() {
+    if (!this.props.currentUser) {
+      return <div className="error">Must be logged in to create post</div>;
+    }
+
     return (
       <div className="add-item-page">
         {this.error()}
@@ -232,6 +236,12 @@ class NewItem extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     addItem: item => dispatch(addItem(item))
@@ -239,7 +249,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 NewItem = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewItem);
 
