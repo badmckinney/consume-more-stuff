@@ -1,11 +1,14 @@
+$main-font: 'M PLUS Rounded 1c', sans-serif;
+
 .register-wrapper {
-  margin: auto;
-  width: 30%;
-  max-width: 30%;
-  margin-top: 5%;
+  margin-left: 25%;
+  width: 40%;
+  max-width: 40%;
+  margin-top: 8%;
   background: #ddd;
   border-radius: 10px;
-  box-shadow: 5px 5px 2px 2px #eee;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+  0 10px 10px rgba(90, 75, 230, 0.22);
 
   form {
     margin: auto;
@@ -33,7 +36,8 @@
       width: 100%;
       .btn {
         background: #2db8f5;
-        font-size: 30px;
+        font-family: $main-font;
+        font-size: 35px;
         width: 90%;
         max-width: 90%;
         margin-left: 15px;
