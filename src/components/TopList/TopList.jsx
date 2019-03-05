@@ -23,7 +23,7 @@ class TopList extends Component {
       });
     }
     return (
-      <div className={`top-${this.props.category}`}>
+      <div className={`item-container`}>
         {items}
       </div>
     )

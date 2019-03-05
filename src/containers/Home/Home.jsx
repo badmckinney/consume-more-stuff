@@ -12,63 +12,81 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="home">
-        <div className="apparel">
-          <h2>Apparel</h2>
-          <div className="top-10">
+      <div className="home-container">
+        <div className="category-container">
+          <div className="category-name">
+            <h2>Apparel</h2>
+          </div>
+          <div className="top-ten">
             <TopList category="apparel" />
           </div>
         </div>
-        <div className="appliances">
-          <h2>Appliances</h2>
-          <div className="top-10">
+        <div className="category-container">
+          <div className="category-name">
+            <h2>Appliances</h2>
+          </div>
+          <div className="top-ten">
             <TopList category="appliances" />
           </div>
         </div>
-        <div className="automotive">
-          <h2>Automotive</h2>
-          <div className="top-10">
+        <div className="category-container">
+          <div className="category-name">
+            <h2>Automotive</h2>
+          </div>
+          <div className="top-ten">
             <TopList category="automotive" />
           </div>
         </div>
-        <div className="electronics">
-          <h2>Electronics</h2>
-          <div className="top-10">
+        <div className="category-container">
+          <div className="category-name">
+            <h2>Electronics</h2>
+          </div>
+          <div className="top-ten">
             <TopList category="electronics" />
           </div>
         </div>
-        <div className="furniture">
-          <h2>Furniture</h2>
-          <div className="top-10">
+        <div className="category-container">
+          <div className="category-name">
+            <h2>Furniture</h2>
+          </div>
+          <div className="top-ten">
             <TopList category="furniture" />
           </div>
         </div>
-        <div className="jewelry">
-          <h2>Jewelry</h2>
-          <div className="top-10">
+        <div className="category-container">
+          <div className="category-name">
+            <h2>Jewelry</h2>
+          </div>
+          <div className="top-ten">
             <TopList category="jewelry" />
           </div>
         </div>
-        <div className="musical-instruments">
-          <h2>Musical Instruments</h2>
-          <div className="top-10">
+        <div className="category-container">
+          <div className="category-name">
+            <h2>Musical Intruments</h2>
+          </div>
+          <div className="top-ten">
             <TopList category="musical_instruments" />
           </div>
         </div>
-        <div className="sporting-goods">
-          <h2>Sporting Goods</h2>
-          <div className="top-10">
+        <div className="category-container">
+          <div className="category-name">
+            <h2>Sporting Goods</h2>
+          </div>
+          <div className="top-ten">
             <TopList category="sporting_goods" />
           </div>
         </div>
-        <div className="wanted">
-          <h2>Wanted</h2>
-          <div className="top-10">
+        <div className="category-container">
+          <div className="category-name">
+            <h2>Wanted</h2>
+          </div>
+          <div className="top-ten">
             <TopList category="wanted" />
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

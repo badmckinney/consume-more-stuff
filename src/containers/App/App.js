@@ -24,24 +24,29 @@ class App extends Component {
     return (
       <Router>
         <>
-          <Sidebar currentUser={this.props.currentUser} />
+          <div className="app-container">
+            <div className="sidebar-app-container">
+              <Sidebar currentUser={this.props.currentUser} />
 
-          <div className="app">
-            <Header />
-            <Route path="/login" component={Login} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/register" component={Register} />
-            <Route path="/create-posting" component={NewItem} />
-            <Route
-              exact
-              path="/items/category/:category"
-              component={Category}
-            />
-            <Route exact path="/items/:id" component={ItemDetail} />
-            <Route exact path="/items/:id/edit" component={ItemEdit} />
-            <Route exact path="/search/:term" component={SearchDisplay} />
-            <Route path="/profile" component={Profile} />
-            <Route exact path="/" component={Home} />
+              <div className="app-body">
+                <Header />
+                <Route path="/login" component={Login} />
+                <Route path="/logout" component={Logout} />
+                <Route path="/register" component={Register} />
+                <Route path="/create-posting" component={NewItem} />
+                <Route
+                  exact
+                  path="/items/category/:category"
+                  component={Category}
+                />
+                <Route exact path="/items/:id" component={ItemDetail} />
+                <Route exact path="/items/:id/edit" component={ItemEdit} />
+                <Route exact path="/search/:term" component={SearchDisplay} />
+                <Route path="/profile" component={Profile} />
+                <Route exact path="/" component={Home} />
+              </div>
+            </div>
+            <div className="footer">im a footerr</div>
           </div>
         </>
       </Router>
