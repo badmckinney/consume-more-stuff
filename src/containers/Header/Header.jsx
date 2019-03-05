@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import HeaderLogin from '../../components/HeaderLogin';
 import { logout, searchItems } from '../../actions';
+import './Header.scss';
 
 class Header extends Component {
   constructor(props) {
@@ -46,9 +47,8 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        <div>LOGO</div>
         <form className="search-form">
-          <input
+          <input placeholder="Search items..."
             type="text"
             className="search-bar"
             value={this.state.search}
