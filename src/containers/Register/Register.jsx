@@ -24,7 +24,7 @@ class Register extends Component {
 
   error() {
     if (this.state.isError) {
-      return <div className="error">error creating account</div>;
+      return <div className="error">Error creating account</div>;
     }
 
     return <></>;
