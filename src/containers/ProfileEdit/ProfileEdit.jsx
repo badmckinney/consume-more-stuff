@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './ProfileEdit.scss';
 
+import { getProfile, editProfile } from '../../actions';
+
 class ProfileEdit extends Component {
   constructor(props) {
     super(props);
@@ -11,13 +13,17 @@ class ProfileEdit extends Component {
       isError: false,
       email: '',
       username: '',
-      firstName: '',
-      lastName: ''
+      first_name: '',
+      last_name: ''
     };
+
+    this.error = this.error.bind(this);
+    this.handleInputOnChange = this.handleInputOnChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    // this.props.getProfile();
+    this.props.getProfile();
   }
 
   componentDidUpdate(prevProps) {
@@ -28,8 +34,8 @@ class ProfileEdit extends Component {
     return this.setState({
       email: this.props.profile.email,
       username: this.props.profile.username,
-      firstName: this.props.profile.first_name,
-      lastName: this.props.profile.last_name
+      first_name: this.props.profile.first_name,
+      last_name: this.props.profile.last_name
     });
   }
 
@@ -50,10 +56,10 @@ class ProfileEdit extends Component {
         return this.setState({ email: value });
       case 'username':
         return this.setState({ username: value });
-      case 'firstName':
-        return this.setState({ firstName: value });
-      case 'lastName':
-        return this.setState({ lastName: value });
+      case 'first_name':
+        return this.setState({ first_name: value });
+      case 'last_name':
+        return this.setState({ last_name: value });
       default:
         return;
     }
@@ -63,10 +69,25 @@ class ProfileEdit extends Component {
     const editedProfile = this.state;
 
     e.preventDefault();
-    this.props.editProfile(editedProfile);
+    this.props.editProfile(editedProfile).then(data => {
+      if (!data) {
+        return this.setState({ isError: true });
+      }
+      console.log('hit');
+      this.setState({ isError: false });
+      return this.props.history.push('/profile');
+    });
   }
 
   render() {
+    if (!this.props.currentUser) {
+      return (
+        <div className="profile-edit-page">
+          <div className="error">You must be logged in to edit profile</div>
+        </div>
+      );
+    }
+
     return (
       <div className="profile-edit-page">
         {this.error()}
@@ -104,8 +125,8 @@ class ProfileEdit extends Component {
             </div>
             <input
               type="text"
-              name="firstName"
-              value={this.state.firstName}
+              name="first_name"
+              value={this.state.first_name}
               onChange={this.handleInputOnChange}
             />
 
@@ -114,8 +135,8 @@ class ProfileEdit extends Component {
             </div>
             <input
               type="text"
-              name="lastName"
-              value={this.state.lastName}
+              name="last_name"
+              value={this.state.last_name}
               onChange={this.handleInputOnChange}
             />
           </div>
@@ -129,13 +150,15 @@ class ProfileEdit extends Component {
 
 const mapStateToProps = state => {
   return {
-    profile: state.profile
+    profile: state.profile,
+    currentUser: state.currentUser
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    // getProfile: () => dispatch(getProfile())
+    getProfile: () => dispatch(getProfile()),
+    editProfile: editedProfile => dispatch(editProfile(editedProfile))
   };
 };
 

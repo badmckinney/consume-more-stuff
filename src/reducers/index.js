@@ -7,7 +7,8 @@ import {
   LOAD_TOP,
   FETCHED_SEARCH,
   FETCHED_PROFILE,
-  FETCHED_USERS_ITEMS
+  FETCHED_USERS_ITEMS,
+  EDIT_PROFILE
 } from '../actions';
 
 const initialState = {
@@ -53,6 +54,15 @@ const itemReducer = (state = initialState, action) => {
     case FETCHED_USERS_ITEMS:
       return Object.assign({}, state, {
         items: action.payload
+      });
+    case EDIT_PROFILE:
+      if (action.payload === state.currentUser) {
+        return;
+      }
+
+      localStorage.setItem('user', action.payload);
+      return Object.assign({}, state, {
+        currentUser: action.payload
       });
     default:
       return state;
