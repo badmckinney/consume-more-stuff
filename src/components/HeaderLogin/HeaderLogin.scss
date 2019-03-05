@@ -1,4 +1,6 @@
 $main-font: 'M PLUS Rounded 1c', sans-serif;
+$primary-color: #2db8f5;
+$secondary-color: #5c49e6;
 
 html {
   body {
@@ -12,9 +14,10 @@ html {
         align-items: center;
         height: 4em;
         width: 100%;
-        background: linear-gradient(to left,#2db8f5, #5c49e6);
+        background: linear-gradient(to left, $primary-color, $secondary-color);
 
-        .logged-in, .logged-out {
+        .logged-in,
+        .logged-out {
           display: flex;
           align-items: center;
           height: 100%;
@@ -22,16 +25,16 @@ html {
           font-family: $main-font;
           text-transform: capitalize;
           padding: 1em;
-       
-          .link{
-            height:100%;
-            padding-top:20px;
+
+          .link {
+            height: 100%;
+            padding-top: 20px;
           }
-          button{
+          button {
             height: 60%;
             width: 70px;
             border-radius: 10px;
-            background: #5c49e6;
+            background: $secondary-color;
             border: none;
             color: #fff;
             font-family: $main-font;
@@ -42,8 +45,8 @@ html {
           }
 
           button:hover {
-            background: lighten(#5c49e6, 5%);
-            cursor:pointer;
+            background: lighten($secondary-color, 5%);
+            cursor: pointer;
           }
         }
       }
