@@ -29,8 +29,8 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/items/new" component={NewItem} />
           <Route path="/items/category/:category" component={Category} />
-          <Route path="/items/:id/edit" component={ItemEdit} />
-          <Route path="/items/:id/details" component={ItemDetail} />
+          <Route exact path="/items/:id" component={ItemDetail} />
+          <Route exact path="/items/:id/edit" component={ItemEdit} />
           <Route
             path="/search/:term"
             render={props => (

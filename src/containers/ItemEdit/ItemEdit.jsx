@@ -293,7 +293,7 @@ class ItemEdit extends Component {
             />
           </div>
 
-          <Link to={`/item/${this.state.id}`}>
+          <Link to={`/items/${this.state.id}`}>
             <button>Cancel Edit</button>
           </Link>
           <button onClick={this.handleSubmit}>Edit Post</button>
