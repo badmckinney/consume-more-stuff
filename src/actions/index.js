@@ -9,6 +9,7 @@ export const LOAD_TOP = 'LOAD_TOP';
 export const EDIT_ITEM = 'EDIT_ITEM';
 export const FETCHED_PROFILE = 'FETCHED_PROFILE';
 export const FETCHED_USERS_ITEMS = 'FETCHED_USERS_ITEMS';
+export const EDIT_PROFILE = 'EDIT_PROFILE';
 
 export const register = newUser => {
   return () => {
@@ -221,6 +222,29 @@ export const getUsersItems = () => {
         dispatch({
           type: FETCHED_USERS_ITEMS,
           payload: res
+        });
+
+        return true;
+      })
+      .catch(err => false);
+  };
+};
+
+export const editProfile = editedProfile => {
+  return dispatch => {
+    return fetch('/api/profile', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(editedProfile)
+    })
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('could not edit profile');
+        }
+
+        dispatch({
+          type: EDIT_PROFILE,
+          payload: editedProfile.username
         });
 
         return true;
