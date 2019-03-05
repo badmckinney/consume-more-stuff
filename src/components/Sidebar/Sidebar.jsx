@@ -46,7 +46,9 @@ const Sidebar = props => {
   if (!currentUser) {
     return (
       <div className="logged-out-nav">
-        <div className="logo"><span>React</span>CMS</div>
+        <div className="logo">
+          <span>React</span>CMS
+        </div>
         <div className="user-links">
           <Link to="/">
             <button>Home</button>
@@ -59,7 +61,9 @@ const Sidebar = props => {
   } else {
     return (
       <div className="logged-in-nav">
-        <div className="logo"><span>React</span>CMS</div>
+        <div className="logo">
+          <span>React</span>CMS
+        </div>
         <div className="user-links">
           <Link to="/">
             <button>Home</button>
@@ -70,7 +74,7 @@ const Sidebar = props => {
           <Link to="/messages">
             <button>Messages</button>
           </Link>
-          <Link to="/items/new">
+          <Link to="/create-posting">
             <button>Create a posting</button>
           </Link>
         </div>

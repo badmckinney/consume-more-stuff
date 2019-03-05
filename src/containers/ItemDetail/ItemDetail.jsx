@@ -20,7 +20,22 @@ class ItemDetail extends Component {
       if (!data) {
         return this.setState({ notFound: true });
       }
+
+      return this.setState({ notFound: false });
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      const item = this.props.match.params.id;
+      this.props.loadItem(item).then(data => {
+        if (!data) {
+          return this.setState({ notFound: true });
+        }
+
+        return this.setState({ notFound: false });
+      });
+    }
   }
 
   editButton() {
