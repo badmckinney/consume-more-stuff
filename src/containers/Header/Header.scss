@@ -27,9 +27,7 @@ html {
                 $primary-color,
                 $secondary-color
               );
-              box-shadow: 0 19px 38px rgba(90, 75, 230, 0.1),
-                0 15px 12px rgba(0, 0, 0, 0.12);
-
+              border-bottom:1px solid grey;
               .search-form {
                 display: flex;
                 align-items: center;
