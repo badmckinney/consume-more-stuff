@@ -8,11 +8,11 @@ const HeaderLogin = props => {
   if (!currentUser) {
     return (
       <div className="logged-out">
-        <Link to="/login">
+        <Link className="link" to="/login">
           <button>Login</button>
         </Link>
 
-        <Link to="/register">
+        <Link className="link" to="/register">
           <button>Register</button>
         </Link>
       </div>
