@@ -57,16 +57,9 @@ export const logout = () => {
   return dispatch => {
     return fetch('/api/logout', { method: 'POST' })
       .then(res => {
-        return res.json();
+        if (res.status) return res.json();
       })
       .then(res => {
-        if (res.success) {
-          return dispatch({
-            type: LOGOUT,
-            success: true
-          });
-        }
-
         return dispatch({
           type: LOGOUT,
           success: false
@@ -144,7 +137,6 @@ export const searchItems = term => {
     return fetch(`/api/items/search/${term}`)
       .then(res => {
         if (res.status !== 200) {
-          console.log('hit', res);
           throw new Error('error fetching search results');
         }
 
