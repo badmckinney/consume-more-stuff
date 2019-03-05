@@ -30,11 +30,15 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
             <Route path="/register" component={Register} />
-            <Route exact path="/items/new" component={NewItem} />
-            <Route path="/items/category/:category" component={Category} />
+            <Route path="/create-posting" component={NewItem} />
+            <Route
+              exact
+              path="/items/category/:category"
+              component={Category}
+            />
             <Route exact path="/items/:id" component={ItemDetail} />
             <Route exact path="/items/:id/edit" component={ItemEdit} />
-            <Route path="/search/:term" component={SearchDisplay} />
+            <Route exact path="/search/:term" component={SearchDisplay} />
             <Route exact path="/" component={Home} />
           </div>
         </>
