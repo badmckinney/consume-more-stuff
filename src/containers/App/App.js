@@ -42,6 +42,7 @@ class App extends Component {
                 <Route exact path="/items/:id" component={ItemDetail} />
                 <Route exact path="/items/:id/edit" component={ItemEdit} />
                 <Route exact path="/search/:term" component={SearchDisplay} />
+                <Route path="/profile" component={Profile} />
                 <Route exact path="/" component={Home} />
               </div>
             </div>
