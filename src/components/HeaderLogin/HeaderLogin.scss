@@ -1,0 +1,47 @@
+$main-font: 'M PLUS Rounded 1c', sans-serif;
+
+html {
+  body {
+    width: 100%;
+    margin: 0;
+
+    #root {
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 4em;
+        width: 100%;
+        background: linear-gradient(to left,#2db8f5, #5c49e6);
+
+        .logged-in {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          color: #fff;
+          font-family: $main-font;
+          text-transform: capitalize;
+          padding: 1em;
+          
+          button {
+            height: 60%;
+            width: 70px;
+            border-radius: 10px;
+            background: #5c49e6;
+            border: none;
+            color: #fff;
+            font-family: $main-font;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin-left: 1em;
+            transition: background-color 0.25s ease-in-out;
+          }
+
+          button:hover {
+            background: lighten(#5c49e6, 5%);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Sidebar.scss';
 
 const Sidebar = props => {
   const { currentUser } = props;
@@ -7,7 +8,7 @@ const Sidebar = props => {
   const generateItemLinks = () => {
     return (
       <div className="item-links">
-        <h3>For Sale</h3>
+        <h3>FOR SALE</h3>
         <Link to="/items/category/apparel">
           <button>Apparel</button>
         </Link>
@@ -45,6 +46,7 @@ const Sidebar = props => {
   if (!currentUser) {
     return (
       <div className="logged-out-nav">
+        <div className="logo"><span>React</span>CMS</div>
         <div className="user-links">
           <Link to="/">
             <button>Home</button>
@@ -57,6 +59,7 @@ const Sidebar = props => {
   } else {
     return (
       <div className="logged-in-nav">
+        <div className="logo"><span>React</span>CMS</div>
         <div className="user-links">
           <Link to="/">
             <button>Home</button>

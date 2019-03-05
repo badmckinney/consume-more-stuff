@@ -2,11 +2,11 @@
 FROM node:10.0-alpine
 
 # specify an optional argument with a default value
-ARG app_directory=/src/app
+# ARG app_directory=/src/app
 ARG NODE_ENV=development
 
 # Set the app directory as the context for all commands and entry to the container
-WORKDIR ${app_directory}
+# WORKDIR $app_directory
 
 # ONLY copy over the package.json to install NPM packages
 COPY package.json .
