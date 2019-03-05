@@ -138,8 +138,9 @@ class NewItem extends Component {
             <label htmlFor="image">Image:</label>
           </div>
           <input
-            type="text"
+            type="file"
             name="image"
+            accept="image/png, image/jpeg"
             value={this.state.image}
             onChange={this.handleInputOnChange}
           />

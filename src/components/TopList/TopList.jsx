@@ -5,9 +5,6 @@ import './TopList.scss';
 import { loadTop } from '../../actions';
 
 class TopList extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount() {
     const category = this.props.category;
