@@ -56,9 +56,16 @@ export const logout = () => {
   return dispatch => {
     return fetch('/api/logout', { method: 'POST' })
       .then(res => {
-        if (res.status) return res.json();
+        return res.json();
       })
       .then(res => {
+        if (res.success) {
+          return dispatch({
+            type: LOGOUT,
+            success: true
+          });
+        }
+
         return dispatch({
           type: LOGOUT,
           success: false
