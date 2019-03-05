@@ -7,6 +7,7 @@ export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
 export const FETCHED_SEARCH = 'FETCHED_SEARCH';
 export const LOAD_TOP = 'LOAD_TOP';
 export const EDIT_ITEM = 'EDIT_ITEM';
+export const FETCHED_PROFILE = 'FETCHED_PROFILE';
 
 export const register = newUser => {
   return () => {
@@ -176,6 +177,28 @@ export const editItem = item => {
         if (res.status !== 200) {
           throw new Error('error editing item');
         }
+
+        return true;
+      })
+      .catch(err => false);
+  };
+};
+
+export const getProfile = () => {
+  return dispatch => {
+    return fetch('/api/profile')
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('could not get profile');
+        }
+
+        return res.json();
+      })
+      .then(res => {
+        dispatch({
+          type: FETCHED_PROFILE,
+          payload: res
+        });
 
         return true;
       })

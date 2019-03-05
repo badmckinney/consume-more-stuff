@@ -1,9 +1,9 @@
 const auth = require('../routes/auth');
-const users = require('../routes/users');
+const profile = require('../routes/profile');
 const items = require('../routes/items');
 
 module.exports = {
   auth,
-  users,
+  profile,
   items
 };

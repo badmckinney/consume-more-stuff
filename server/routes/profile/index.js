@@ -7,21 +7,22 @@ const saltRounds = 12;
 
 /************************
  *  GET
-************************/
+ ************************/
 
-router.get('users/:profile', (req, res) => {
-  let username = req.params.profile;
+router.get('/profile', (req, res) => {
+  let id = req.user.id;
 
-  User.where({ username: username }).fetch()
-    .then((user) => {
+  User.where('id', id)
+    .fetch()
+    .then(user => {
       if (!user) {
         res.status(400);
         return res.json({ error: 'That  user does not exist' });
       }
 
-      res.json(user.attributes);
+      res.json(user);
     })
-    .catch((err) => {
+    .catch(err => {
       res.status(500);
       res.json(err);
     });
@@ -29,9 +30,9 @@ router.get('users/:profile', (req, res) => {
 
 /************************
  *  PUT
-************************/
+ ************************/
 
-router.put('/users/profile/edit', (req, res) => {
+router.put('/profile/edit', (req, res) => {
   let id = req.user.id;
   let profile = req.body;
 
@@ -48,17 +49,20 @@ router.put('/users/profile/edit', (req, res) => {
       }
 
       User.where({ id: id })
-        .save({
-          email: profile.email,
-          password: hash,
-          username: profile.username,
-          first_name: profile.first_name,
-          last_name: profile.last_name
-        }, { patch: true })
-        .then((user) => {
+        .save(
+          {
+            email: profile.email,
+            password: hash,
+            username: profile.username,
+            first_name: profile.first_name,
+            last_name: profile.last_name
+          },
+          { patch: true }
+        )
+        .then(user => {
           res.json(user);
         })
-        .catch((err) => {
+        .catch(err => {
           res.status(500);
           res.json(err);
         });
