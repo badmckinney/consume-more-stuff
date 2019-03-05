@@ -30,7 +30,7 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
             <Route path="/register" component={Register} />
-            <Route path="/items/new" component={NewItem} />
+            <Route exact path="/items/new" component={NewItem} />
             <Route path="/items/category/:category" component={Category} />
             <Route exact path="/items/:id" component={ItemDetail} />
             <Route exact path="/items/:id/edit" component={ItemEdit} />
