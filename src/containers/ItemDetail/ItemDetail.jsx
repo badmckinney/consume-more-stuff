@@ -58,7 +58,7 @@ class ItemDetail extends Component {
         </div>
         <div className="detail-wrapper">
           <div className="item">
-            <p>Manufacurer: {item.manufacturer} </p>
+            <p>Manufacturer: {item.manufacturer} </p>
           </div>
 
           <div className="detail">
@@ -100,9 +100,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadItem: item => {
-      return dispatch(loadSingleItem(item));
-    }
+    loadItem: item => dispatch(loadSingleItem(item))
   };
 };
 
