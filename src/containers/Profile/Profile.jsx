@@ -27,6 +27,14 @@ class Profile extends Component {
   }
 
   render() {
+    if (!this.props.currentUser) {
+      return (
+        <div className="profile-info">
+          <div className="error">You must be logged in to view profile</div>
+        </div>
+      );
+    }
+
     const profile = this.props.profile;
 
     return (
@@ -87,7 +95,8 @@ class Profile extends Component {
 const mapStateToProps = state => {
   return {
     profile: state.profile,
-    items: state.items
+    items: state.items,
+    currentUser: state.currentUser
   };
 };
 
