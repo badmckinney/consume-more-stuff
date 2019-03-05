@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
 
 const ProfileItemList = props => {
   const itemList = props.items.map(item => {
+    const localCreatedAt = new Date(item.created_at);
+    const localUpdatedAt = new Date(item.updated_at);
+
     return (
       <Link to={`/items/${item.id}`}>
         <div className="item">
@@ -15,8 +19,12 @@ const ProfileItemList = props => {
           <div className="name">{item.name}</div>
           <div className="category">{item.category.name}</div>
           <div className="timestamps">
-            <div className="create-at">{item.created_at}</div>
-            <div className="updated-at">updated: {item.updated_at}</div>
+            <div className="created-at">
+              <Moment format="LLL">{localCreatedAt}</Moment>
+            </div>
+            <div className="updated-at">
+              updated: <Moment format="LLL">{localUpdatedAt}</Moment>
+            </div>
           </div>
           <div className="views">{item.views}</div>
           <div className="id">{item.id}</div>
