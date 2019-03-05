@@ -47,7 +47,9 @@ const Sidebar = props => {
     return (
       <div className="logged-out-nav">
         <div className="logo">
-          <span>React</span>CMS
+          <Link className="link" to="/">
+            <span>React</span>CMS
+          </Link>
         </div>
         <div className="user-links">
           <Link to="/">
@@ -62,7 +64,9 @@ const Sidebar = props => {
     return (
       <div className="logged-in-nav">
         <div className="logo">
-          <span>React</span>CMS
+          <Link className="link" to="/">
+            <span>React</span>CMS
+          </Link>
         </div>
         <div className="user-links">
           <Link to="/">
