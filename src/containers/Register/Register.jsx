@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { register } from '../../actions';
+import { connect } from 'react-redux';
 
 class Register extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      redirect: false,
+      isError: false,
       first_name: '',
       last_name: '',
       email: '',
@@ -15,20 +15,17 @@ class Register extends Component {
       password: ''
     };
 
-    this.register = this.register.bind(this);
+    this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  register(newUser) {
-    axios.post('/api/register', newUser).then(res => {
-      if (res.data.success) {
-        this.setState({
-          redirect: true
-        });
-      }
-      // error handling;
-    });
+  error() {
+    if (this.state.isError) {
+      return <div className="error">error creating account</div>;
+    }
+
+    return <></>;
   }
 
   handleInputOnChange(e) {
@@ -55,16 +52,20 @@ class Register extends Component {
     const newUser = this.state;
 
     e.preventDefault();
-    this.register(newUser);
+    this.props.register(newUser).then(data => {
+      if (!data) {
+        return this.setState({ isError: true });
+      }
+
+      this.setState({ isError: false });
+      return this.props.history.push('/login');
+    });
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/login" />;
-    }
-
     return (
-      <div>
+      <div className="register-page">
+        {this.error()}
         <form>
           <div>
             <label htmlFor="first_name">First Name:</label>
@@ -124,5 +125,16 @@ class Register extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    register: user => dispatch(register(user))
+  };
+};
+
+Register = connect(
+  null,
+  mapDispatchToProps
+)(Register);
 
 export default Register;

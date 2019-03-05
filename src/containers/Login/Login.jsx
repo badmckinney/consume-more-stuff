@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-
 import { login } from '../../actions';
 
 class Login extends Component {
@@ -10,27 +7,22 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      redirect: false,
+      isError: false,
       username: '',
       password: ''
     };
 
-    this.login = this.login.bind(this);
+    this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  login(user) {
-    axios.post('/api/login', user).then(res => {
-      if (res.data.success) {
-        this.props.dispatchLogin(res.data.username);
-        this.setState({
-          redirect: true
-        });
-      }
+  error() {
+    if (this.state.isError) {
+      return <div className="error">Invalid username or password</div>;
+    }
 
-      //error handle
-    });
+    return <></>;
   }
 
   handleInputOnChange(e) {
@@ -48,48 +40,54 @@ class Login extends Component {
   }
 
   handleSubmit(e) {
-    const { username, password } = this.state;
-    const user = { username, password };
+    const user = this.state;
 
     e.preventDefault();
-    this.login(user);
+
+    this.props.login(user).then(data => {
+      if (!data) {
+        return this.setState({ isError: true });
+      }
+
+      this.setState({ isError: false });
+      return this.props.history.push('/');
+    });
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/" />;
-    }
-
     return (
-      <form>
-        <div>Username:</div>
-        <input
-          type="text"
-          name="username"
-          value={this.state.username}
-          onChange={this.handleInputOnChange}
-        />
+      <div className="login-page">
+        {this.error()}
+        <form>
+          <div>Username:</div>
+          <input
+            type="text"
+            name="username"
+            value={this.state.username}
+            onChange={this.handleInputOnChange}
+          />
 
-        <div>Password:</div>
-        <input
-          type="password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handleInputOnChange}
-        />
+          <div>Password:</div>
+          <input
+            type="password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleInputOnChange}
+          />
 
-        <div>
-          <button onClick={this.handleSubmit}>Login</button>
-        </div>
-      </form>
+          <div>
+            <button onClick={this.handleSubmit}>Login</button>
+          </div>
+        </form>
+      </div>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatchLogin: user => {
-      dispatch(login(user));
+    login: user => {
+      return dispatch(login(user));
     }
   };
 };
