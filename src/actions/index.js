@@ -5,7 +5,6 @@ export const ADD_ITEM = 'ADD_ITEM';
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
 export const FETCHED_SEARCH = 'FETCHED_SEARCH';
-export const SEARCH_ERROR = 'ERROR';
 export const LOAD_TOP = 'LOAD_TOP';
 export const EDIT_ITEM = 'EDIT_ITEM';
 
@@ -143,12 +142,14 @@ export const searchItems = term => {
         return res.json();
       })
       .then(res => {
-        return dispatch({
+        dispatch({
           type: FETCHED_SEARCH,
           payload: res.items
         });
+
+        return true;
       })
-      .catch(err => dispatch({ type: SEARCH_ERROR }));
+      .catch(err => false);
   };
 };
 

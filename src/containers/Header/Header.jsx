@@ -48,7 +48,8 @@ class Header extends Component {
     return (
       <div className="header">
         <form className="search-form">
-          <input placeholder="Search items..."
+          <input
+            placeholder="Search items..."
             type="text"
             className="search-bar"
             value={this.state.search}

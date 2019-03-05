@@ -5,8 +5,7 @@ import {
   FETCH_ITEMS,
   LOAD_SINGLE_ITEM,
   LOAD_TOP,
-  FETCHED_SEARCH,
-  SEARCH_ERROR
+  FETCHED_SEARCH
 } from '../actions';
 
 const initialState = {
@@ -33,10 +32,6 @@ const itemReducer = (state = initialState, action) => {
     case FETCHED_SEARCH:
       return Object.assign({}, state, {
         items: action.payload
-      });
-    case SEARCH_ERROR:
-      return Object.assign({}, state, {
-        items: []
       });
     case LOAD_SINGLE_ITEM:
       return Object.assign({}, state, { item: action.payload });
