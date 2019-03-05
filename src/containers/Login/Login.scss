@@ -1,0 +1,63 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.login-page {
+  width: 30%;
+  max-width: 30%;
+  background: #ddd;
+  margin: auto;
+  margin-top: 5%;
+  border-radius:10px;
+  box-shadow: 5px 5px 2px 2px #eee;
+  form {
+    width: 80%;
+    max-width: 80%;
+    padding: 10px 10px 10px 10px;
+    margin: auto;
+  }
+  div{
+    margin-top: 10px;
+  }
+  input {
+    width: 90%;
+    max-width: 90%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 0px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  .register-here{
+    margin-top:40px;
+    width:100%;
+    text-align:center;
+  }
+  #login-button-container {
+    width: 100%;
+    .btn {
+      background: #2db8f5;
+      font-size: 30px;
+      width: 90%;
+      max-width: 90%;
+      margin-left: 15px;
+      height: 60px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
+.btn:hover{
+  cursor:pointer;
+}
