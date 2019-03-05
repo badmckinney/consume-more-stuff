@@ -41,16 +41,15 @@ class Header extends Component {
   handleSubmit(e) {
     const { searchTerm } = this.state;
     e.preventDefault();
-    this.props.searchItems(searchTerm).then(() => {
-      this.props.history.push(`/search/${searchTerm}`);
-    });
+    this.props.history.push(`/search/${searchTerm}`);
   }
 
   render() {
     return (
       <div className="header">
         <form className="search-form">
-          <input placeholder="Search items..."
+          <input
+            placeholder="Search items..."
             type="text"
             className="search-bar"
             value={this.state.search}

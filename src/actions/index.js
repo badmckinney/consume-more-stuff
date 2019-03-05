@@ -5,7 +5,6 @@ export const ADD_ITEM = 'ADD_ITEM';
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
 export const FETCHED_SEARCH = 'FETCHED_SEARCH';
-export const ERROR = 'ERROR';
 export const LOAD_TOP = 'LOAD_TOP';
 export const EDIT_ITEM = 'EDIT_ITEM';
 
@@ -142,14 +141,22 @@ export const loadSingleItem = id => {
 export const searchItems = term => {
   return dispatch => {
     return fetch(`/api/items/search/${term}`)
-      .then(res => res.json())
       .then(res => {
-        return dispatch({
+        if (res.status !== 200) {
+          throw new Error('error fetching search results');
+        }
+
+        return res.json();
+      })
+      .then(res => {
+        dispatch({
           type: FETCHED_SEARCH,
           payload: res.items
         });
+
+        return true;
       })
-      .catch(err => dispatch({ type: ERROR }));
+      .catch(err => false);
   };
 };
 

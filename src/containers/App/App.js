@@ -12,7 +12,7 @@ import ItemEdit from '../ItemEdit';
 import ItemDetail from '../ItemDetail';
 import NewItem from '../NewItem';
 import Category from '../Category';
-import SearchDisplay from '../../components/SearchDisplay';
+import SearchDisplay from '../SearchDisplay';
 import Home from '../Home';
 
 // import actions here
@@ -23,23 +23,16 @@ class App extends Component {
       <Router>
         <>
           <Sidebar currentUser={this.props.currentUser} />
+
           <div className="app">
             <Header />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/items/new" component={NewItem} />
             <Route path="/items/category/:category" component={Category} />
-            <Route path="/items/:id/edit" component={ItemEdit} />
-            <Route path="/items/:id/details" component={ItemDetail} />
-            <Route
-              path="/search/:term"
-              render={props => (
-                <SearchDisplay
-                  {...props}
-                  searchResults={this.props.searchResults}
-                />
-              )}
-            />
+            <Route exact path="/items/:id" component={ItemDetail} />
+            <Route exact path="/items/:id/edit" component={ItemEdit} />
+            <Route path="/search/:term" component={SearchDisplay} />
             <Route exact path="/" component={Home} />
           </div>
         </>
@@ -50,8 +43,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser,
-    searchResults: state.searchResults
+    currentUser: state.currentUser
   };
 };
 
