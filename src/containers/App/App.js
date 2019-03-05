@@ -22,25 +22,26 @@ class App extends Component {
     return (
       <Router>
         <>
-          <Header />
           <Sidebar currentUser={this.props.currentUser} />
-
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/items/new" component={NewItem} />
-          <Route path="/items/category/:category" component={Category} />
-          <Route path="/items/:id/edit" component={ItemEdit} />
-          <Route path="/items/:id/details" component={ItemDetail} />
-          <Route
-            path="/search/:term"
-            render={props => (
-              <SearchDisplay
-                {...props}
-                searchResults={this.props.searchResults}
-              />
-            )}
-          />
-          <Route exact path="/" component={Home} />
+          <div className="app">
+            <Header />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/items/new" component={NewItem} />
+            <Route path="/items/category/:category" component={Category} />
+            <Route path="/items/:id/edit" component={ItemEdit} />
+            <Route path="/items/:id/details" component={ItemDetail} />
+            <Route
+              path="/search/:term"
+              render={props => (
+                <SearchDisplay
+                  {...props}
+                  searchResults={this.props.searchResults}
+                />
+              )}
+            />
+            <Route exact path="/" component={Home} />
+          </div>
         </>
       </Router>
     );
