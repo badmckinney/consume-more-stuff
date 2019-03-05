@@ -14,6 +14,7 @@ import ItemDetail from '../ItemDetail';
 import NewItem from '../NewItem';
 import Category from '../Category';
 import SearchDisplay from '../SearchDisplay';
+import Profile from '../Profile';
 import Home from '../Home';
 
 // import actions here
