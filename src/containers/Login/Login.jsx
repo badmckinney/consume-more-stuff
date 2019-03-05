@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions';
-
+import { Link } from 'react-router-dom';
+import './Login.scss';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -75,8 +76,15 @@ class Login extends Component {
             onChange={this.handleInputOnChange}
           />
 
-          <div>
-            <button onClick={this.handleSubmit}>Login</button>
+          <div className="register-here">
+            Don't have an account?
+            <Link to={'/register'}> Register here</Link>
+          </div>
+
+          <div id="login-button-container">
+            <button className="btn" onClick={this.handleSubmit}>
+              Login
+            </button>
           </div>
         </form>
       </div>
