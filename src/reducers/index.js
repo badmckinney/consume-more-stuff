@@ -5,14 +5,14 @@ import {
   FETCH_ITEMS,
   LOAD_SINGLE_ITEM,
   LOAD_TOP,
-  FETCHED_SEARCH
+  FETCHED_SEARCH,
+  SEARCH_ERROR
 } from '../actions';
 
 const initialState = {
   items: [],
   item: {},
   currentUser: localStorage.getItem('user'),
-  searchResults: [],
   topTen: {}
 };
 
@@ -32,7 +32,11 @@ const itemReducer = (state = initialState, action) => {
       return Object.assign({}, state, { items: action.payload });
     case FETCHED_SEARCH:
       return Object.assign({}, state, {
-        searchResults: action.payload
+        items: action.payload
+      });
+    case SEARCH_ERROR:
+      return Object.assign({}, state, {
+        items: []
       });
     case LOAD_SINGLE_ITEM:
       return Object.assign({}, state, { item: action.payload });

@@ -12,7 +12,7 @@ import ItemEdit from '../ItemEdit';
 import ItemDetail from '../ItemDetail';
 import NewItem from '../NewItem';
 import Category from '../Category';
-import SearchDisplay from '../../components/SearchDisplay';
+import SearchDisplay from '../SearchDisplay';
 import Home from '../Home';
 
 // import actions here
@@ -34,10 +34,7 @@ class App extends Component {
           <Route
             path="/search/:term"
             render={props => (
-              <SearchDisplay
-                {...props}
-                searchResults={this.props.searchResults}
-              />
+              <SearchDisplay {...props} searchResults={this.props.items} />
             )}
           />
           <Route exact path="/" component={Home} />
@@ -50,7 +47,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     currentUser: state.currentUser,
-    searchResults: state.searchResults
+    items: state.items
   };
 };
 

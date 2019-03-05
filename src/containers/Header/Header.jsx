@@ -40,9 +40,7 @@ class Header extends Component {
   handleSubmit(e) {
     const { searchTerm } = this.state;
     e.preventDefault();
-    this.props.searchItems(searchTerm).then(() => {
-      this.props.history.push(`/search/${searchTerm}`);
-    });
+    this.props.history.push(`/search/${searchTerm}`);
   }
 
   render() {
