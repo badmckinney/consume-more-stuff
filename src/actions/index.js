@@ -8,6 +8,7 @@ export const FETCHED_SEARCH = 'FETCHED_SEARCH';
 export const LOAD_TOP = 'LOAD_TOP';
 export const EDIT_ITEM = 'EDIT_ITEM';
 export const FETCHED_PROFILE = 'FETCHED_PROFILE';
+export const FETCHED_USERS_ITEMS = 'FETCHED_USERS_ITEMS';
 
 export const register = newUser => {
   return () => {
@@ -197,6 +198,28 @@ export const getProfile = () => {
       .then(res => {
         dispatch({
           type: FETCHED_PROFILE,
+          payload: res
+        });
+
+        return true;
+      })
+      .catch(err => false);
+  };
+};
+
+export const getUsersItems = () => {
+  return dispatch => {
+    return fetch('/api/items/owned')
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error("could not get user's items");
+        }
+
+        return res.json();
+      })
+      .then(res => {
+        dispatch({
+          type: FETCHED_USERS_ITEMS,
           payload: res
         });
 

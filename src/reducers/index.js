@@ -6,7 +6,8 @@ import {
   LOAD_SINGLE_ITEM,
   LOAD_TOP,
   FETCHED_SEARCH,
-  FETCHED_PROFILE
+  FETCHED_PROFILE,
+  FETCHED_USERS_ITEMS
 } from '../actions';
 
 const initialState = {
@@ -48,6 +49,10 @@ const itemReducer = (state = initialState, action) => {
     case FETCHED_PROFILE:
       return Object.assign({}, state, {
         profile: action.payload
+      });
+    case FETCHED_USERS_ITEMS:
+      return Object.assign({}, state, {
+        items: action.payload
       });
     default:
       return state;
