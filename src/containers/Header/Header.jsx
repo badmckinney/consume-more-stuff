@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import HeaderLogin from '../../components/HeaderLogin';
 import { logout, searchItems } from '../../actions';
@@ -21,13 +20,10 @@ class Header extends Component {
   }
 
   logout() {
-    axios.post('/api/logout', null).then(res => {
-      if (res.data.success) {
-        this.props.dispatchLogout();
-        this.props.history.push('/');
+    this.props.logout().then(data => {
+      if (data) {
+        return this.props.history.push('/logout');
       }
-
-      //error handling
     });
   }
 
@@ -48,7 +44,8 @@ class Header extends Component {
     return (
       <div className="header">
         <form className="search-form">
-          <input placeholder="Search items..."
+          <input
+            placeholder="Search items..."
             type="text"
             className="search-bar"
             value={this.state.search}
@@ -77,9 +74,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatchLogout: () => {
-      dispatch(logout());
-    },
+    logout: () => dispatch(logout()),
 
     searchItems: term => {
       return dispatch(searchItems(term));

@@ -57,27 +57,17 @@ export const logout = () => {
   return dispatch => {
     return fetch('/api/logout', { method: 'POST' })
       .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        if (res.success) {
-          return dispatch({
-            type: LOGOUT,
-            success: true
-          });
+        if (res.status !== 200) {
+          throw new Error('error logging out');
         }
 
-        return dispatch({
-          type: LOGOUT,
-          success: false
+        dispatch({
+          type: LOGOUT
         });
+
+        return true;
       })
-      .catch(err => {
-        return dispatch({
-          type: LOGOUT,
-          success: false
-        });
-      });
+      .catch(err => false);
   };
 };
 
@@ -144,7 +134,6 @@ export const searchItems = term => {
     return fetch(`/api/items/search/${term}`)
       .then(res => {
         if (res.status !== 200) {
-          console.log('hit', res);
           throw new Error('error fetching search results');
         }
 

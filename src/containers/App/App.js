@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './App.scss';
 
 import Sidebar from '../../components/Sidebar';
+import Logout from '../../components/Logout';
 
 import Header from '../Header';
 import Login from '../Login';
@@ -27,6 +28,7 @@ class App extends Component {
           <div className="app">
             <Header />
             <Route path="/login" component={Login} />
+            <Route path="/logout" component={Logout} />
             <Route path="/register" component={Register} />
             <Route path="/items/new" component={NewItem} />
             <Route path="/items/category/:category" component={Category} />
