@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './Register.scss';
 import { register } from '../../actions';
 import { connect } from 'react-redux';
+import './Register.scss';
 
 class Register extends Component {
   constructor(props) {
