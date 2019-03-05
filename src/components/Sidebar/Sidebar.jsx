@@ -78,7 +78,7 @@ const Sidebar = props => {
           <Link to="/messages">
             <button>Messages</button>
           </Link>
-          <Link to="/items/new">
+          <Link to="/create-posting">
             <button>Create a posting</button>
           </Link>
         </div>
