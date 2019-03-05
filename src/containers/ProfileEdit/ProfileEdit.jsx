@@ -73,7 +73,7 @@ class ProfileEdit extends Component {
       if (!data) {
         return this.setState({ isError: true });
       }
-      console.log('hit');
+
       this.setState({ isError: false });
       return this.props.history.push('/profile');
     });
