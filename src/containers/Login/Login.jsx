@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions';
+import { Link } from 'react-router-dom';
+import "./Login.scss";
 
 class Login extends Component {
   constructor(props) {
