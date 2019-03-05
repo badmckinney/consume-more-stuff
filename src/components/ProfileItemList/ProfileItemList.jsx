@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import './ProfileItemList.scss';
 
 const ProfileItemList = props => {
   const itemList = props.items.map(item => {
