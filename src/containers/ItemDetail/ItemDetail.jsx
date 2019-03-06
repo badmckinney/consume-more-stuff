@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './ItemDetail.scss';
 import { loadSingleItem } from '../../actions';
 import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
+import './ItemDetail.scss';
 
 class ItemDetail extends Component {
   constructor(props) {
@@ -52,6 +53,7 @@ class ItemDetail extends Component {
 
   render() {
     const item = this.props.item;
+    const localCreatedAt = new Date(item.created_at);
 
     if (this.state.notFound) {
       return <div className="error">Item not found</div>;
@@ -62,8 +64,11 @@ class ItemDetail extends Component {
         {this.editButton()}
         <div className="header-container">
           <h3> {item.name} </h3>
-          <h3> - </h3>
-          <h3> ${item.price} </h3>
+          <h3> {item.price ? `$ ${item.price}` : ''} </h3>
+
+          <h3>
+            Posted <Moment fromNow>{localCreatedAt}</Moment>
+          </h3>
         </div>
         <div className="content-wrapper">
           <div className="detail-image">
@@ -90,13 +95,11 @@ class ItemDetail extends Component {
             </div>
           </div>
         </div>
-      <div className="description-container">
-        <div className="description">
-
-          <div>{item.description}</div>
+        <div className="description-container">
+          <div className="description">
+            <div>{item.description}</div>
+          </div>
         </div>
-</div>
-      
       </div>
     );
   }

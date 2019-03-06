@@ -5,6 +5,7 @@ import './App.scss';
 
 import Sidebar from '../../components/Sidebar';
 import Logout from '../../components/Logout';
+import Footer from '../../components/Footer';
 
 import Header from '../Header';
 import Login from '../Login';
@@ -18,8 +19,6 @@ import Profile from '../Profile';
 import ProfileEdit from '../ProfileEdit';
 import PasswordEdit from '../PasswordEdit';
 import Home from '../Home';
-
-// import actions here
 
 class App extends Component {
   render() {
@@ -49,7 +48,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
             </div>
           </div>
-          <div className="footer">im a footerr</div>
+          <Footer />
         </div>
       </Router>
     );
