@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './PasswordEdit.scss';
 
+import { changePassword } from '../../actions';
+
 class PasswordEdit extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isError: false,
+      incorrectPw: false,
+      nonMatch: false,
 
       old: '',
       new: '',
@@ -22,11 +26,21 @@ class PasswordEdit extends Component {
       confirmType: 'password'
     };
 
+    this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  error() {
+    if (this.state.incorrectPw) {
+      return <div>incorrect password</div>;
+    } else if (this.state.nonMatch) {
+      return <div>passwords did not match</div>;
+    } else if (this.state.isError) {
+      return <div>error updating password</div>;
+    }
+  }
   handleInputOnChange(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -72,14 +86,41 @@ class PasswordEdit extends Component {
   }
 
   handleSubmit(e) {
-    const passwordUpdate = this.state;
+    const update = this.state;
+
+    this.setState({
+      incorrectPw: false,
+      nonMatch: false,
+      isError: false
+    });
 
     e.preventDefault();
+    this.props.changePassword(update).then(data => {
+      switch (data) {
+        case 'not-auth':
+          return this.setState({ incorrectPw: true });
+        case 'non-match':
+          return this.setState({ nonMatch: true });
+        case 'error':
+          return this.setState({ isError: true });
+        case 'success':
+          return this.props.history.push('/profile');
+        default:
+          return;
+      }
+    });
+
+    return this.setState({
+      old: '',
+      new: '',
+      confirm: ''
+    });
   }
 
   render() {
     return (
       <div className="change-password-page">
+        {this.error()}
         <div className="title">Update Your Password: </div>
         <form>
           <div className="old-password">
@@ -153,5 +194,16 @@ class PasswordEdit extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changePassword: update => dispatch(changePassword(update))
+  };
+};
+
+PasswordEdit = connect(
+  null,
+  mapDispatchToProps
+)(PasswordEdit);
 
 export default PasswordEdit;

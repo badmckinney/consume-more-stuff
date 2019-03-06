@@ -255,11 +255,11 @@ export const editProfile = editedProfile => {
 };
 
 export const changePassword = passUpdate => {
-  if (passUpdate.new !== passUpdate.confirm) {
-    return 'non-match';
-  }
+  return () => {
+    if (passUpdate.new !== passUpdate.confirm) {
+      return Promise.resolve('non-match');
+    }
 
-  return dispatch => {
     return fetch('/api/profile/password', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
