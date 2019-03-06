@@ -76,7 +76,6 @@ class NewItem extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     const newItem = this.state;
     const formData = new FormData();
 
