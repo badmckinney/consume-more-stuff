@@ -44,7 +44,7 @@ class NewItem extends Component {
       file = e.target.files[0];
     }
 
-    if (value === 'image') {
+    if (name === 'image') {
       return this.setState({ image: file });
     }
 
@@ -104,7 +104,7 @@ class NewItem extends Component {
             <div className="image">
               <label>Image</label>
               <input
-                type="text"
+                type="file"
                 name="image"
                 onChange={this.handleInputOnChange}
               />
