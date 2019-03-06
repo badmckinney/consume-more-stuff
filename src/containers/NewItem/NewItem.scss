@@ -12,6 +12,8 @@ html {
         .sidebar-app-container {
           .app-body {
             .add-item-container {
+              box-shadow:5px 5px 28px rgba(0,0,0,0.2) ;;
+              border-radius:10px;
               width: 70%;
               margin: auto;
               padding: 50px;
@@ -73,6 +75,7 @@ html {
                     .description {
                       width: 100%;
                       textarea {
+                        resize:none;
                         width: 100%;
                         max-width: 100%;
                         height: 100px;
