@@ -1,0 +1,28 @@
+$primary-color: #2db8f5;
+$secondary-color: #5c49e6;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  body {
+    #root {
+      .app-container {
+        .sidebar-app-container {
+          .app-body {
+            .edit-container{
+              box-shadow:5px 5px 14px grey ;
+              border-radius:10px;
+              width:70%;
+              margin:auto;
+              padding:50px;
+              margin-top:5%;
+
+            }
+          }
+        }
+      }
+    }
+  }
+}

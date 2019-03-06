@@ -34,7 +34,6 @@ class ItemEdit extends Component {
   }
 
   componentDidMount() {
-
     const id = this.props.match.params.id;
 
     this.props.loadItem(id).then(data => {
@@ -74,7 +73,6 @@ class ItemEdit extends Component {
       notes: item.notes ? item.notes : '',
       status_id: item.status_id
     });
-
   }
 
   error() {
@@ -134,7 +132,7 @@ class ItemEdit extends Component {
     });
   }
 
-  render() { 
+  render() {
     if (this.state.notFound) {
       return <div className="error">Item not found</div>;
     }
@@ -143,12 +141,11 @@ class ItemEdit extends Component {
       return <div className="error">Denied: user does not own this post</div>;
     }
     return (
-     
-      <div className="edit-item-page">
+      <div className="edit-container">
         {this.error()}
         <form>
           <div>
-            <label htmlFor="category_id">Category:</label>
+            <div className="category">Category</div>
           </div>
           <select
             name="category_id"
