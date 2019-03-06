@@ -16,6 +16,7 @@ import Category from '../Category';
 import SearchDisplay from '../SearchDisplay';
 import Profile from '../Profile';
 import ProfileEdit from '../ProfileEdit';
+import PasswordEdit from '../PasswordEdit';
 import Home from '../Home';
 
 // import actions here
@@ -44,6 +45,7 @@ class App extends Component {
               <Route exact path="/search/:term" component={SearchDisplay} />
               <Route exact path="/profile" component={Profile} />
               <Route path="/profile/edit" component={ProfileEdit} />
+              <Route path="/password" component={PasswordEdit} />
               <Route exact path="/" component={Home} />
             </div>
           </div>
