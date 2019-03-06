@@ -9,11 +9,11 @@ const HeaderLogin = props => {
     return (
       <div className="logged-out">
         <Link className="link" to="/login">
-          <button>Login</button>
+          <button className="btn">Login</button>
         </Link>
 
         <Link className="link" to="/register">
-          <button>Register</button>
+          <button className="btn">Register</button>
         </Link>
       </div>
     );

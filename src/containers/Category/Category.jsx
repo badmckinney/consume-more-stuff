@@ -26,7 +26,7 @@ class Category extends Component {
 
   render() {
     return (
-      <div className="category">
+      <div className="category-container">
         <ItemList items={this.props.items} />
       </div>
     );

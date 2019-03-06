@@ -113,11 +113,11 @@ class ItemEdit extends Component {
       return <div className="error">Denied: user does not own this post</div>;
     }
     return (
-      <div className="edit-item-page">
+      <div className="edit-container">
         {this.error()}
         <form>
           <div>
-            <label htmlFor="category_id">Category:</label>
+            <div className="category">Category</div>
           </div>
           <select
             name="category_id"
