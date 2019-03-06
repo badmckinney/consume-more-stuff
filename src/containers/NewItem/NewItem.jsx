@@ -38,6 +38,11 @@ class NewItem extends Component {
   handleInputOnChange(e) {
     const value = e.target.value;
     const name = e.target.name;
+    let file;
+
+    if (e.target.files) {
+      file = e.target.files[0];
+    }
 
     switch (name) {
       case 'category_id':
@@ -47,7 +52,7 @@ class NewItem extends Component {
       case 'price':
         return this.setState({ price: value });
       case 'image':
-        return this.setState({ image: value });
+        return this.setState({ image: file });
       case 'description':
         return this.setState({ description: value });
       case 'manufacturer':
@@ -70,10 +75,16 @@ class NewItem extends Component {
   }
 
   handleSubmit(e) {
-    const newItem = this.state;
-
     e.preventDefault();
-    this.props.addItem(newItem).then(data => {
+    console.log(this.state);
+    const newItem = this.state;
+    const formData = new FormData();
+
+    for (var key in newItem) {
+      formData.append(key, newItem[key]);
+    }
+
+    this.props.addItem(formData).then(data => {
       if (!data) {
         return this.setState({ isError: true });
       }
@@ -92,7 +103,7 @@ class NewItem extends Component {
       <div className="add-item-page">
         {this.error()}
         <h2>Create Post:</h2>
-        <form>
+        <form encType="multipart/form-data" method="post">
           <div>
             <label htmlFor="category_id">Category:</label>
           </div>
@@ -141,7 +152,6 @@ class NewItem extends Component {
             type="file"
             name="image"
             accept="image/png, image/jpeg"
-            value={this.state.image}
             onChange={this.handleInputOnChange}
           />
 
@@ -230,7 +240,7 @@ class NewItem extends Component {
             />
           </div>
 
-          <button onClick={this.handleSubmit}>Create Post</button>
+          <button onClick={this.handleSubmit}>Submit</button>
         </form>
       </div>
     );

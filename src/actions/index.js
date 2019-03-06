@@ -74,10 +74,7 @@ export const addItem = newItem => {
   return () => {
     return fetch('/api/items/new', {
       method: 'POST',
-      body: JSON.stringify(newItem),
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      body: newItem
     })
       .then(res => {
         if (res.status !== 200) {

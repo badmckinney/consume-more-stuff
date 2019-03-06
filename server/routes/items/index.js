@@ -1,8 +1,10 @@
-console.log('hit');
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const multer = require('multer');
+const upload = multer({ dest: 'server/uploads/' });
+
 const bookshelf = require('../../../database/models/bookshelf');
 const Item = require('../../../database/models/Item');
 const Category = require('../../../database/models/Category');
@@ -12,6 +14,13 @@ const User = require('../../../database/models/User');
 
 const AWS = require('aws-sdk');
 AWS.config.update({ region: 'us-west-2' });
+AWS.config.credentials = new AWS.ECSCredentials({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+  httpOptions: { timeout: 5000 },
+  maxRetries: 10,
+  retryDelayOptions: { base: 200 }
+})
 s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
 /************************
@@ -257,15 +266,14 @@ router.get('/items/:id', (req, res) => {
  * POST
  ************************/
 
-router.post('/items/new', (req, res) => {
-  console.log('hit');
+router.post('/items/new', upload.single('image'), (req, res) => {
   const user = req.user;
-
-  if (req.body.image) {
-    const uploadParams = { Bucket: 'badmckinney-cms-photos', Key: `${user}-${req.body.name}`, Body: '' };
-    const file = req.body.image;
-
+  console.log(req.file);
+  if (req.file) {
+    const uploadParams = { Bucket: 'badmckinney-cms-photos', Key: '', Body: '' };
+    const file = path.join(`/src/app/server/uploads/${req.file.filename}`);
     const fileStream = fs.createReadStream(file);
+
     fileStream.on('error', function (err) {
       console.log('File Error', err);
     });
@@ -274,46 +282,48 @@ router.post('/items/new', (req, res) => {
     uploadParams.Key = path.basename(file);
 
     s3.upload(uploadParams, function (err, data) {
+      console.log(data.Location);
       if (err) {
         console.log("Error", err);
       } else if (data) {
-        console.log("Upload Success", data.Location);
-        req.image.image = data.Location
+        fs.unlink(`/src/app/server/uploads/${req.file.filename}`, (err) => {
+          if (err) {
+            console.log(err);
+          }
+        });
+
+        const newItem = {
+          created_by: user.id,
+          category_id: parseInt(req.body.category_id),
+          name: req.body.name,
+          price: req.body.price ? parseInt(req.body.price) : null,
+          image: data.Location,
+          description: req.body.description,
+          manufacturer: req.body.manufacturer,
+          model: req.body.manufacturer,
+          condition_id: parseInt(req.body.condition_id),
+          length: req.body.length ? parseInt(req.body.length) : null,
+          width: req.body.width ? parseInt(req.body.width) : null,
+          height: req.body.height ? parseInt(req.body.height) : null,
+          notes: req.body.notes,
+          status_id: 1,
+          views: 0
+        };
+
+        Item.forge(newItem)
+          .save(null, { method: 'insert' })
+          .then(newItem => {
+            return res.json({
+              id: newItem.id
+            });
+          })
+          .catch(err => {
+            res.status(500);
+            res.json(err);
+          });
       }
     });
   }
-
-  res.json(req.body.image);
-
-  // const newItem = {
-  //   created_by: user.id,
-  //   category_id: parseInt(req.body.category_id),
-  //   name: req.body.name,
-  //   price: req.body.price ? parseInt(req.body.price) : null,
-  //   image: req.body.image,
-  //   description: req.body.description,
-  //   manufacturer: req.body.manufacturer,
-  //   model: req.body.manufacturer,
-  //   condition_id: parseInt(req.body.condition_id),
-  //   length: req.body.length ? parseInt(req.body.length) : null,
-  //   width: req.body.width ? parseInt(req.body.width) : null,
-  //   height: req.body.height ? parseInt(req.body.height) : null,
-  //   notes: req.body.notes,
-  //   status_id: 1,
-  //   views: 0
-  // };
-
-  // Item.forge(newItem)
-  //   .save(null, { method: 'insert' })
-  //   .then(newItem => {
-  //     return res.json({
-  //       id: newItem.id
-  //     });
-  //   })
-  //   .catch(err => {
-  //     res.status(500);
-  //     res.json(err);
-  //   });
 });
 
 /************************
@@ -321,6 +331,7 @@ router.post('/items/new', (req, res) => {
  ************************/
 
 router.put('/items/:id', (req, res) => {
+  console.log('hit put')
   const item_id = req.params.id;
   const user_id = req.user.id;
   const editedItem = {
