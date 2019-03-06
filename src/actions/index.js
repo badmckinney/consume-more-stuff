@@ -10,6 +10,7 @@ export const EDIT_ITEM = 'EDIT_ITEM';
 export const FETCHED_PROFILE = 'FETCHED_PROFILE';
 export const FETCHED_USERS_ITEMS = 'FETCHED_USERS_ITEMS';
 export const EDIT_PROFILE = 'EDIT_PROFILE';
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 
 export const register = newUser => {
   return () => {
@@ -250,5 +251,31 @@ export const editProfile = editedProfile => {
         return true;
       })
       .catch(err => false);
+  };
+};
+
+export const changePassword = passUpdate => {
+  if (passUpdate.new !== passUpdate.confirm) {
+    return 'non-match';
+  }
+
+  return dispatch => {
+    return fetch('/api/profile/password', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(passUpdate)
+    })
+      .then(res => {
+        if (res.status === 401) {
+          return 'not-auth';
+        }
+
+        if (res.status !== 200) {
+          return 'error';
+        }
+
+        return 'success';
+      })
+      .catch(err => 'error');
   };
 };
