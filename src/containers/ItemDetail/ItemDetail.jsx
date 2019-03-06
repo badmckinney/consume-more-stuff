@@ -13,6 +13,7 @@ class ItemDetail extends Component {
     };
 
     this.editButton = this.editButton.bind(this);
+    this.timestampsDetail = this.timestampsDetail.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +50,31 @@ class ItemDetail extends Component {
     }
 
     return <></>;
+  }
+
+  timestampsDetail() {
+    const item = this.props.item;
+    const localCreatedAt = new Date(item.created_at);
+    const localUpdatedAt = new Date(item.updated_at);
+
+    if (item.created_at === item.updated_at) {
+      return (
+        <div className="created">
+          Posted: <Moment fromNow>{localCreatedAt}</Moment>
+        </div>
+      );
+    }
+
+    return (
+      <>
+        <div className="created">
+          posted: <Moment fromNow>{localCreatedAt}</Moment>
+        </div>
+        <div className="updated">
+          updated: <Moment fromNow>{localUpdatedAt}</Moment>
+        </div>
+      </>
+    );
   }
 
   render() {
@@ -99,6 +125,10 @@ class ItemDetail extends Component {
           <div className="description">
             <div>{item.description}</div>
           </div>
+        </div>
+        <div className="additional-details">
+          <div className="id">post id: {item.id}</div>
+          {this.timestampsDetail()}
         </div>
       </div>
     );
