@@ -1,0 +1,83 @@
+$primary-color: #2db8f5;
+$secondary-color: #5c49e6;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  body {
+    background:#eee;
+    #root {
+      .app-container {
+        .sidebar-app-container {
+          .app-body {
+          
+            .detail-container {
+              width: 70%;
+              margin: auto;
+              padding: 50px;
+              margin-top: 5%;
+              .header-container {
+                letter-spacing: 1px;
+                display: flex;
+                width: 60%;
+                margin-bottom: 10px;
+                p {
+                  margin-left: auto;
+                }
+              }
+              .content-wrapper {
+                display: flex;
+                height: 400px;
+                max-height: 400px;
+                .detail-wrapper {
+                  margin-left: 5px;
+                  .detail {
+                    margin-top: 5%;
+                    padding: 2px;
+                    width: 200px;
+                    max-width: 200px;
+                    text-align: center;
+                    background: #eee;
+                    border-radius: 10px;
+                    border: 1px solid grey;
+                  }
+                  .dimension {
+                    margin-top: 2%;
+                  }
+                }
+                .detail-image {
+                  width: 500px;
+                  max-width: 500px;
+                  img {
+                    border: 1px solid black;
+                    width: 100%;
+                  }
+                }
+              }
+              .btn {
+                width: 80px;
+                max-width: 80px;
+                height: 30px;
+                float: right;
+                border: 0px;
+                background: $primary-color;
+                color: white;
+                font-size: 16px;
+                border-radius: 10px;
+              }
+              .btn:active {
+                background: $secondary-color;
+              }
+              .description-container {
+                width: 500px;
+                padding: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
