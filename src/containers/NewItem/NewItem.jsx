@@ -38,6 +38,15 @@ class NewItem extends Component {
   handleInputOnChange(e) {
     const value = e.target.value;
     const name = e.target.name;
+    let file;
+
+    if (e.target.files) {
+      file = e.target.files[0];
+    }
+
+    if (value === 'image') {
+      return this.setState({ image: file });
+    }
 
     return this.setState({ [name]: value });
   }
