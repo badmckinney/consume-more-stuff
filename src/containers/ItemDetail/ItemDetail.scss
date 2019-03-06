@@ -7,13 +7,15 @@ $secondary-color: #5c49e6;
 }
 html {
   body {
-    background:#eee;
     #root {
       .app-container {
         .sidebar-app-container {
           .app-body {
           
             .detail-container {
+              background:#eee;
+              border-radius:10px;
+              box-shadow:5px 5px 28px rgba(0,0,0,0.2) ;
               width: 70%;
               margin: auto;
               padding: 50px;
