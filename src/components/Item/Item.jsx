@@ -19,13 +19,13 @@ const Item = props => {
             <img src={item.image} className="item-image" alt={item.name} />
           </div>
           <div className="item-detail">
-          <p className="post-date">
-            <Moment format="MMM M">{localCreatedAt}</Moment>
-          </p>
-          <h4 className="item-name">{item.name}</h4>
-        </div>
+            <p className="post-date">
+              <Moment format="MMM M">{localCreatedAt}</Moment>
+            </p>
+            <h4 className="item-name">{item.name}</h4>
+          </div>
           <div className="price-container">
-          <p className="item-price">${item.price}</p>
+            <p className="item-price">{item.price ? `$ ${item.price}` : ''}</p>
           </div>
         </div>
       </Link>
