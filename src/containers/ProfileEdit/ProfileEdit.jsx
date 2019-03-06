@@ -51,18 +51,7 @@ class ProfileEdit extends Component {
     const name = e.target.name;
     const value = e.target.value;
 
-    switch (name) {
-      case 'email':
-        return this.setState({ email: value });
-      case 'username':
-        return this.setState({ username: value });
-      case 'first_name':
-        return this.setState({ first_name: value });
-      case 'last_name':
-        return this.setState({ last_name: value });
-      default:
-        return;
-    }
+    this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
