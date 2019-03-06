@@ -67,9 +67,7 @@ router.put('/profile/password', (req, res) => {
 
           return true;
         })
-        .catch(err => {
-          throw err;
-        });
+        .catch(err => false);
     })
     .then(isOldPwAuth => {
       if (!isOldPwAuth) {
