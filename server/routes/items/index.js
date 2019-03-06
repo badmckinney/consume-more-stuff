@@ -239,27 +239,25 @@ router.get('/items/:id', (req, res) => {
 
 router.post('/items/new', upload.single('image'), (req, res) => {
   const user = req.user;
-  console.log(req.file);
   if (req.file) {
     const uploadParams = { Bucket: 'badmckinney-cms-photos', Key: '', Body: '' };
     const file = path.join(`/src/app/server/uploads/${req.file.filename}`);
     const fileStream = fs.createReadStream(file);
 
     fileStream.on('error', function (err) {
-      console.log('File Error', err);
+      throw new Error('File Error', err);
     });
 
     uploadParams.Body = fileStream;
     uploadParams.Key = path.basename(file);
 
     s3.upload(uploadParams, function (err, data) {
-      console.log(data.Location);
       if (err) {
-        console.log("Error", err);
+        throw new Error("Error", err);
       } else if (data) {
         fs.unlink(`/src/app/server/uploads/${req.file.filename}`, (err) => {
           if (err) {
-            console.log(err);
+            throw new Error(err);
           }
         });
 
@@ -302,7 +300,6 @@ router.post('/items/new', upload.single('image'), (req, res) => {
  ************************/
 
 router.put('/items/:id', (req, res) => {
-  console.log('hit put')
   const item_id = req.params.id;
   const user_id = req.user.id;
   const editedItem = {
