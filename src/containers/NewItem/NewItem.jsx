@@ -207,7 +207,11 @@ class NewItem extends Component {
               />
             </div>
           </div>
+          <div className="button-container">
+          <div className="submit">
           <button className="btn" onClick={this.handleSubmit}>Create Post</button>
+          </div>
+          </div>
         </form>
       </div>
     );
