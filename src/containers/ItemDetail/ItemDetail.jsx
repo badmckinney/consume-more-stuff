@@ -56,7 +56,6 @@ class ItemDetail extends Component {
     if (this.state.notFound) {
       return <div className="error">Item not found</div>;
     }
-    console.log('rendering on detail page')
 
     return (
       <div className="detail-container">
