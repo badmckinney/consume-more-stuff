@@ -142,7 +142,6 @@ class ItemEdit extends Component {
     if (this.state.isOwner) {
       return <div className="error">Denied: user does not own this post</div>;
     }
-    console.log('rendering on edit page')
     return (
      
       <div className="edit-item-page">
