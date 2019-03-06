@@ -9,17 +9,18 @@ html {
   body {
     #root {
       display: flex;
+
       .logged-in-nav,
       .logged-out-nav {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 25%;
-        max-width: 25%;
-        height: cover;
+        position: fixed;
+        width: 20%;
+        height: 100vh;
         background: #fafafa;
-        box-shadow: 0 0px 28px rgba(0, 0, 0, 0.25),
-          0 0px 10px rgba(90, 75, 230, 0.22);
+        box-shadow: 0 0px 28px rgba(0, 0, 0, 0.25);
+          // 0 0px 10px rgba(90, 75, 230, 0.22);
   
         .link {
           text-decoration: none;
@@ -45,9 +46,8 @@ html {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 0em 0em 9em 0em;
+          padding: 0em 0em 1em 0em;
           width: 70%;
-          height: 140px;
           border-bottom: 3px solid $secondary-color;
 
           a {
@@ -55,6 +55,7 @@ html {
               text-align: left;
               color: $primary-color;
               padding-bottom: 1px;
+              margin-bottom: 10px;
               background: none;
               border: 3px solid transparent;
               border-radius: 2px;
@@ -97,7 +98,6 @@ html {
           flex-direction: column;
           align-items: center;
           width: 70%;
-          height: 100%;
 
           h3 {
             display: flex;
