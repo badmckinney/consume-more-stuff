@@ -1,4 +1,10 @@
+*{
+  box-sizing:border-box;
+  padding:0;
+  margin:0;
+}
 html {
+ 
   body {
     #root {
       .app-container {
@@ -21,7 +27,7 @@ html {
                   border: 1px solid black;
                   border-radius: 5px;
                   height: 320px;
-                  .category{
+                  .item-container{
                     display:flex;
 
                     border:1px solid black;
@@ -31,6 +37,14 @@ html {
                     height: 300px;
                     a{
                       padding:15px;
+                      .item{
+                        display:flex;
+                        flex-direction: column;
+                        border:1px solid black;
+                      }
+                      img{
+                        width: 300px;
+                      }
                     }
                   }
                 }
@@ -42,3 +56,4 @@ html {
     }
   }
 }
+
