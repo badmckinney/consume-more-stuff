@@ -31,14 +31,7 @@ class Login extends Component {
     const name = e.target.name;
     const value = e.target.value;
 
-    switch (name) {
-      case 'username':
-        return this.setState({ username: value });
-      case 'password':
-        return this.setState({ password: value });
-      default:
-        return;
-    }
+    return this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
@@ -82,12 +75,11 @@ class Login extends Component {
             <Link to={'/register'}> Register here</Link>
           </div>
 
-           <div id="login-button-container">
+          <div id="login-button-container">
             <button className="btn" onClick={this.handleSubmit}>
               Login
             </button>
           </div>
-
         </form>
       </div>
     );

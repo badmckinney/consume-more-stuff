@@ -39,34 +39,7 @@ class NewItem extends Component {
     const value = e.target.value;
     const name = e.target.name;
 
-    switch (name) {
-      case 'category_id':
-        return this.setState({ category_id: value });
-      case 'name':
-        return this.setState({ name: value });
-      case 'price':
-        return this.setState({ price: value });
-      case 'image':
-        return this.setState({ image: value });
-      case 'description':
-        return this.setState({ description: value });
-      case 'manufacturer':
-        return this.setState({ manufacturer: value });
-      case 'model':
-        return this.setState({ model: value });
-      case 'condition_id':
-        return this.setState({ condition_id: value });
-      case 'length':
-        return this.setState({ length: value });
-      case 'width':
-        return this.setState({ width: value });
-      case 'height':
-        return this.setState({ height: value });
-      case 'notes':
-        return this.setState({ notes: value });
-      default:
-        return;
-    }
+    return this.setState({ [name]: value });
   }
 
   handleSubmit(e) {

@@ -34,20 +34,7 @@ class Register extends Component {
     const name = e.target.name;
     const value = e.target.value;
 
-    switch (name) {
-      case 'first_name':
-        return this.setState({ first_name: value });
-      case 'last_name':
-        return this.setState({ last_name: value });
-      case 'email':
-        return this.setState({ email: value });
-      case 'username':
-        return this.setState({ username: value });
-      case 'password':
-        return this.setState({ password: value });
-      default:
-        return;
-    }
+    this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
@@ -68,7 +55,7 @@ class Register extends Component {
     return (
       <div className="register-wrapper">
         <div className="register-container">
-                {this.error()}
+          {this.error()}
           <form>
             <div>
               <label htmlFor="first_name">First Name:</label>
@@ -133,7 +120,6 @@ class Register extends Component {
           </form>
         </div>
       </div>
-                
     );
   }
 }
