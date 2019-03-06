@@ -27,43 +27,14 @@ s3 = new AWS.S3({ apiVersion: '2006-03-01' });
  *  GET
  ************************/
 
-router.get('/items', (req, res) => {
-  Item.fetchAll({
-    withRelated: ['createdBy', 'category', 'condition', 'status']
-  })
+router.get('/items/owned', (req, res) => {
+  const id = req.user.id;
+
+  Item.where('created_by', id)
+    .fetchAll({
+      withRelated: ['createdBy', 'category', 'condition', 'status']
+    })
     .then(items => {
-      itemList = items.models;
-      items = [];
-
-      itemList.forEach(item => {
-        const relations = item.relations;
-        item = item.attributes;
-        const condition = relations.condition.attributes;
-        const category = relations.category.attributes;
-        const createdBy = relations.createdBy.attributes;
-        const status = relations.status.attributes;
-
-        const itemData = {
-          id: item.id,
-          created_by: createdBy.username,
-          status: status.name,
-          category: category.name,
-          condition: condition.name,
-          name: item.name,
-          image: item.image,
-          description: item.description,
-          price: item.price,
-          manufacturer: item.manufacturer,
-          model: item.model,
-          dimensions: item.dimensions,
-          created_at: item.created_at,
-          updated_at: item.updated_at,
-          notes: item.notes,
-          views: item.views
-        };
-
-        items.push(itemData);
-      });
       res.json(items);
     })
     .catch(err => {

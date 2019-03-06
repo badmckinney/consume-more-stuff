@@ -7,6 +7,10 @@ export const LOAD_SINGLE_ITEM = 'LOAD_SINGLE_ITEM';
 export const FETCHED_SEARCH = 'FETCHED_SEARCH';
 export const LOAD_TOP = 'LOAD_TOP';
 export const EDIT_ITEM = 'EDIT_ITEM';
+export const FETCHED_PROFILE = 'FETCHED_PROFILE';
+export const FETCHED_USERS_ITEMS = 'FETCHED_USERS_ITEMS';
+export const EDIT_PROFILE = 'EDIT_PROFILE';
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 
 export const register = newUser => {
   return () => {
@@ -177,5 +181,98 @@ export const editItem = item => {
         return true;
       })
       .catch(err => false);
+  };
+};
+
+export const getProfile = () => {
+  return dispatch => {
+    return fetch('/api/profile')
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('could not get profile');
+        }
+
+        return res.json();
+      })
+      .then(res => {
+        dispatch({
+          type: FETCHED_PROFILE,
+          payload: res
+        });
+
+        return true;
+      })
+      .catch(err => false);
+  };
+};
+
+export const getUsersItems = () => {
+  return dispatch => {
+    return fetch('/api/items/owned')
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error("could not get user's items");
+        }
+
+        return res.json();
+      })
+      .then(res => {
+        dispatch({
+          type: FETCHED_USERS_ITEMS,
+          payload: res
+        });
+
+        return true;
+      })
+      .catch(err => false);
+  };
+};
+
+export const editProfile = editedProfile => {
+  return dispatch => {
+    return fetch('/api/profile', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(editedProfile)
+    })
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('could not edit profile');
+        }
+
+        dispatch({
+          type: EDIT_PROFILE,
+          payload: editedProfile.username
+        });
+
+        return true;
+      })
+      .catch(err => false);
+  };
+};
+
+export const changePassword = passUpdate => {
+  return () => {
+    if (passUpdate.new !== passUpdate.confirm) {
+      return Promise.resolve('non-match');
+    }
+
+    return fetch('/api/profile/password', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(passUpdate)
+    })
+      .then(res => {
+        if (res.status === 401) {
+          return 'not-auth';
+        }
+
+        if (res.status !== 200) {
+          return 'error';
+        }
+
+        return 'success';
+      })
+      .catch(err => 'error');
   };
 };

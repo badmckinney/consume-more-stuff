@@ -6,7 +6,7 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local');
 const User = require('../database/models/User');
-const { auth, users, items } = require('./routes');
+const { auth, profile, items } = require('./routes');
 
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'squirtle';
@@ -95,7 +95,7 @@ passport.use(
   })
 );
 
-app.use('/api', auth, items, users);
+app.use('/api', auth, items, profile);
 
 app.listen(PORT, () => {
   console.log(`Server is hot and ready on: ${PORT}`);

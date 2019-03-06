@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './ItemDetail.scss';
 import { loadSingleItem } from '../../actions';
 import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
+import './ItemDetail.scss';
 
 class ItemDetail extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class ItemDetail extends Component {
     if (this.props.item.createdBy === this.props.currentUser) {
       return (
         <Link to={`/items/${this.props.item.id}/edit`}>
-          <button>Edit</button>
+          <button className="btn">Edit</button>
         </Link>
       );
     }
@@ -52,6 +53,7 @@ class ItemDetail extends Component {
 
   render() {
     const item = this.props.item;
+    const localCreatedAt = new Date(item.created_at);
 
     if (this.state.notFound) {
       return <div className="error">Item not found</div>;
@@ -59,48 +61,45 @@ class ItemDetail extends Component {
 
     return (
       <div className="detail-container">
-        <div className="detail-header">
-          <div className="detail-name">
-            <h3> {item.name} </h3>
-          </div>
-
-          <div className="detail-price">
-            <h3> ${item.price} </h3>
-          </div>
-        </div>
-        <div className="detail-image">
-          <img alt={item.name} src="" />
-        </div>
-        <div className="detail-wrapper">
-          <div className="item">
-            <p>Manufacturer: {item.manufacturer} </p>
-          </div>
-
-          <div className="detail">
-            <p>Model: {item.model} </p>
-          </div>
-
-          <div className="detail">
-            <p> Dimensions </p>
-            <p>
-              L: {item.length} W:{item.width} H:
-              {item.height}
-            </p>
-          </div>
-
-          <div className="detail">
-            <p> Additional information</p>
-            <p> {item.notes} </p>
-          </div>
-
-          <div className="detail">
-            <p> Views: {item.views} </p>
-          </div>
-        </div>
-        <div className="detail-description">
-          <div>{item.description}</div>
-        </div>
         {this.editButton()}
+        <div className="header-container">
+          <h3> {item.name} </h3>
+          <h3> {item.price ? `$ ${item.price}` : ''} </h3>
+
+          <h3>
+            Posted <Moment fromNow>{localCreatedAt}</Moment>
+          </h3>
+        </div>
+        <div className="content-wrapper">
+          <div className="detail-image">
+            <img alt={item.name} src={item.image} />
+          </div>
+          <div className="detail-wrapper">
+            <div className="detail">
+              <p>Manufacturer: </p>
+              <p>{item.manufacturer}</p>
+            </div>
+
+            <div className="detail">
+              <p>Model:</p>
+              <p> {item.model} </p>
+            </div>
+
+            <div className="detail">Length: {item.length}</div>
+            <div className="detail">Width: {item.width}</div>
+            <div className="detail">Height: {item.height}</div>
+
+            <div className="detail">
+              <p> Additional information</p>
+              <p> {item.notes} </p>
+            </div>
+          </div>
+        </div>
+        <div className="description-container">
+          <div className="description">
+            <div>{item.description}</div>
+          </div>
+        </div>
       </div>
     );
   }

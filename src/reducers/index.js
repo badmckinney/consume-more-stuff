@@ -5,14 +5,18 @@ import {
   FETCH_ITEMS,
   LOAD_SINGLE_ITEM,
   LOAD_TOP,
-  FETCHED_SEARCH
+  FETCHED_SEARCH,
+  FETCHED_PROFILE,
+  FETCHED_USERS_ITEMS,
+  EDIT_PROFILE
 } from '../actions';
 
 const initialState = {
   items: [],
   item: {},
   currentUser: localStorage.getItem('user'),
-  topTen: {}
+  topTen: {},
+  profile: {}
 };
 
 const itemReducer = (state = initialState, action) => {
@@ -25,7 +29,8 @@ const itemReducer = (state = initialState, action) => {
     case LOGOUT:
       localStorage.removeItem('user');
       return Object.assign({}, state, {
-        currentUser: ''
+        currentUser: '',
+        profile: {}
       });
     case FETCH_ITEMS:
       return Object.assign({}, state, { items: action.payload });
@@ -41,6 +46,23 @@ const itemReducer = (state = initialState, action) => {
         topTen: Object.assign({}, state.topTen, {
           [category]: action.payload.items
         })
+      });
+    case FETCHED_PROFILE:
+      return Object.assign({}, state, {
+        profile: action.payload
+      });
+    case FETCHED_USERS_ITEMS:
+      return Object.assign({}, state, {
+        items: action.payload
+      });
+    case EDIT_PROFILE:
+      if (action.payload === state.currentUser) {
+        return;
+      }
+
+      localStorage.setItem('user', action.payload);
+      return Object.assign({}, state, {
+        currentUser: action.payload
       });
     default:
       return state;

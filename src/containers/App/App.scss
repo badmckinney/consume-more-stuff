@@ -1,0 +1,12 @@
+html{
+  body{
+    #root{
+      .app-container{
+        width:100%;
+        .sidebar-app-container{
+          display:flex;
+        }
+      }
+    }
+  }
+}
