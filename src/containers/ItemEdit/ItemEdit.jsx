@@ -116,159 +116,140 @@ class ItemEdit extends Component {
       <div className="edit-container">
         {this.error()}
         <form>
-          <div>
-            <div className="category">Category</div>
-          </div>
-          <select
-            name="category_id"
-            value={this.state.category_id}
-            onChange={this.handleInputOnChange}
-          >
-            <option value="1">Automotive</option>
-            <option value="2">Furniture</option>
-            <option value="3">Appliances</option>
-            <option value="4">Electronics</option>
-            <option value="5">Sporting Goods</option>
-            <option value="6">Jewelry</option>
-            <option value="7">Apparel</option>
-            <option value="8">Musical Instruments</option>
-            <option value="9">Wanted</option>
-          </select>
+          <div className="top-box">
+            <div className="title-price-container">
+              <div className="title">
+                <label htmlFor="title">Posting Title:</label>
 
-          <div className="title-price">
-            <div>
-              <label htmlFor="title">Posting Title:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.handleInputOnChange}
+                />
+              </div>
+              <div className="price">
+                <label htmlFor="price">Price</label>
+
+                <input
+                  type="text"
+                  name="price"
+                  value={this.state.price}
+                  onChange={this.handleInputOnChange}
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleInputOnChange}
-            />
 
-            <div>
-              <label htmlFor="price">Price</label>
+            <div className="description-container">
+              <div className="description">
+                <label>Posting Body</label>
+                <textarea
+                  name="description"
+                  value={this.state.description}
+                  onChange={this.handleInputOnChange}
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              name="price"
-              value={this.state.price}
-              onChange={this.handleInputOnChange}
-            />
           </div>
-
-          <div>
-            <label htmlFor="image">Image:</label>
-          </div>
-          <input
-            type="text"
-            name="image"
-            value={this.state.image}
-            onChange={this.handleInputOnChange}
-          />
-
-          <div>
-            <label htmlFor="description">Posting Body</label>
-          </div>
-          <textarea
-            name="description"
-            value={this.state.description}
-            onChange={this.handleInputOnChange}
-          />
 
           <div className="posting-details">
-            <div>
-              <label htmlFor="manufacturer">Make / Manufacturer</label>
-            </div>
-            <input
-              type="text"
-              name="manufacturer"
-              value={this.state.manufacturer}
-              onChange={this.handleInputOnChange}
-            />
-
-            <div>
-              <label htmlFor="model">Model Name / Number</label>
-            </div>
-            <input
-              type="text"
-              name="model"
-              value={this.state.model}
-              onChange={this.handleInputOnChange}
-            />
-
-            <div>
-              <label htmlFor="dimensions">Size / Dimensions</label>
-            </div>
-            <div className="dimensions">
+            <div className="detail-container1">
+              <label className="manufacturer">Make / Manufacturer</label>
               <input
                 type="text"
-                name="length"
-                placeholder="length"
-                value={this.state.length}
+                name="manufacturer"
+                value={this.state.manufacturer}
                 onChange={this.handleInputOnChange}
               />
-              x
+              <label className="model-name">Model Name / Number</label>
               <input
                 type="text"
-                name="width"
-                placeholder="width"
-                value={this.state.width}
+                name="model"
+                value={this.state.model}
                 onChange={this.handleInputOnChange}
               />
-              x
-              <input
-                type="text-area"
-                name="height"
-                placeholder="height"
-                value={this.state.height}
+              <label className="dimension-name">Size / Dimensions</label>
+              <div className="dimensions">
+                <input
+                  type="text"
+                  name="length"
+                  placeholder="length"
+                  value={this.state.length}
+                  onChange={this.handleInputOnChange}
+                />
+
+                <input
+                  type="text"
+                  name="width"
+                  placeholder="width"
+                  value={this.state.width}
+                  onChange={this.handleInputOnChange}
+                />
+                <input
+                  type="text-area"
+                  name="height"
+                  placeholder="height"
+                  value={this.state.height}
+                  onChange={this.handleInputOnChange}
+                />
+              </div>
+            </div>
+
+            <div className="select-container">
+              <div className="category">
+                <label>Category</label>
+                <select
+                  name="category_id"
+                  value={this.state.category_id}
+                  onChange={this.handleInputOnChange}
+                >
+                  <option value="1">Automotive</option>
+                  <option value="2">Furniture</option>
+                  <option value="3">Appliances</option>
+                  <option value="4">Electronics</option>
+                  <option value="5">Sporting Goods</option>
+                  <option value="6">Jewelry</option>
+                  <option value="7">Apparel</option>
+                  <option value="8">Musical Instruments</option>
+                  <option value="9">Wanted</option>
+                </select>
+              </div>
+              <div className="condition">
+                <label>Condition</label>
+                <select
+                  name="condition_id"
+                  value={this.state.condition_id}
+                  onChange={this.handleInputOnChange}
+                >
+                  <option value="1">Poor</option>
+                  <option value="2">Fair</option>
+                  <option value="3">Great</option>
+                  <option value="4">Excellent</option>
+                  <option value="5">New In Box</option>
+                </select>
+              </div>
+            </div>
+            <div className="notes-container">
+              <label className="notes">Notes</label>
+              <textarea
+                name="notes"
+                value={this.state.notes}
                 onChange={this.handleInputOnChange}
               />
             </div>
-
-            <div>
-              <label htmlFor="status_id">Status</label>
-            </div>
-            <select
-              name="status_id"
-              value={this.status}
-              onChange={this.handleInputOnChange}
-            >
-              <option value="1">For Sale</option>
-              <option value="2">Pending</option>
-              <option value="3">Sold</option>
-            </select>
-
-            <div>
-              <label htmlFor="condition_id">Condition</label>
-            </div>
-            <select
-              name="condition_id"
-              value={this.state.condition_id}
-              onChange={this.handleInputOnChange}
-            >
-              <option value="1">Poor</option>
-              <option value="2">Fair</option>
-              <option value="3">Great</option>
-              <option value="4">Excellent</option>
-              <option value="5">New In Box</option>
-            </select>
-
-            <div>
-              <label htmlFor="notes">Notes:</label>
-            </div>
-            <textarea
-              name="notes"
-              value={this.state.notes}
-              onChange={this.handleInputOnChange}
-            />
           </div>
-
+          <div className="button-container">
+          <div className="submit">
+          <button className="btn" onClick={this.handleSubmit}>Submit Changes</button>
+          </div>
+      <div className="cancel">
           <Link to={`/items/${this.state.id}`}>
-            <button>Cancel Edit</button>
+            <button className="btn">Cancel Changes</button>
           </Link>
-          <button onClick={this.handleSubmit}>Edit Post</button>
+          </div>
+          </div>
         </form>
+
       </div>
     );
   }
