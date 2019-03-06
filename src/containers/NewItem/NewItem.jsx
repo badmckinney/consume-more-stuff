@@ -83,7 +83,7 @@ class NewItem extends Component {
           <div className="top-box">
             <div className="title-price-container">
               <div className="title">
-                <div>Posting Title:</div>
+                <label htmlFor="title">Posting Title:</label>
                 <input
                   type="text"
                   name="name"
@@ -92,7 +92,7 @@ class NewItem extends Component {
                 />
               </div>
               <div className="price">
-                <div>Price</div>
+                <label>Price</label>
                 <input
                   type="text"
                   name="price"
@@ -102,17 +102,16 @@ class NewItem extends Component {
               </div>
             </div>
             <div className="image">
-              <div>Image</div>
+              <label>Image</label>
               <input
                 type="text"
                 name="image"
-                value={this.state.image}
                 onChange={this.handleInputOnChange}
               />
             </div>
             <div className="description-container">
               <div className="description">
-                <div>Posting Body</div>
+                <label>Posting Body</label>
                 <textarea
                   name="description"
                   value={this.state.description}
@@ -124,21 +123,21 @@ class NewItem extends Component {
 
           <div className="posting-details">
             <div className="detail-container1">
-              <div className="manufacturer">Make / Manufacturer</div>
+              <label className="manufacturer">Make / Manufacturer</label>
               <input
                 type="text"
                 name="manufacturer"
                 value={this.state.manufacturer}
                 onChange={this.handleInputOnChange}
               />
-              <div className="model-name">Model Name / Number</div>
+              <label className="model-name">Model Name / Number</label>
               <input
                 type="text"
                 name="model"
                 value={this.state.model}
                 onChange={this.handleInputOnChange}
               />
-              <div className="dimension-name">Size / Dimensions</div>
+              <label className="dimension-name">Size / Dimensions</label>
               <div className="dimensions">
                 <input
                   type="text"
@@ -167,7 +166,7 @@ class NewItem extends Component {
 
             <div className="select-container">
               <div className="category">
-                <div>Category</div>
+                <label>Category</label>
                 <select
                   name="category_id"
                   value={this.state.category_id}
@@ -185,7 +184,7 @@ class NewItem extends Component {
                 </select>
               </div>
               <div className="condition">
-                <div>Condition</div>
+                <label>Condition</label>
                 <select
                   name="condition_id"
                   value={this.state.condition_id}
@@ -200,7 +199,7 @@ class NewItem extends Component {
               </div>
             </div>
             <div className="notes-container">
-              <div className="notes">Notes</div>
+              <label className="notes">Notes</label>
               <textarea
                 name="notes"
                 value={this.state.notes}
