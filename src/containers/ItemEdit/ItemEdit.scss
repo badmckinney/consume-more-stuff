@@ -1,5 +1,6 @@
-$primary-color: #2db8f5;
-$secondary-color: #5c49e6;
+$primary-color: #424242;
+$secondary-color: #ccc;
+$hover-color: lighten($primary-color, 20%);
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,14 +12,134 @@ html {
       .app-container {
         .sidebar-app-container {
           .app-body {
-            .edit-container{
-              box-shadow:5px 5px 14px grey ;
-              border-radius:10px;
-              width:70%;
-              margin:auto;
-              padding:50px;
-              margin-top:5%;
+            .edit-container {
+              background: white;
+              box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
+              border-radius: 3px;
+              width: 70%;
+              margin: auto;
+              padding: 50px;
+              margin-top: 5%;
 
+              form {
+                .top-box {
+                  .title-price-container {
+                    display: flex;
+                    justify-content: space-evenly;
+                    padding: 10px;
+                    input {
+                      width: 100%;
+                      max-width: 100%;
+                      margin: auto;
+                      height: 25px;
+                    }
+                    .title {
+                      width: 50%;
+                      max-width: 50%;
+                    }
+                    .price {
+                      width: 50%;
+                      max-width: 50%;
+                    }
+                  }
+                  .image {
+                    width: 100%;
+                    margin: auto;
+                    text-align: center;
+                    input {
+                      width: 97.5%;
+                      max-width: 97.5%;
+                      margin: auto;
+                      height: 25px;
+                    }
+                  }
+                  .description-container {
+                    margin: auto;
+                    text-align: center;
+                    padding: 10px;
+                    height: 150px;
+                    margin-top: 5%;
+                    .description {
+                      width: 100%;
+                      textarea {
+                        resize: none;
+                        width: 100%;
+                        max-width: 100%;
+                        height: 100px;
+                      }
+                    }
+                  }
+                }
+                .posting-details {
+                  border: 2px solid grey;
+                  display: flex;
+                  justify-content: space-evenly;
+                  padding: 10px;
+                  text-align: left;
+                  background: #ccc;
+                  border-radius: 10px;
+                  .detail-container1 {
+                    width: 25%;
+                    max-width: 25%;
+                  }
+
+                  .dimensions {
+                    display: flex;
+                    flex-direction: row;
+
+                    input {
+                      width: 30%;
+                      margin-left: 5px;
+                    }
+                  }
+                  input {
+                    height: 25px;
+                    margin-top: 10px;
+                  }
+
+                  .select-container {
+                    display: flex;
+                    flex-direction: column;
+
+                    .category {
+                      height: 30%;
+                    }
+                  }
+                  .condition {
+                    height: 30%;
+                  }
+                  .notes-container {
+                    textarea {
+                      resize: none;
+                      height: 90%;
+                      width: 100%;
+                      max-width: 100%;
+                    }
+                  }
+                }
+                .button-container {
+                  display:flex;
+                  flex-direction: row-reverse;
+                  justify-content: space-between;
+                  .btn {
+                    width: 130px;
+                    max-width: 130px;
+                    height: 40px;
+                    border: 0px;
+                    background: $primary-color;
+                    color: white;
+                    font-size: 16px;
+                    border-radius: 2px;
+                    margin-top: 20px;
+                  }
+                  .btn:active {
+                    background: $secondary-color;
+                  }
+                  .btn:hover{
+                    background:$hover-color;
+                  }
+                }
+              }
             }
           }
         }

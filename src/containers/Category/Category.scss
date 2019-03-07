@@ -1,5 +1,6 @@
-$primary-color: #2db8f5;
-$secondary-color: #5c49e6;
+$primary-color: #424242;
+$secondary-color: #ccc;
+$hover-color: lighten($primary-color, 20%);
 * {
   box-sizing: border-box;
   padding: 0;
@@ -23,7 +24,8 @@ html {
                 width: 90%;
                 max-width: 90%;
                 margin: auto;
-
+                margin-top: 5px;
+                margin-bottom:20px;
                 a {
                   margin-top:10px;
                   text-decoration: none;
@@ -34,11 +36,11 @@ html {
                   margin-left: 50px;
                   .item {
                     background:#eee;
-                    box-shadow:5px 5px 14px grey ;
-                    border-radius:10px;
+                    box-shadow:5px 5px 28px rgba(0,0,0,0.25) ;
+                    border-radius:4px;
                     display: flex;
                     flex-direction: column;
-                    border: 1px solid black;
+                    border: 1px solid grey;
                     width: 400px;
                     max-width: 400px;
                     height: 400px;
