@@ -92,7 +92,6 @@ class Profile extends Component {
             <div className="item-list-container">
               <ProfileItemList items={this.forSale()} />
             </div>
-   
           </div>
         </div>
       </>

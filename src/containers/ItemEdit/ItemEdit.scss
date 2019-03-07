@@ -118,7 +118,7 @@ html {
                   }
                 }
                 .button-container {
-                  display:flex;
+                  display: flex;
                   flex-direction: row-reverse;
                   justify-content: space-between;
                   .btn {
@@ -135,8 +135,8 @@ html {
                   .btn:active {
                     background: $secondary-color;
                   }
-                  .btn:hover{
-                    background:$hover-color;
+                  .btn:hover {
+                    background: $hover-color;
                   }
                 }
               }
