@@ -16,26 +16,26 @@ html {
               border: 1px solid black;
               border-radius: 10px;
               box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
-              width: 70%;
+              width: 100%;
               margin: auto;
               padding: 50px;
               margin-top: 5%;
-              margin-bottom:5%;
-              .title-container{
-                text-align:center;
+              margin-bottom: 5%;
+              .title-container {
+                text-align: center;
               }
               .user-info-container {
-                display:flex;
-                text-align:left;
-                padding:10px;
+                display: flex;
+                text-align: left;
+                padding: 10px;
                 border: 1px solid black;
                 .left {
-                  padding:10px;
-                  width:50%;
+                  padding: 10px;
+                  width: 50%;
                 }
                 .right {
-                  padding:10px;
-                  width:50%;
+                  padding: 10px;
+                  width: 50%;
                   .btn {
                     width: 80px;
                     max-width: 80px;
@@ -50,38 +50,87 @@ html {
                     background: $secondary-color;
                   }
                 }
-                
               }
               .status-container {
-                margin-top:5%;
-                .title{
-                  font-size:20px;
-                }
-                .columns-container{
-                  display:flex;
-                  justify-content: space-evenly;
-                  border:1px solid black;
-                  height:300px;
-                  margin-top:5px;
-                  overflow-y:scroll;
+                border: 1px solid black;
+                margin-top: 10px;
+              }
+              .item-list-container {
 
-                  .column{
-                    width:100%;
-                    text-align:center;
-                    border:1px solid black;
 
-                    .column-name{
-                      border-bottom:1px solid black;
-                    }
+                overflow-y: scroll;
+                height: 500px;
+              }
+              .columns-container {
+                display: flex;
+
+                .column {
+                  border: 1px solid black;
+                  height:30px;
+                  .status-column {
+                    width: 60px;
+                    max-width: 60px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  }
+                  .title-column {
+                    width: 120px;
+                    max-width: 120px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                  }
+                  .category-column {
+                    width: 150px;
+                    max-width: 150px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                  }
+                  .date-column {
+                    width: 160px;
+                    max-width: 160px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                  }
+                  .update-column {
+                    width: 160px;
+                    max-width: 160px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                  }
+                  .views-column {
+                    width: 60px;
+                    max-width: 60px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                  }
+                  .id-column {
+                    width: 60px;
+                    max-width: 60px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                  }
+                  .manage-column {
+                    width: 190px;
+                    max-width: 190px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
                   }
                 }
-                .sold-container {
-
-                  margin-top:5%;
-
-
-                }
-        
               }
             }
           }
