@@ -1,5 +1,6 @@
-$primary-color: #2db8f5;
-$secondary-color: #5c49e6;
+$primary-color: #424242;
+$secondary-color: #ccc;
+$hover-color: lighten($primary-color, 20%);
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,20 +12,21 @@ html {
       .app-container {
         .sidebar-app-container {
           .app-body {
-          
             .detail-container {
-              background:#eee;
-              border-radius:10px;
-              box-shadow:5px 5px 28px rgba(0,0,0,0.2) ;
+              background: #eee;
+              border-radius: 10px;
+              box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
               width: 70%;
               margin: auto;
               padding: 50px;
               margin-top: 5%;
               .header-container {
-                letter-spacing: 1px;
                 display: flex;
-                width: 60%;
+                width: 85%;
                 margin-bottom: 10px;
+                h3 {
+                  margin-left: 5px;
+                }
                 p {
                   margin-left: auto;
                 }
@@ -67,10 +69,13 @@ html {
                 background: $primary-color;
                 color: white;
                 font-size: 16px;
-                border-radius: 10px;
+                border-radius: 2px;
               }
               .btn:active {
                 background: $secondary-color;
+              }
+              .btn:hover{
+                background:$hover-color;
               }
               .description-container {
                 width: 500px;

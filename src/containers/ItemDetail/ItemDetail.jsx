@@ -90,7 +90,7 @@ class ItemDetail extends Component {
         {this.editButton()}
         <div className="header-container">
           <h3> {item.name} </h3>
-          <h3> {item.price ? `$ ${item.price}` : ''} </h3>
+          <h3> {item.price ? `$${item.price}` : ''} </h3>
 
           <h3>
             Posted <Moment fromNow>{localCreatedAt}</Moment>
