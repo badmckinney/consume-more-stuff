@@ -27,6 +27,19 @@ s3 = new AWS.S3({ apiVersion: '2006-03-01' });
  *  GET
  ************************/
 
+router.get('/items', (req, res) => {
+  Item.fetchAll({
+    withRelated: ['createdBy', 'category', 'condition', 'status']
+  })
+    .then(items => {
+      res.json(items);
+    })
+    .catch(err => {
+      res.status(500);
+      res.json(err);
+    });
+});
+
 router.get('/items/owned', (req, res) => {
   const id = req.user.id;
 
@@ -89,6 +102,7 @@ router.get('/items/category/:category', (req, res) => {
             id: item.id,
             created_by: item.created_by.username,
             status: item.status.name,
+            status_id: item.status_id,
             category: item.category.name,
             condition: item.condition.name,
             name: item.name,

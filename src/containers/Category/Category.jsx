@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ItemList from '../../components/ItemList';
-import { fetchItems } from '../../actions';
+import { fetchItemsByCategory, fetchItemsAll } from '../../actions';
 import { withRouter } from 'react-router-dom';
 
 import './Category.scss';
@@ -14,13 +14,23 @@ class Category extends Component {
 
   componentWillMount() {
     const category = this.props.match.params.category;
-    this.props.getItems(category);
+
+    if (category === 'all') {
+      return this.props.getItemsAll();
+    }
+
+    this.props.getItemsByCategory(category);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.category !== prevProps.match.params.category) {
       const category = this.props.match.params.category;
-      this.props.getItems(category);
+
+      if (category === 'all') {
+        return this.props.getItemsAll();
+      }
+
+      this.props.getItemsByCategory(category);
     }
   }
 
@@ -39,15 +49,16 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getItems: category => {
-      dispatch(fetchItems(category));
-    }
+    getItemsByCategory: category => dispatch(fetchItemsByCategory(category)),
+    getItemsAll: () => dispatch(fetchItemsAll())
   };
 };
 
-Category = withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Category));
+Category = withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Category)
+);
 
 export default Category;
