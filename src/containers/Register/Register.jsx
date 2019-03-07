@@ -25,7 +25,7 @@ class Register extends Component {
   }
 
   validate() {
-   return this.form.current.reportValidity()
+    return this.form.current.reportValidity()
   }
 
   error() {
@@ -45,9 +45,9 @@ class Register extends Component {
 
   handleSubmit(e) {
     const newUser = this.state;
-      
+
     e.preventDefault();
-    
+
     if (!this.validate()) {
       return
     }
@@ -68,58 +68,46 @@ class Register extends Component {
         <div className="register-container">
           {this.error()}
           <form ref={this.form}>
-            <div>
-              <label htmlFor="first_name" >First Name:</label>
-            </div>
+            <h1>Sign Up</h1>
             <input
               type="text"
               name="first_name"
+              placeholder="First name"
               value={this.state.first_name}
               onChange={this.handleInputOnChange}
               required
               pattern="[A-Za-z]{1,30}"
             />
-            <div>
-              <label htmlFor="last_name" >Last Name:</label>
-            </div>
             <input
               type="text"
               name="last_name"
+              placeholder="Last name"
               value={this.state.last_name}
               onChange={this.handleInputOnChange}
               required
               pattern="[A-Za-z]{1,30}"
             />
-
-            <div>
-              <label htmlFor="email" >Email:</label>
-            </div>
             <input
               type="email"
               name="email"
+              placeholder="Email"
               value={this.state.email}
               onChange={this.handleInputOnChange}
               required
             />
-
-            <div>
-              <label htmlFor="username" >Username:</label>
-            </div>
             <input
               type="text"
               name="username"
+              placeholder="Username"
               value={this.state.username}
               onChange={this.handleInputOnChange}
               required
               pattern="[A-Za-z0-9_]{6,30}"
             />
-
-            <div>
-              <label htmlFor="password" >Password:</label>
-            </div>
             <input
               type="password"
               name="password"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.handleInputOnChange}
               required
@@ -127,16 +115,15 @@ class Register extends Component {
               maxLength="30"
             />
 
-            <div className="login-here">
-              {' '}
-              Already have an account?
-              <Link to={'/login'}> Login here</Link>
-            </div>
-
             <div className="btn-container">
               <button className="btn" onClick={this.handleSubmit}>
                 Register
               </button>
+            </div>
+            <div className="login-here">
+              {' '}
+              Already have an account?
+              <Link to={'/login'}> Login here</Link>
             </div>
           </form>
         </div>
