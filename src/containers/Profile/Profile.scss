@@ -1,8 +1,9 @@
 $logo-font: 'Staatliches', sans-serif;
 $body-font: 'Roboto', sans-serif;
-$primary-color: #424242;
-$secondary-color: #eee;
-$hover-color: lighten($primary-color, 20%);
+$primary-color: #304ffe;
+$secondary-color: #424242;
+$tertiary-color: #eee;
+$hover-color: lighten($primary-color, 5%);
 * {
   box-sizing: border-box;
   padding: 0;
@@ -45,16 +46,17 @@ html {
                     width: 90px;
                     max-width: 90px;
                     height: 25px;
-                    border: 0px;
+                    border: none;
+                    border-radius: 2px;
                     background: $primary-color;
                     color: white;
                     font-size: 16px;
-                    border-radius: 2px;
-                  }
-                  .btn:active {
-                    background: $secondary-color;
+                    font-family: $body-font;
+                    font-weight: 500;
+                    transition: background-color 0.24s ease-in-out;
                   }
                   .btn:hover {
+                    cursor: pointer;
                     background: $hover-color;
                   }
                 }
@@ -63,7 +65,7 @@ html {
                 margin-top: 50px;
                 display: flex;
                 flex-direction: column;
-                overflow-x:scroll;
+                overflow-x: scroll;
               }
               .item-list-container {
                 margin-left: 30px;
