@@ -28,6 +28,8 @@ class ItemEdit extends Component {
       status_id: ''
     };
 
+    this.form = React.createRef();
+    this.validate = this.validate.bind(this)
     this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -75,6 +77,10 @@ class ItemEdit extends Component {
     });
   }
 
+  validate() {
+    return this.form.current.reportValidity()
+  }
+
   error() {
     if (this.state.editError) {
       return <div className="error">error editing post</div>;
@@ -94,6 +100,11 @@ class ItemEdit extends Component {
     const editedItem = this.state;
 
     e.preventDefault();
+
+    if (!this.validate()) {
+      return 
+    }
+    
     this.props.editItem(editedItem).then(data => {
       if (!data) {
         return this.setState({ editError: true });
@@ -115,24 +126,24 @@ class ItemEdit extends Component {
     return (
       <div className="edit-container">
         {this.error()}
-        <form>
+        <form ref={this.form}>
           <div className="top-box">
             <div className="title-price-container">
               <div className="title">
                 <label htmlFor="title">Posting Title:</label>
-
                 <input
                   type="text"
                   name="name"
                   value={this.state.name}
                   onChange={this.handleInputOnChange}
+                  required
                 />
               </div>
               <div className="price">
                 <label htmlFor="price">Price</label>
 
                 <input
-                  type="text"
+                  type="number"
                   name="price"
                   value={this.state.price}
                   onChange={this.handleInputOnChange}
@@ -147,6 +158,7 @@ class ItemEdit extends Component {
                   name="description"
                   value={this.state.description}
                   onChange={this.handleInputOnChange}
+                  required
                 />
               </div>
             </div>

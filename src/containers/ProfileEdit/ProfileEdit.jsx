@@ -17,6 +17,8 @@ class ProfileEdit extends Component {
       last_name: ''
     };
 
+    this.form = React.createRef();
+    this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,6 +41,10 @@ class ProfileEdit extends Component {
     });
   }
 
+  validate() {
+    return this.form.current.reportValidity()
+  }
+
   error() {
     if (this.state.isError) {
       return <div className="error">error editing profile</div>;
@@ -56,6 +62,10 @@ class ProfileEdit extends Component {
 
   handleSubmit(e) {
     const editedProfile = this.state;
+
+    if (!this.validate()) {
+      return
+    }
 
     e.preventDefault();
     this.props.editProfile(editedProfile).then(data => {
@@ -87,10 +97,11 @@ class ProfileEdit extends Component {
               <label htmlFor="email">Email:</label>
             </div>
             <input
-              type="text"
+              type="email"
               name="email"
               value={this.state.email}
               onChange={this.handleInputOnChange}
+              required
             />
 
             <div>
@@ -101,6 +112,8 @@ class ProfileEdit extends Component {
               name="username"
               value={this.state.username}
               onChange={this.handleInputOnChange}
+              required
+              pattern="[A-Za-z0-9_]{6,30}"
             />
 
             <div>
@@ -118,6 +131,8 @@ class ProfileEdit extends Component {
               name="first_name"
               value={this.state.first_name}
               onChange={this.handleInputOnChange}
+              required
+              pattern="[A-Za-z]{1,30}"
             />
 
             <div>
@@ -128,6 +143,8 @@ class ProfileEdit extends Component {
               name="last_name"
               value={this.state.last_name}
               onChange={this.handleInputOnChange}
+              required
+              pattern="[A-Za-z]{1,30}"
             />
           </div>
           </div>

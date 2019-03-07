@@ -15,7 +15,7 @@ html {
           .app-body {
             display: flex;
             flex-direction: column;
-            width: 75%;
+            width: 80%;
             height: 100%;
 
             .header {
@@ -28,6 +28,7 @@ html {
               width: 80%;
               background: $primary-color;
               border-bottom:1px solid grey;
+              z-index: 3;
 
               .search-form {
                 display: flex;
