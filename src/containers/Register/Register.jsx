@@ -25,7 +25,7 @@ class Register extends Component {
   }
 
   validate() {
-   return this.form.current.reportValidity()
+    return this.form.current.reportValidity();
   }
 
   error() {
@@ -45,11 +45,11 @@ class Register extends Component {
 
   handleSubmit(e) {
     const newUser = this.state;
-      
+
     e.preventDefault();
-    
+
     if (!this.validate()) {
-      return
+      return;
     }
 
     this.props.register(newUser).then(data => {
@@ -69,7 +69,7 @@ class Register extends Component {
           {this.error()}
           <form ref={this.form}>
             <div>
-              <label htmlFor="first_name" >First Name:</label>
+              <label htmlFor="first_name">First Name:</label>
             </div>
             <input
               type="text"
@@ -80,7 +80,7 @@ class Register extends Component {
               pattern="[A-Za-z]{1,30}"
             />
             <div>
-              <label htmlFor="last_name" >Last Name:</label>
+              <label htmlFor="last_name">Last Name:</label>
             </div>
             <input
               type="text"
@@ -92,7 +92,7 @@ class Register extends Component {
             />
 
             <div>
-              <label htmlFor="email" >Email:</label>
+              <label htmlFor="email">Email:</label>
             </div>
             <input
               type="email"
@@ -103,7 +103,7 @@ class Register extends Component {
             />
 
             <div>
-              <label htmlFor="username" >Username:</label>
+              <label htmlFor="username">Username:</label>
             </div>
             <input
               type="text"
@@ -115,7 +115,7 @@ class Register extends Component {
             />
 
             <div>
-              <label htmlFor="password" >Password:</label>
+              <label htmlFor="password">Password:</label>
             </div>
             <input
               type="password"
@@ -123,7 +123,7 @@ class Register extends Component {
               value={this.state.password}
               onChange={this.handleInputOnChange}
               required
-              minlength="6"
+              minLength="6"
               maxLength="30"
             />
 

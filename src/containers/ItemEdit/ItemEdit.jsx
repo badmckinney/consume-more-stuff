@@ -25,12 +25,15 @@ class ItemEdit extends Component {
       width: '',
       height: '',
       notes: '',
-      status_id: ''
+      status_id: '',
+      status: ''
     };
 
     this.form = React.createRef();
-    this.validate = this.validate.bind(this)
+    this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
+    this.toggleStatus = this.toggleStatus.bind(this);
+    this.markSoldOrPublish = this.markSoldOrPublish.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -48,18 +51,26 @@ class ItemEdit extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    const id = this.props.match.params.id;
     const item = this.props.item;
 
     if (prevProps === this.props) {
       return;
     }
 
-    if (item.createdBy !== this.props.currentUser) {
+    if (item.createdBy === this.props.currentUser) {
       return this.setState({ isOwner: true });
     }
 
+    // this.props.loadItem(id).then(data => {
+    //   if (!data) {
+    //     return this.setState({ notFound: true });
+    //   }
+
+    //   return this.setState({ notFound: false });
+    // });
+
     return this.setState({
-      isOwner: false,
       id: item.id,
       category_id: item.category_id,
       name: item.name,
@@ -73,12 +84,13 @@ class ItemEdit extends Component {
       width: item.width ? item.width : '',
       height: item.height ? item.height : '',
       notes: item.notes ? item.notes : '',
-      status_id: item.status_id
+      status_id: item.status_id,
+      status: item.status
     });
   }
 
   validate() {
-    return this.form.current.reportValidity()
+    return this.form.current.reportValidity();
   }
 
   error() {
@@ -87,6 +99,52 @@ class ItemEdit extends Component {
     }
 
     return <></>;
+  }
+
+  toggleStatus() {
+    if (this.status_id !== 1) {
+      return this.props
+        .editItem({ id: this.state.id, status_id: 3 })
+        .then(data => {
+          if (!data) {
+            return this.setState({ editError: true });
+          }
+
+          this.setState({ editError: false });
+          return this.props.history.push('/profile');
+        });
+    }
+
+    return this.props
+      .editItem({ id: this.state.id, status_id: 1 })
+      .then(data => {
+        if (!data) {
+          return this.setState({ editError: true });
+        }
+
+        this.setState({ editError: false });
+        return this.props.history.push('/profile');
+      });
+  }
+
+  markSoldOrPublish() {
+    if (this.state.status_id !== 1) {
+      return (
+        <div className="change-status">
+          <button className="btn" onClick={this.toggleStatus}>
+            re-publish posting
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="change-status">
+        <button className="btn" onClick={this.toggleStatus}>
+          mark as sold
+        </button>
+      </div>
+    );
   }
 
   handleInputOnChange(e) {
@@ -102,9 +160,9 @@ class ItemEdit extends Component {
     e.preventDefault();
 
     if (!this.validate()) {
-      return 
+      return;
     }
-    
+
     this.props.editItem(editedItem).then(data => {
       if (!data) {
         return this.setState({ editError: true });
@@ -120,7 +178,7 @@ class ItemEdit extends Component {
       return <div className="error">Item not found</div>;
     }
 
-    if (this.state.isOwner) {
+    if (!this.state.isOwner) {
       return <div className="error">Denied: user does not own this post</div>;
     }
     return (
@@ -241,6 +299,12 @@ class ItemEdit extends Component {
                 </select>
               </div>
             </div>
+
+            <div className="status">
+              status: {this.state.status}
+              {this.markSoldOrPublish()}
+            </div>
+
             <div className="notes-container">
               <label className="notes">Notes</label>
               <textarea
@@ -251,17 +315,18 @@ class ItemEdit extends Component {
             </div>
           </div>
           <div className="button-container">
-          <div className="submit">
-          <button className="btn" onClick={this.handleSubmit}>Submit Changes</button>
-          </div>
-      <div className="cancel">
-          <Link to={`/items/${this.state.id}`}>
-            <button className="btn">Cancel Changes</button>
-          </Link>
-          </div>
+            <div className="submit">
+              <button className="btn" onClick={this.handleSubmit}>
+                Submit Changes
+              </button>
+            </div>
+            <div className="cancel">
+              <Link to={`/items/${this.state.id}`}>
+                <button className="btn">Cancel Changes</button>
+              </Link>
+            </div>
           </div>
         </form>
-
       </div>
     );
   }
