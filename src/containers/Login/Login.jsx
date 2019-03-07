@@ -54,31 +54,32 @@ class Login extends Component {
       <div className="login-page">
         {this.error()}
         <form>
-          <div>Username:</div>
+          <h1>Login</h1>
           <input
             type="text"
             name="username"
+            placeholder="Username"
             value={this.state.username}
             onChange={this.handleInputOnChange}
           />
 
-          <div>Password:</div>
           <input
             type="password"
             name="password"
+            placeholder="Password"
             value={this.state.password}
             onChange={this.handleInputOnChange}
           />
-
-          <div className="register-here">
-            Don't have an account?
-            <Link to={'/register'}> Register here</Link>
-          </div>
 
           <div id="login-button-container">
             <button className="btn" onClick={this.handleSubmit}>
               Login
             </button>
+          </div>
+
+          <div className="register-here">
+            Don't have an account?
+            <Link to={'/register'}> Register here</Link>
           </div>
         </form>
       </div>
