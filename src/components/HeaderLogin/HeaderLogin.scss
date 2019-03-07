@@ -1,8 +1,9 @@
 $logo-font: 'Staatliches', sans-serif;
 $body-font: 'Roboto', sans-serif;
 $primary-color: #424242;
-$secondary-color: #ccc;
+$secondary-color: #eee;
 $hover-color: lighten($primary-color, 20%);
+
 html {
   body {
     width: 100%;
@@ -19,6 +20,18 @@ html {
           font-family: $body-font;
           text-transform: capitalize;
           padding: 1em;
+
+          .link {
+            height: 100%;
+            border-radius: 2px;
+            background: $primary-color;
+            color: #fff;
+            font-family: $body-font;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin-left: 1em;
+            transition: background-color 0.25s ease-in-out;
+          }
 
           button {
             height: 100%;
