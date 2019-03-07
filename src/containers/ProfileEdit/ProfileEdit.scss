@@ -1,5 +1,6 @@
-$primary-color: #2db8f5;
-$secondary-color: #5c49e6;
+$primary-color: #424242;
+$secondary-color: #ccc;
+$hover-color: lighten($primary-color, 20%);
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,6 +12,55 @@ html {
       .app-container {
         .sidebar-app-container {
           .app-body {
+            margin-left: auto;
+            .edit-profile-container {
+              background: #eee;
+              border-radius: 3px;
+              box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
+              width: 50%;
+
+              .edit-profile {
+                display: flex;
+                flex-direction: column;
+                .info-container {
+                  padding: 15px;
+                  display: flex;
+                  .left-container {
+                    width: 50%;
+                    max-width: 50%;
+                  }
+                  .right-container {
+                    width: 50%;
+                    max-width: 50%;
+                  }
+                  input {
+                    width: 90%;
+                    height: 25px;
+                  }
+                }
+                .button-container {
+                  padding:10px;
+                  margin-right:20px;
+                  .btn {
+                    width: 80px;
+                    max-width: 80px;
+                    height: 30px;
+                    float: right;
+                    border: 0px;
+                    background: $primary-color;
+                    color: white;
+                    font-size: 16px;
+                    border-radius: 2px;
+                  }
+                  .btn:active {
+                    background: $secondary-color;
+                  }
+                  .btn:hover {
+                    background: $hover-color;
+                  }
+                }
+              }
+            }
           }
         }
       }

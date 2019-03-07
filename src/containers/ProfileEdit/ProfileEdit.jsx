@@ -81,6 +81,7 @@ class ProfileEdit extends Component {
       <div className="edit-profile-container">
         {this.error()}
         <form className="edit-profile">
+        <div className="info-container">
           <div className="left-container">
             <div>
               <label htmlFor="email">Email:</label>
@@ -129,8 +130,10 @@ class ProfileEdit extends Component {
               onChange={this.handleInputOnChange}
             />
           </div>
-
-          <button onClick={this.handleSubmit}>Edit Profile</button>
+          </div>
+      <div className="button-container">
+          <button className="btn"onClick={this.handleSubmit}>Edit Profile</button>
+          </div>
         </form>
       </div>
     );
