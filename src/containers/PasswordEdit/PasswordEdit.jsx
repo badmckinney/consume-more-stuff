@@ -93,11 +93,12 @@ class PasswordEdit extends Component {
 
   render() {
     return (
-      <div className="change-password-page">
+      <div className="change-password-container">
         {this.error()}
-        <div className="title">Update Your Password: </div>
-        <form>
-          <div className="old-password">
+
+        <div className="title">Change Your Password: </div>
+        <form className="form-container">
+          <div className="password-container">
             <div>
               <label htmlFor="old">old password:</label>
             </div>
@@ -114,9 +115,7 @@ class PasswordEdit extends Component {
             >
               {this.state.oldWording}
             </span>
-          </div>
 
-          <div className="new-password">
             <div>
               <label htmlFor="new">new password:</label>
             </div>
@@ -133,9 +132,7 @@ class PasswordEdit extends Component {
             >
               {this.state.newWording}
             </span>
-          </div>
 
-          <div className="confirm-new-password">
             <div>
               <label
                 htmlFor="confirm"
@@ -160,8 +157,10 @@ class PasswordEdit extends Component {
             </span>
           </div>
 
-          <div>
-            <button onClick={this.handleSubmit}>Change Password</button>
+          <div className="button-container">
+            <button className="btn" onClick={this.handleSubmit}>
+              Change Password
+            </button>
           </div>
         </form>
       </div>
