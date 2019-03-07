@@ -1,14 +1,16 @@
 html{
+  overflow-x: hidden;
   body{
-
     #root{
       .app-container{
-        width:100%;
+        width: 100%;
         .sidebar-app-container{
           background:#ddd;
           display:flex;
-          .app-body{
+          width: 100vw;
 
+          .app-body{
+            width: 80%;
             height:100%;
             max-width: 80%;
           }

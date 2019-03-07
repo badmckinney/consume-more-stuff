@@ -1,7 +1,7 @@
 $logo-font: 'Staatliches', sans-serif;
 $body-font: 'Roboto', sans-serif;
 $primary-color: #424242;
-$secondary-color: #ccc;
+$secondary-color: #eee;
 $hover-color: lighten($primary-color, 20%);
 
 html {
@@ -17,6 +17,7 @@ html {
         flex-direction: column;
         align-items: center;
         position: fixed;
+        z-index: 9999;
         width: 20%;
         height: 100vh;
         background: #fafafa;

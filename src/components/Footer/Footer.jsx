@@ -4,7 +4,7 @@ import './Footer.scss';
 const Footer = props => {
   return (
     <div className="footer-container">
-    <a href="/"> HOME</a>
+      {/* <a href="/"> HOME</a> */}
     </div>
   );
 };
