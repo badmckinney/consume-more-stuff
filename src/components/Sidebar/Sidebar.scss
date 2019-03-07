@@ -1,11 +1,12 @@
 $logo-font: 'Staatliches', sans-serif;
 $body-font: 'Roboto', sans-serif;
-$primary-color: #424242;
-$secondary-color: #eee;
-$hover-color: lighten($primary-color, 20%);
+$primary-color: #304FFE;
+$secondary-color: #424242;
+$tertiary-color: #eee;
+$hover-color: lighten($primary-color, 5%);
 
 html {
-  background: $secondary-color;
+  background: $tertiary-color;
   body {
     #root {
       display: flex;
@@ -20,7 +21,7 @@ html {
         z-index: 9999;
         width: 20%;
         height: 100vh;
-        background: #fafafa;
+        background: #fff;
         box-shadow: 0 0px 28px rgba(0, 0, 0, 0.25);
           // 0 0px 10px rgba(90, 75, 230, 0.22);
   
@@ -28,18 +29,26 @@ html {
           text-decoration: none;
           color: $primary-color;
         }
+
         .logo {
           font-size: 2.5em;
           font-family: $body-font;
           font-weight: 300;
           letter-spacing: 0em;
           width: 70%;
-          padding: 0.1em;
-          margin: 0.2em 0em;
-          color: $primary-color;
+          margin: 0.4em 0em;
+          color: $secondary-color;
+          display: flex;
+          align-items: center;
+
+          img {
+            width: 60px;
+            height: 60px;
+            margin-right: 5px;
+          }
 
           span {
-            color: $primary-color;
+            color: $secondary-color;
             font-weight: 800;
           }
         }
@@ -50,12 +59,12 @@ html {
           justify-content: space-between;
           padding: 0em 0em 1em 0em;
           width: 70%;
-          border-bottom: 3px solid $secondary-color;
+          border-bottom: 3px solid $tertiary-color;
 
           a {
             button {
               text-align: left;
-              color: $primary-color;
+              color: $secondary-color;
               padding-bottom: 1px;
               margin-bottom: 10px;
               background: none;
@@ -107,7 +116,7 @@ html {
             align-items: center;
             width: 100%;
             font-family: $body-font;
-            color: $primary-color;
+            color: $secondary-color;
             font-size: 2em;
             font-weight: 300;
             text-transform: uppercase;
@@ -118,7 +127,7 @@ html {
             letter-spacing: 1px;
             width: 100%;
             text-align: left;
-            color: $primary-color;
+            color: $secondary-color;
             background: transparent;
             border: none;
             border-bottom: 3px solid transparent;

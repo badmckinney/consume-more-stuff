@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Sidebar.scss';
 
 const Sidebar = props => {
+  console.log(window.location.origin);
   const { currentUser } = props;
 
   const generateItemLinks = () => {
@@ -47,6 +48,7 @@ const Sidebar = props => {
     return (
       <div className="logged-out-nav">
         <div className="logo">
+          <img src="assets/Edslist.png" alt="logo" />
           <Link className="link" to="/">
             <span>Eds</span>list
           </Link>
@@ -64,6 +66,7 @@ const Sidebar = props => {
     return (
       <div className="logged-in-nav">
         <div className="logo">
+          <img src="/assets/Edslist.png" alt="logo" />
           <Link className="link" to="/">
             <span>Eds</span>list
           </Link>
