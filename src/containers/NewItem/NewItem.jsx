@@ -8,29 +8,29 @@ class NewItem extends Component {
     super(props);
     this.state = {
       isError: false,
-      category_id: 1,
+      category_id: '',
       name: '',
       price: '',
       image: '',
       description: '',
       manufacturer: '',
       model: '',
-      condition_id: 1,
+      condition_id: 2,
       length: '',
       width: '',
       height: '',
       notes: ''
     };
 
-    this.form = React.createRef()
-    this.validate = this.validate.bind(this)
+    this.form = React.createRef();
+    this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   validate() {
-    return this.form.current.reportValidity()
+    return this.form.current.reportValidity();
   }
 
   error() {
@@ -63,7 +63,7 @@ class NewItem extends Component {
     const formData = new FormData();
 
     if (!this.validate()) {
-      return 
+      return;
     }
 
     for (var key in newItem) {
@@ -183,7 +183,9 @@ class NewItem extends Component {
                   name="category_id"
                   value={this.state.category_id}
                   onChange={this.handleInputOnChange}
+                  required
                 >
+                  <option value="">Choose a Category</option>
                   <option value="1">Apparel</option>
                   <option value="2">Appliances</option>
                   <option value="3">Automotive</option>
@@ -192,6 +194,7 @@ class NewItem extends Component {
                   <option value="6">Jewelry</option>
                   <option value="7">Musical Instruments</option>
                   <option value="8">Sporting Goods</option>
+                  <option value="9">Other</option>
                   <option value="10">Wanted</option>
                 </select>
               </div>
@@ -220,9 +223,11 @@ class NewItem extends Component {
             </div>
           </div>
           <div className="button-container">
-          <div className="submit">
-          <button className="btn" onClick={this.handleSubmit}>Create Post</button>
-          </div>
+            <div className="submit">
+              <button className="btn" onClick={this.handleSubmit}>
+                Create Post
+              </button>
+            </div>
           </div>
         </form>
       </div>

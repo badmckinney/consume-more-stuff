@@ -29,7 +29,7 @@ class ItemEdit extends Component {
     };
 
     this.form = React.createRef();
-    this.validate = this.validate.bind(this)
+    this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -78,7 +78,7 @@ class ItemEdit extends Component {
   }
 
   validate() {
-    return this.form.current.reportValidity()
+    return this.form.current.reportValidity();
   }
 
   error() {
@@ -102,9 +102,9 @@ class ItemEdit extends Component {
     e.preventDefault();
 
     if (!this.validate()) {
-      return 
+      return;
     }
-    
+
     this.props.editItem(editedItem).then(data => {
       if (!data) {
         return this.setState({ editError: true });
@@ -215,15 +215,16 @@ class ItemEdit extends Component {
                   value={this.state.category_id}
                   onChange={this.handleInputOnChange}
                 >
-                  <option value="1">Automotive</option>
-                  <option value="2">Furniture</option>
-                  <option value="3">Appliances</option>
+                  <option value="1">Apparel</option>
+                  <option value="2">Appliances</option>
+                  <option value="3">Automotive</option>
                   <option value="4">Electronics</option>
-                  <option value="5">Sporting Goods</option>
+                  <option value="5">Furniture</option>
                   <option value="6">Jewelry</option>
-                  <option value="7">Apparel</option>
-                  <option value="8">Musical Instruments</option>
-                  <option value="9">Wanted</option>
+                  <option value="7">Musical Instruments</option>
+                  <option value="8">Sporting Goods</option>
+                  <option value="9">Other</option>
+                  <option value="10">Wanted</option>
                 </select>
               </div>
               <div className="condition">
@@ -251,17 +252,18 @@ class ItemEdit extends Component {
             </div>
           </div>
           <div className="button-container">
-          <div className="submit">
-          <button className="btn" onClick={this.handleSubmit}>Submit Changes</button>
-          </div>
-      <div className="cancel">
-          <Link to={`/items/${this.state.id}`}>
-            <button className="btn">Cancel Changes</button>
-          </Link>
-          </div>
+            <div className="submit">
+              <button className="btn" onClick={this.handleSubmit}>
+                Submit Changes
+              </button>
+            </div>
+            <div className="cancel">
+              <Link to={`/items/${this.state.id}`}>
+                <button className="btn">Cancel Changes</button>
+              </Link>
+            </div>
           </div>
         </form>
-
       </div>
     );
   }
