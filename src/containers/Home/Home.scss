@@ -22,14 +22,14 @@ html {
 
               .home-header {
                 width: 80%;
-                height: 2.5em;
+                height: 2em;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 position: fixed;
                 margin-bottom: 1em;
                 box-shadow: 0 0px 28px rgba(0, 0, 0, 0.25);
-                font-size: 3em;
+                font-size: 1.5em;
                 text-transform: uppercase;
                 color: $secondary-color;
                 font-family: $body-font;
@@ -38,7 +38,7 @@ html {
               }
 
               .categories {
-                margin-top: 9.5em;
+                margin-top: 5.5em;
 
                 .top-category {
                   .category-name {
