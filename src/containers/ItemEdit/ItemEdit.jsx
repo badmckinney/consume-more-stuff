@@ -25,15 +25,12 @@ class ItemEdit extends Component {
       width: '',
       height: '',
       notes: '',
-      status_id: '',
-      status: ''
+      status_id: ''
     };
 
     this.form = React.createRef();
     this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
-    this.toggleStatus = this.toggleStatus.bind(this);
-    this.makeStatusButton = this.makeStatusButton.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -76,8 +73,7 @@ class ItemEdit extends Component {
       width: item.width ? item.width : '',
       height: item.height ? item.height : '',
       notes: item.notes ? item.notes : '',
-      status_id: item.status_id,
-      status: item.status
+      status_id: item.status_id
     });
   }
 
@@ -91,54 +87,6 @@ class ItemEdit extends Component {
     }
 
     return <></>;
-  }
-
-  toggleStatus(e) {
-    e.preventDefault();
-
-    if (this.state.status_id !== 1) {
-      return this.props
-        .editItem({ id: this.state.id, status_id: 1 })
-        .then(data => {
-          if (!data) {
-            return this.setState({ editError: true });
-          }
-
-          this.setState({ editError: false });
-          return this.props.loadItem(this.state.id);
-        });
-    }
-
-    return this.props
-      .editItem({ id: this.state.id, status_id: 3 })
-      .then(data => {
-        if (!data) {
-          return this.setState({ editError: true });
-        }
-
-        this.setState({ editError: false });
-        return this.props.loadItem(this.state.id);
-      });
-  }
-
-  makeStatusButton() {
-    if (this.state.status_id !== 1) {
-      return (
-        <div className="change-status">
-          <button className="btn" onClick={this.toggleStatus}>
-            re-publish posting
-          </button>
-        </div>
-      );
-    }
-
-    return (
-      <div className="change-status">
-        <button className="btn" onClick={this.toggleStatus}>
-          mark as sold
-        </button>
-      </div>
-    );
   }
 
   handleInputOnChange(e) {
@@ -296,8 +244,17 @@ class ItemEdit extends Component {
             </div>
 
             <div className="status">
-              status: {this.state.status}
-              {this.makeStatusButton()}
+              <div>
+                <label htmlFor="status_id">Status</label>
+              </div>
+              <select
+                name="status_id"
+                value={this.state.status_id}
+                onChange={this.handleInputOnChange}
+              >
+                <option value="1">for sale</option>
+                <option value="3">sold</option>
+              </select>
             </div>
 
             <div className="notes-container">
