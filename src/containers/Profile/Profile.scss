@@ -1,5 +1,8 @@
-$primary-color: #2db8f5;
-$secondary-color: #5c49e6;
+$logo-font: 'Staatliches', sans-serif;
+$body-font: 'Roboto', sans-serif;
+$primary-color: #424242;
+$secondary-color: #eee;
+$hover-color: lighten($primary-color, 20%);
 * {
   box-sizing: border-box;
   padding: 0;
@@ -16,15 +19,16 @@ html {
               border: 1px solid black;
               border-radius: 10px;
               box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
-              width: 100%;
+
               margin: auto;
               padding: 50px;
-              margin-top: 5%;
+              margin-top: 10%;
               margin-bottom: 5%;
               .title-container {
                 text-align: center;
               }
               .user-info-container {
+                margin-left: 30px;
                 display: flex;
                 text-align: left;
                 padding: 10px;
@@ -37,8 +41,9 @@ html {
                   padding: 10px;
                   width: 50%;
                   .btn {
-                    width: 80px;
-                    max-width: 80px;
+                    padding: 3px;
+                    width: 90px;
+                    max-width: 90px;
                     height: 25px;
                     border: 0px;
                     background: $primary-color;
@@ -49,17 +54,25 @@ html {
                   .btn:active {
                     background: $secondary-color;
                   }
+                  .btn:hover {
+                    background: $hover-color;
+                  }
                 }
               }
               .status-container {
-                border: 1px solid black;
-                margin-top: 10px;
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                overflow-x:scroll;
               }
               .item-list-container {
+                margin-left: 30px;
                 overflow-y: scroll;
                 height: 500px;
               }
               .columns-container {
+                margin-left: 30px;
+                text-align: center;
                 display: flex;
 
                 .column {
@@ -115,7 +128,7 @@ html {
                     text-overflow: ellipsis;
                   }
                   .manage-column {
-                    width: 190px;
+                    width: 119px;
                     max-width: 190px;
                     white-space: nowrap;
                     overflow: hidden;

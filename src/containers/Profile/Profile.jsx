@@ -57,11 +57,12 @@ class Profile extends Component {
               <div className="first-name">First Name: {profile.first_name}</div>
               <div className="last-name">Last Name: {profile.last_name}</div>
               <Link to="/profile/edit">
-                <button className="btn">edit profile</button>
+                <button className="btn">Edit Profile</button>
               </Link>
             </div>
           </div>
           <div className="status-container">
+
             <div className="columns-container">
               <div className="column">
                 <div className="status-column">Status</div>
@@ -91,6 +92,7 @@ class Profile extends Component {
             </div>
             <div className="item-list-container">
               <ProfileItemList items={this.forSale()} />
+              <ProfileItemList items={this.sold()} />
             </div>
           </div>
         </div>
