@@ -17,9 +17,15 @@ class Register extends Component {
       password: ''
     };
 
+    this.form = React.createRef();
+    this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  validate() {
+   return this.form.current.reportValidity()
   }
 
   error() {
@@ -39,8 +45,13 @@ class Register extends Component {
 
   handleSubmit(e) {
     const newUser = this.state;
-
+      
     e.preventDefault();
+    
+    if (!this.validate()) {
+      return
+    }
+
     this.props.register(newUser).then(data => {
       if (!data) {
         return this.setState({ isError: true });
@@ -56,54 +67,64 @@ class Register extends Component {
       <div className="register-wrapper">
         <div className="register-container">
           {this.error()}
-          <form>
+          <form ref={this.form}>
             <div>
-              <label htmlFor="first_name">First Name:</label>
+              <label htmlFor="first_name" >First Name:</label>
             </div>
             <input
               type="text"
               name="first_name"
               value={this.state.first_name}
               onChange={this.handleInputOnChange}
+              required
+              pattern="[A-Za-z]{1,30}"
             />
             <div>
-              <label htmlFor="last_name">Last Name:</label>
+              <label htmlFor="last_name" >Last Name:</label>
             </div>
             <input
               type="text"
               name="last_name"
               value={this.state.last_name}
               onChange={this.handleInputOnChange}
+              required
+              pattern="[A-Za-z]{1,30}"
             />
 
             <div>
-              <label htmlFor="email">Email:</label>
+              <label htmlFor="email" >Email:</label>
             </div>
             <input
-              type="text"
+              type="email"
               name="email"
               value={this.state.email}
               onChange={this.handleInputOnChange}
+              required
             />
 
             <div>
-              <label htmlFor="username">Username:</label>
+              <label htmlFor="username" >Username:</label>
             </div>
             <input
               type="text"
               name="username"
               value={this.state.username}
               onChange={this.handleInputOnChange}
+              required
+              pattern="[A-Za-z0-9_]{6,30}"
             />
 
             <div>
-              <label htmlFor="password">Password:</label>
+              <label htmlFor="password" >Password:</label>
             </div>
             <input
               type="password"
               name="password"
               value={this.state.password}
               onChange={this.handleInputOnChange}
+              required
+              minlength="6"
+              maxLength="30"
             />
 
             <div className="login-here">
