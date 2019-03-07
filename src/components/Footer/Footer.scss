@@ -1,13 +1,16 @@
-$main-font: 'M PLUS Rounded 1c', sans-serif;
-$primary-color: #2db8f5;
-$secondary-color: #5c49e6;
+$logo-font: 'Staatliches', sans-serif;
+$body-font: 'Roboto', sans-serif;
+$primary-color: #424242;
+$secondary-color: #ccc;
+$hover-color: lighten($primary-color, 20%);
 
 .footer-container{
-  border:1px solid black;
-  height:10vh;
-  margin-bottom:auto;
-  text-align:center;
-  padding:20px;
+  border: none;
+  height: 40px;
+  padding: 0px;
   background: $primary-color;
-
+  width: 80.2%;
+  position: relative;
+  margin-left: auto;
+  bottom: 0;
 }
