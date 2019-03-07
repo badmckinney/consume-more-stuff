@@ -241,18 +241,22 @@ router.post('/items/new', upload.single('image'), (req, res) => {
   const user = req.user;
 
   if (req.file) {
-    const uploadParams = { Bucket: 'badmckinney-cms-photos', Key: '', Body: '' };
+    const uploadParams = {
+      Bucket: 'badmckinney-cms-photos',
+      Key: '',
+      Body: ''
+    };
     const file = path.join(`/src/app/server/uploads/${req.file.filename}`);
     const fileStream = fs.createReadStream(file);
 
-    fileStream.on('error', function (err) {
+    fileStream.on('error', function(err) {
       throw new Error('File Error', err);
     });
 
     uploadParams.Body = fileStream;
     uploadParams.Key = path.basename(file);
 
-    s3.upload(uploadParams, function (err, data) {
+    s3.upload(uploadParams, function(err, data) {
       if (err) {
         fs.unlink(`/src/app/server/uploads/${req.file.filename}`, err => {
           if (err) {
@@ -262,7 +266,7 @@ router.post('/items/new', upload.single('image'), (req, res) => {
 
         throw new Error('Error', err);
       } else if (data) {
-        fs.unlink(`/src/app/server/uploads/${req.file.filename}`, (err) => {
+        fs.unlink(`/src/app/server/uploads/${req.file.filename}`, err => {
           if (err) {
             throw new Error(err);
           }
