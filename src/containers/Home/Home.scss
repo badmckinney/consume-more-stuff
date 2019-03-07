@@ -1,8 +1,9 @@
 $logo-font: 'Staatliches', sans-serif;
 $body-font: 'Roboto', sans-serif;
-$primary-color: #424242;
-$secondary-color: #eee;
-$hover-color: lighten($primary-color, 20%);
+$primary-color: #304FFE;
+$secondary-color: #424242;
+$tertiary-color: #eee;
+$hover-color: lighten($primary-color, 5%);
 
 html {
   body {
@@ -17,7 +18,7 @@ html {
               width: 100%;
               margin-top: 4em;
               overflow: hidden;
-              background: $secondary-color;
+              background: $tertiary-color;
 
               .home-header {
                 width: 80%;
@@ -30,9 +31,9 @@ html {
                 box-shadow: 0 0px 28px rgba(0, 0, 0, 0.25);
                 font-size: 3em;
                 text-transform: uppercase;
-                color: $primary-color;
+                color: $secondary-color;
                 font-family: $body-font;
-                background: #fafafa;
+                background: #fff;
                 z-index: 2;
               }
 
@@ -44,7 +45,7 @@ html {
                     padding: 0;
                     margin: 1em;
                     font-family: $body-font;
-                    color: $primary-color;
+                    color: $secondary-color;
                   }
                   .top-ten {
                     display: flex;
@@ -62,20 +63,19 @@ html {
   
                       a {
                         text-decoration: none;
-                        color: $primary-color;
                         padding: 15px;
 
                         .item {
-                          background:#fafafa;
+                          background:#fff;
                           box-shadow: 5px 5px 28px rgba(0,0,0,0.2);
                           display: flex;
                           flex-direction: column;
-                          border: 1px solid $secondary-color;
+                          border: 1px solid $tertiary-color;
                           border-radius: 2px;
                           width: 300px;
                           max-width:300px;
                           height:100%;
-                          color: $primary-color;
+                          color: $secondary-color;
 
                           .img-container{
                             height:85%;
@@ -99,7 +99,7 @@ html {
                             align-items: center;
 
                             .item-price {
-                              color: $primary-color;
+                              color: $secondary-color;
                             }
                           }
                           
