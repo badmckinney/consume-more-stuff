@@ -1,10 +1,17 @@
 html{
   body{
+
     #root{
       .app-container{
         width:100%;
         .sidebar-app-container{
+          background:#ddd;
           display:flex;
+          .app-body{
+
+            height:100%;
+            max-width: 80%;
+          }
         }
       }
     }

@@ -41,48 +41,22 @@ class PasswordEdit extends Component {
       return <div>error updating password</div>;
     }
   }
+
   handleInputOnChange(e) {
     const name = e.target.name;
     const value = e.target.value;
 
-    switch (name) {
-      case 'old':
-        return this.setState({ old: value });
-      case 'new':
-        return this.setState({ new: value });
-      case 'confirm':
-        return this.setState({ confirm: value });
-      default:
-        return;
-    }
+    return this.setState({ [name]: value });
   }
 
   handleToggle(e) {
     const inputName = e.target.dataset.name;
-    let isPassword;
+    let isPassword = this.state[`${inputName}Type`] === 'password';
 
-    switch (inputName) {
-      case 'old':
-        isPassword = this.state.oldType === 'password';
-        return this.setState({
-          oldWording: isPassword ? 'hide' : 'show',
-          oldType: isPassword ? 'text' : 'password'
-        });
-      case 'new':
-        isPassword = this.state.newType === 'password';
-        return this.setState({
-          newWording: isPassword ? 'hide' : 'show',
-          newType: isPassword ? 'text' : 'password'
-        });
-      case 'confirm':
-        isPassword = this.state.confirmType === 'password';
-        return this.setState({
-          confirmWording: isPassword ? 'hide' : 'show',
-          confirmType: isPassword ? 'text' : 'password'
-        });
-      default:
-        return;
-    }
+    return this.setState({
+      [`${inputName}Wording`]: isPassword ? 'hide' : 'show',
+      [`${inputName}Type`]: isPassword ? 'text' : 'password'
+    });
   }
 
   handleSubmit(e) {

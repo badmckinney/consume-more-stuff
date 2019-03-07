@@ -1,0 +1,13 @@
+$main-font: 'M PLUS Rounded 1c', sans-serif;
+$primary-color: #2db8f5;
+$secondary-color: #5c49e6;
+
+.footer-container{
+  border:1px solid black;
+  height:10vh;
+  margin-bottom:auto;
+  text-align:center;
+  padding:20px;
+  background: $primary-color;
+
+}
