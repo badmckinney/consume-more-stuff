@@ -96,7 +96,7 @@ class ProfileEdit extends Component {
               <label htmlFor="email">Email:</label>
             </div>
             <input
-              type="text"
+              type="email"
               name="email"
               value={this.state.email}
               onChange={this.handleInputOnChange}

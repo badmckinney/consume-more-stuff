@@ -118,7 +118,7 @@ class PasswordEdit extends Component {
               onChange={this.handleInputOnChange}
               required
               minLength="6"
-              maxLength="8"
+              maxLength="30"
             />
             <span
               className="pw-toggle"
@@ -140,7 +140,7 @@ class PasswordEdit extends Component {
               onChange={this.handleInputOnChange}
               required
               minLength="6"
-              maxLength="8"
+              maxLength="30"
             />
             <span
               className="pw-toggle"
@@ -168,7 +168,7 @@ class PasswordEdit extends Component {
               onChange={this.handleInputOnChange}
               required
               minLength="6"
-              maxLength="8"
+              maxLength="30"
             />
             <span
               className="pw-toggle"
