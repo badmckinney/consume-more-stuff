@@ -67,7 +67,9 @@ class Profile extends Component {
               <div className="column">
                 <div className="status-column">Status</div>
               </div>
-
+              <div className="column">
+                <div className="manage-column">Manage</div>
+              </div>
               <div className="column">
                 <div className="title-column">Post Title</div>
               </div>
@@ -86,9 +88,7 @@ class Profile extends Component {
               <div className="column">
                 <div className="id-column">Post Id</div>
               </div>
-              <div className="column">
-                <div className="manage-column">Manage</div>
-              </div>
+        
             </div>
             <div className="item-list-container">
               <ProfileItemList items={this.forSale()} />

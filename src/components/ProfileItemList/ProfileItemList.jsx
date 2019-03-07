@@ -10,10 +10,21 @@ const ProfileItemList = props => {
 
     return (
       <div className="item" key={item.id}>
-        <Link className="item-detail-container" to={`/items/${item.id}`}>
-          <div className="item-columns">
+            <Link className="item-detail-container" to={`/items/${item.id}`}>
+            <div className="item-columns">
             <div className="item-status">{item.status.name}</div>
           </div>
+            </Link>
+
+            <Link className="item-detail-container" to={`/items/${item.id}/edit`}>
+          <div className="item-columns">
+          <div className="item-edit">
+           <button className="btn">Edit Post</button>
+           </div>
+           </div>
+          </Link>
+        <Link className="item-detail-container" to={`/items/${item.id}`}>
+       
           <div className="item-columns">
             <div className="item-name">{item.name}</div>
           </div>
@@ -39,13 +50,7 @@ const ProfileItemList = props => {
         </Link>
 
 
-          <Link className="item-detail-container" to={`/items/${item.id}/edit`}>
-          <div className="item-columns">
-          <div className="item-edit">
-           <button className="btn">Edit Post</button>
-           </div>
-           </div>
-          </Link>
+     
 
       </div>
     );
