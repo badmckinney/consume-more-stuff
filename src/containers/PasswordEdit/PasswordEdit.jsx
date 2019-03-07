@@ -26,10 +26,16 @@ class PasswordEdit extends Component {
       confirmType: 'password'
     };
 
+    this.form = React.createRef();
+    this.validate = this.validate.bind(this)
     this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  validate() {
+    return this.form.current.reportValidity()
   }
 
   error() {
@@ -61,6 +67,10 @@ class PasswordEdit extends Component {
 
   handleSubmit(e) {
     const update = this.state;
+
+    if (!this.validate()) {
+      return 
+    }
 
     this.setState({
       incorrectPw: false,
@@ -96,7 +106,7 @@ class PasswordEdit extends Component {
       <div className="change-password-page">
         {this.error()}
         <div className="title">Update Your Password: </div>
-        <form>
+        <form ref={this.form}>
           <div className="old-password">
             <div>
               <label htmlFor="old">old password:</label>
@@ -106,6 +116,9 @@ class PasswordEdit extends Component {
               name="old"
               value={this.state.old}
               onChange={this.handleInputOnChange}
+              required
+              minLength="6"
+              maxLength="30"
             />
             <span
               className="pw-toggle"
@@ -125,6 +138,9 @@ class PasswordEdit extends Component {
               name="new"
               value={this.state.new}
               onChange={this.handleInputOnChange}
+              required
+              minLength="6"
+              maxLength="30"
             />
             <span
               className="pw-toggle"
@@ -150,6 +166,9 @@ class PasswordEdit extends Component {
               name="confirm"
               value={this.state.confirm}
               onChange={this.handleInputOnChange}
+              required
+              minLength="6"
+              maxLength="30"
             />
             <span
               className="pw-toggle"
