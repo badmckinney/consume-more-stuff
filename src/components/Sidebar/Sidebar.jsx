@@ -47,7 +47,7 @@ const Sidebar = props => {
     return (
       <div className="logged-out-nav">
         <div className="logo">
-          <img src="assets/Edslist.png" alt="logo" />
+          <img src="/assets/Edslist.png" alt="logo" />
           <Link className="link" to="/">
             <span>Eds</span>list
           </Link>
