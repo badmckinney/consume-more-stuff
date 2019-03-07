@@ -9,6 +9,9 @@ const Sidebar = props => {
     return (
       <div className="item-links">
         <h3>FOR SALE</h3>
+        <Link to="/items/category/all">
+          <button>View All</button>
+        </Link>
         <Link to="/items/category/apparel">
           <button>Apparel</button>
         </Link>
@@ -33,8 +36,8 @@ const Sidebar = props => {
         <Link to="/items/category/sporting_goods">
           <button>Sporting Goods</button>
         </Link>
-        <Link to="/items/all">
-          <button>View All</button>
+        <Link to="/items/category/other">
+          <button>Other</button>
         </Link>
         <Link to="/items/category/wanted">
           <button>Wanted</button>
