@@ -33,7 +33,7 @@ class ItemEdit extends Component {
     this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
     this.toggleStatus = this.toggleStatus.bind(this);
-    this.markSoldOrPublish = this.markSoldOrPublish.bind(this);
+    this.makeStatusButton = this.makeStatusButton.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -121,7 +121,7 @@ class ItemEdit extends Component {
       });
   }
 
-  markSoldOrPublish() {
+  makeStatusButton() {
     if (this.state.status_id !== 1) {
       return (
         <div className="change-status">
@@ -297,7 +297,7 @@ class ItemEdit extends Component {
 
             <div className="status">
               status: {this.state.status}
-              {this.markSoldOrPublish()}
+              {this.makeStatusButton()}
             </div>
 
             <div className="notes-container">
