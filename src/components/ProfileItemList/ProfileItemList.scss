@@ -1,0 +1,17 @@
+.item{
+  border:1px solid black;
+  display:flex;
+  margin-top:10px;
+  .item-detail-container{
+    display:flex;
+
+
+    .item-detail{
+      overflow-x:scroll;
+      border:1px solid black;
+      margin-left:10px;
+
+      margin-top:10px;
+    }
+  }
+}

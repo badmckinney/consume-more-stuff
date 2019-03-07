@@ -78,10 +78,10 @@ class ProfileEdit extends Component {
     }
 
     return (
-      <div className="profile-edit-page">
+      <div className="edit-profile-container">
         {this.error()}
-        <form className="profile-edit">
-          <div className="left">
+        <form className="edit-profile">
+          <div className="left-container">
             <div>
               <label htmlFor="email">Email:</label>
             </div>
@@ -108,7 +108,7 @@ class ProfileEdit extends Component {
             <Link to="/password">change password</Link>
           </div>
 
-          <div className="right">
+          <div className="right-container">
             <div>
               <label htmlFor="first-name">First Name:</label>
             </div>

@@ -1,0 +1,19 @@
+$primary-color: #2db8f5;
+$secondary-color: #5c49e6;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  body {
+    #root {
+      .app-container {
+        .sidebar-app-container {
+          .app-body {
+          }
+        }
+      }
+    }
+  }
+}

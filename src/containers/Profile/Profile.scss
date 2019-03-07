@@ -1,0 +1,92 @@
+$primary-color: #2db8f5;
+$secondary-color: #5c49e6;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  body {
+    #root {
+      .app-container {
+        .sidebar-app-container {
+          .app-body {
+            .profile-container {
+              background: #eee;
+              border: 1px solid black;
+              border-radius: 10px;
+              box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
+              width: 70%;
+              margin: auto;
+              padding: 50px;
+              margin-top: 5%;
+              margin-bottom:5%;
+              .title-container{
+                text-align:center;
+              }
+              .user-info-container {
+                display:flex;
+                text-align:left;
+                padding:10px;
+                border: 1px solid black;
+                .left {
+                  padding:10px;
+                  width:50%;
+                }
+                .right {
+                  padding:10px;
+                  width:50%;
+                  .btn {
+                    width: 80px;
+                    max-width: 80px;
+                    height: 25px;
+                    border: 0px;
+                    background: $primary-color;
+                    color: white;
+                    font-size: 16px;
+                    border-radius: 2px;
+                  }
+                  .btn:active {
+                    background: $secondary-color;
+                  }
+                }
+                
+              }
+              .status-container {
+                margin-top:5%;
+                .title{
+                  font-size:20px;
+                }
+                .columns-container{
+                  display:flex;
+                  justify-content: space-evenly;
+                  border:1px solid black;
+                  height:300px;
+                  margin-top:5px;
+                  overflow-y:scroll;
+
+                  .column{
+                    width:100%;
+                    text-align:center;
+                    border:1px solid black;
+
+                    .column-name{
+                      border-bottom:1px solid black;
+                    }
+                  }
+                }
+                .sold-container {
+
+                  margin-top:5%;
+
+
+                }
+        
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
