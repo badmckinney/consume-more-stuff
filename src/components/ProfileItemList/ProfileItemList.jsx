@@ -10,26 +10,32 @@ const ProfileItemList = props => {
 
     return (
       <div className="item" key={item.id}>
-     
-        <Link className="item-detail-container"to={`/items/${item.id}`}>
-        
-          <div className="item-detail">{item.status.name}</div>
-
-          <div className="item-detail">{item.name}</div>
-
-          <div className="item-detail">{item.category.name}</div>
-
-            <div className="item-detail">
+        <Link className="item-detail-container" to={`/items/${item.id}`}>
+          <div className="item-columns">
+            <div className="item-status">{item.status.name}</div>
+          </div>
+          <div className="item-columns">
+            <div className="item-name">{item.name}</div>
+          </div>
+          <div className="item-columns">
+            <div className="item-category">{item.category.name}</div>
+          </div>
+          <div className="item-columns">
+            <div className="item-date">
               <Moment format="LLL">{localCreatedAt}</Moment>
             </div>
-            <div className="item-detail">
-              updated: <Moment format="LLL">{localUpdatedAt}</Moment>
+          </div>
+          <div className="item-columns">
+            <div className="item-updated-date">
+              <Moment format="LLL">{localUpdatedAt}</Moment>
             </div>
-
-          <div className="item-detail">{item.views}</div>
-
-          <div className="item-detail">{item.id}</div>
-
+          </div>
+          <div className="item-columns">
+            <div className="item-views">{item.views}</div>
+          </div>
+          <div className="item-columns">
+            <div className="item-id">{item.id}</div>
+          </div>
         </Link>
 
         <div className="manage">

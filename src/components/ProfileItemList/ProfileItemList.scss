@@ -1,17 +1,73 @@
-.item{
-  border:1px solid black;
-  display:flex;
-  margin-top:10px;
-  .item-detail-container{
-    display:flex;
+.item {
 
+  display: flex;
+  height: 40px;
+a{text-decoration: none; color:black;}
+  .manage {
+    border: 1px solid black;
+    width: 192px;
+    max-width: 192px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-    .item-detail{
-      overflow-x:scroll;
-      border:1px solid black;
-      margin-left:10px;
+  .item-detail-container {
+    display: flex;
 
-      margin-top:10px;
+    .item-columns {
+      border: 1px solid black;
+border-top:0px solid black;
+
+      .item-status {
+        width: 60px;
+        max-width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-name {
+        width: 120px;
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-category {
+        width: 150px;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-date {
+        width: 160px;
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-updated-date {
+        width: 160px;
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-views {
+        width: 60px;
+        max-width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-id {
+        width: 60px;
+        max-width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 }
