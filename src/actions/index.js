@@ -11,6 +11,7 @@ export const FETCHED_PROFILE = 'FETCHED_PROFILE';
 export const FETCHED_USERS_ITEMS = 'FETCHED_USERS_ITEMS';
 export const EDIT_PROFILE = 'EDIT_PROFILE';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+export const INCREMENT_VIEWS = 'INCREMENT_VIEWS';
 
 export const register = newUser => {
   return () => {
@@ -287,5 +288,14 @@ export const changePassword = passUpdate => {
         return 'success';
       })
       .catch(err => 'error');
+  };
+};
+
+export const incrementViews = id => {
+  return () => {
+    return fetch(`/api/items/${id}/views`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }
+    });
   };
 };
