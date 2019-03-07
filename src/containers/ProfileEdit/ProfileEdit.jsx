@@ -112,7 +112,7 @@ class ProfileEdit extends Component {
               value={this.state.username}
               onChange={this.handleInputOnChange}
               required
-              pattern="[A-Za-z0-9_]{1,30}"
+              pattern="[A-Za-z0-9_]{6,30}"
             />
 
             <div>
