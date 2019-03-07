@@ -77,6 +77,7 @@ class Register extends Component {
               value={this.state.first_name}
               onChange={this.handleInputOnChange}
               required
+              pattern="[A-Za-z]{1,30}"
             />
             <div>
               <label htmlFor="last_name" >Last Name:</label>
@@ -87,6 +88,7 @@ class Register extends Component {
               value={this.state.last_name}
               onChange={this.handleInputOnChange}
               required
+              pattern="[A-Za-z]{1,30}"
             />
 
             <div>
@@ -109,6 +111,7 @@ class Register extends Component {
               value={this.state.username}
               onChange={this.handleInputOnChange}
               required
+              pattern="[A-Za-z0-9_]{1,30}"
             />
 
             <div>
@@ -121,6 +124,7 @@ class Register extends Component {
               onChange={this.handleInputOnChange}
               required
               minlength="6"
+              maxLength="30"
             />
 
             <div className="login-here">
