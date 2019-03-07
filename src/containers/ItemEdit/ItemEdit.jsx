@@ -216,15 +216,16 @@ class ItemEdit extends Component {
                   value={this.state.category_id}
                   onChange={this.handleInputOnChange}
                 >
-                  <option value="1">Automotive</option>
-                  <option value="2">Furniture</option>
-                  <option value="3">Appliances</option>
+                  <option value="1">Apparel</option>
+                  <option value="2">Appliances</option>
+                  <option value="3">Automotive</option>
                   <option value="4">Electronics</option>
-                  <option value="5">Sporting Goods</option>
+                  <option value="5">Furniture</option>
                   <option value="6">Jewelry</option>
-                  <option value="7">Apparel</option>
-                  <option value="8">Musical Instruments</option>
-                  <option value="9">Wanted</option>
+                  <option value="7">Musical Instruments</option>
+                  <option value="8">Sporting Goods</option>
+                  <option value="9">Other</option>
+                  <option value="10">Wanted</option>
                 </select>
               </div>
               <div className="condition">

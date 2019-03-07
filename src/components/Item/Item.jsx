@@ -12,7 +12,7 @@ const Item = props => {
   }
 
   if (item.status_id !== 1) {
-    return <></>
+    return <></>;
   }
 
   return (

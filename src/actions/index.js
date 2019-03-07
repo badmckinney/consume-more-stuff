@@ -92,7 +92,20 @@ export const addItem = newItem => {
   };
 };
 
-export const fetchItems = category => {
+export const fetchItemsAll = () => {
+  return dispatch => {
+    return fetch('/api/items')
+      .then(res => res.json())
+      .then(items => {
+        return dispatch({
+          type: FETCH_ITEMS,
+          payload: items
+        });
+      });
+  };
+};
+
+export const fetchItemsByCategory = category => {
   return dispatch => {
     return fetch(`/api/items/category/${category}`)
       .then(res => {
