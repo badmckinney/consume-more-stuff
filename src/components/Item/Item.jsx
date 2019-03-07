@@ -11,6 +11,10 @@ const Item = props => {
     item.image = '';
   }
 
+  if (item.status_id !== 1) {
+    return <></>
+  }
+
   return (
     <>
       <Link to={`/items/${item.id}`}>

@@ -25,7 +25,7 @@ class Register extends Component {
   }
 
   validate() {
-    return this.form.current.reportValidity()
+    return this.form.current.reportValidity();
   }
 
   error() {
@@ -49,7 +49,7 @@ class Register extends Component {
     e.preventDefault();
 
     if (!this.validate()) {
-      return
+      return;
     }
 
     this.props.register(newUser).then(data => {
@@ -111,7 +111,7 @@ class Register extends Component {
               value={this.state.password}
               onChange={this.handleInputOnChange}
               required
-              minlength="6"
+              minLength="6"
               maxLength="30"
             />
 

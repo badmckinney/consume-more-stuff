@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './Sidebar.scss';
 
 const Sidebar = props => {
-  console.log(window.location.origin);
   const { currentUser } = props;
 
   const generateItemLinks = () => {
