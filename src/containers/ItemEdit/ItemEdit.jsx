@@ -51,26 +51,18 @@ class ItemEdit extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const id = this.props.match.params.id;
-    const item = this.props.item;
-
     if (prevProps === this.props) {
       return;
     }
 
-    if (item.createdBy === this.props.currentUser) {
-      return this.setState({ isOwner: true });
+    const item = this.props.item;
+
+    if (item.createdBy !== this.props.currentUser) {
+      return;
     }
 
-    // this.props.loadItem(id).then(data => {
-    //   if (!data) {
-    //     return this.setState({ notFound: true });
-    //   }
-
-    //   return this.setState({ notFound: false });
-    // });
-
     return this.setState({
+      isOwner: true,
       id: item.id,
       category_id: item.category_id,
       name: item.name,
@@ -101,29 +93,31 @@ class ItemEdit extends Component {
     return <></>;
   }
 
-  toggleStatus() {
-    if (this.status_id !== 1) {
+  toggleStatus(e) {
+    e.preventDefault();
+
+    if (this.state.status_id !== 1) {
       return this.props
-        .editItem({ id: this.state.id, status_id: 3 })
+        .editItem({ id: this.state.id, status_id: 1 })
         .then(data => {
           if (!data) {
             return this.setState({ editError: true });
           }
 
           this.setState({ editError: false });
-          return this.props.history.push('/profile');
+          return this.props.loadItem(this.state.id);
         });
     }
 
     return this.props
-      .editItem({ id: this.state.id, status_id: 1 })
+      .editItem({ id: this.state.id, status_id: 3 })
       .then(data => {
         if (!data) {
           return this.setState({ editError: true });
         }
 
         this.setState({ editError: false });
-        return this.props.history.push('/profile');
+        return this.props.loadItem(this.state.id);
       });
   }
 
@@ -181,6 +175,7 @@ class ItemEdit extends Component {
     if (!this.state.isOwner) {
       return <div className="error">Denied: user does not own this post</div>;
     }
+
     return (
       <div className="edit-container">
         {this.error()}

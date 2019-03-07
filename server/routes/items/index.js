@@ -374,7 +374,6 @@ router.put('/items/:id', (req, res) => {
       item
         .save(editedItem, { patch: true })
         .then(() => {
-          console.log('hit');
           res.json({
             success: true
           });
