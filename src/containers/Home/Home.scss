@@ -3,7 +3,7 @@ $body-font: 'Roboto', sans-serif;
 $primary-color: #304FFE;
 $secondary-color: #424242;
 $tertiary-color: #eee;
-$hover-color: lighten($primary-color, 5%);
+$hover-color: lighten($primary-color, 10%);
 
 html {
   body {
@@ -13,6 +13,8 @@ html {
           .app-body {
             width: 80%; 
             margin-left: calc(100vw - 80.1%);
+            background: $tertiary-color;
+            min-height: 93.6vh;
 
             .home-container {
               width: 100%;
