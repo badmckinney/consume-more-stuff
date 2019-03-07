@@ -38,11 +38,15 @@ const ProfileItemList = props => {
           </div>
         </Link>
 
-        <div className="manage">
-          <Link className="edit-link" to={`/items/${item.id}/edit`}>
-            edit post
+
+          <Link className="item-detail-container" to={`/items/${item.id}/edit`}>
+          <div className="item-columns">
+          <div className="item-edit">
+           <button className="btn">Edit Post</button>
+           </div>
+           </div>
           </Link>
-        </div>
+
       </div>
     );
   });
