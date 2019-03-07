@@ -18,8 +18,8 @@ class Register extends Component {
     };
 
     this.form = React.createRef();
-    this.error = this.error.bind(this);
     this.validate = this.validate.bind(this);
+    this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

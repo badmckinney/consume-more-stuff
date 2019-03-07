@@ -22,9 +22,15 @@ class NewItem extends Component {
       notes: ''
     };
 
+    this.form = React.createRef()
+    this.validate = this.validate.bind(this)
     this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  validate() {
+    return this.form.current.reportValidity()
   }
 
   error() {
@@ -56,6 +62,10 @@ class NewItem extends Component {
     const newItem = this.state;
     const formData = new FormData();
 
+    if (!this.validate()) {
+      return 
+    }
+
     for (var key in newItem) {
       formData.append(key, newItem[key]);
     }
@@ -79,7 +89,7 @@ class NewItem extends Component {
       <div className="add-item-container">
         {this.error()}
         <h2>Create New Posting</h2>
-        <form>
+        <form ref={this.form}>
           <div className="top-box">
             <div className="title-price-container">
               <div className="title">
@@ -89,12 +99,13 @@ class NewItem extends Component {
                   name="name"
                   value={this.state.name}
                   onChange={this.handleInputOnChange}
+                  required
                 />
               </div>
               <div className="price">
                 <label>Price</label>
                 <input
-                  type="text"
+                  type="number"
                   name="price"
                   value={this.state.price}
                   onChange={this.handleInputOnChange}
@@ -116,6 +127,7 @@ class NewItem extends Component {
                   name="description"
                   value={this.state.description}
                   onChange={this.handleInputOnChange}
+                  required
                 />
               </div>
             </div>
