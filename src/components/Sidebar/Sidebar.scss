@@ -1,21 +1,27 @@
-$main-font: 'M PLUS Rounded 1c', sans-serif;
-$primary-color: #2db8f5;
-$secondary-color: #5c49e6;
+$logo-font: 'Staatliches', sans-serif;
+$body-font: 'Roboto', sans-serif;
+$primary-color: #424242;
+$secondary-color: #ccc;
+$hover-color: lighten($primary-color, 20%);
+
 html {
+  background: $secondary-color;
   body {
     #root {
       display: flex;
+
       .logged-in-nav,
       .logged-out-nav {
         background:white;
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 25%;
-        max-width: 25%;
-        height: cover;
-        box-shadow: 0 0px 28px rgba(0, 0, 0, 0.25),
-          0 0px 10px rgba(90, 75, 230, 0.22);
+        position: fixed;
+        width: 20%;
+        height: 100vh;
+        background: #fafafa;
+        box-shadow: 0 0px 28px rgba(0, 0, 0, 0.25);
+          // 0 0px 10px rgba(90, 75, 230, 0.22);
   
         .link {
           text-decoration: none;
@@ -23,16 +29,17 @@ html {
         }
         .logo {
           font-size: 2.5em;
-          font-family: $main-font;
-          font-weight: 800;
+          font-family: $body-font;
+          font-weight: 300;
           letter-spacing: 0em;
           width: 70%;
           padding: 0.1em;
-          margin-bottom: 0.2em;
+          margin: 0.2em 0em;
           color: $primary-color;
 
           span {
-            color: $secondary-color;
+            color: $primary-color;
+            font-weight: 800;
           }
         }
 
@@ -40,28 +47,49 @@ html {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 1em 0em 2em 0em;
+          padding: 0em 0em 1em 0em;
           width: 70%;
-          height: 120px;
-          border-bottom: 3px solid #eee;
+          border-bottom: 3px solid $secondary-color;
 
           a {
             button {
-              width: 100%;
               text-align: left;
-              color: #777;
+              color: $primary-color;
+              padding-bottom: 1px;
+              margin-bottom: 10px;
               background: none;
-              border: none;
-              font-size: 1em;
-              font-family: $main-font;
-              font-weight: bold;
-              letter-spacing: 1px;
+              border: 3px solid transparent;
+              border-radius: 2px;
+              font-size: 1.1em;
+              font-family: $body-font;
+              font-weight: 500;
+              transition: border-bottom .24s ease-in-out;
             }
 
             button:hover {
               cursor: pointer;
-              background: lighten(#777, 20%);
-              color: white;
+              border-bottom: 3px solid $primary-color;
+            }
+          }
+
+          a:last-child {
+            button {
+              text-align: left;
+              color: #fff;
+              padding: 8px;
+              background: $primary-color;
+              border: none;
+              border-radius: 2px;
+              font-size: 1.1em;
+              font-family: $body-font;
+              font-weight: 500;
+              margin-top: 5px;
+              transition: background-color 0.24s ease-in-out;
+            }
+
+            button:hover {
+              cursor: pointer;
+              background-color: $hover-color;
             }
           }
         }
@@ -69,42 +97,42 @@ html {
         .item-links {
           display: flex;
           flex-direction: column;
+          align-items: center;
           width: 70%;
-          height: 100%;
 
           h3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
-            padding-left: 0.4em;
-            font-family: $main-font;
-            color: $secondary-color;
-            font-weight: 800;
-            margin: 1em 0em 0em 0em;
+            font-family: $body-font;
+            color: $primary-color;
+            font-size: 2em;
+            font-weight: 300;
+            text-transform: uppercase;
+            margin: 0.5em 0em 0.5em 0em;
           }
 
           button {
             letter-spacing: 1px;
             width: 100%;
             text-align: left;
-            color: #777;
+            color: $primary-color;
             background: transparent;
             border: none;
+            border-bottom: 3px solid transparent;
             font-size: 1em;
-            font-family: $main-font;
+            font-family: $body-font;
             font-weight: bold;
             margin-bottom: 0.8em;
-            padding-left: 0.4em;
-            border-radius: 7px;
-            height: 40px;
-            transition: background-color 0.25s ease-in-out;
+            padding-bottom: 10px;
+            border-radius: 2px;
+            height: 25px;
+            transition: color 0.25s ease-in-out, border-bottom 0.25s ease-in-out;
           }
 
           button:hover {
-            color: #fff;
-            background: linear-gradient(
-              to left,
-              $primary-color,
-              $secondary-color
-            );
+            border-bottom: 3px solid $primary-color;
             cursor: pointer;
           }
         }
