@@ -102,6 +102,7 @@ router.get('/items/category/:category', (req, res) => {
             id: item.id,
             created_by: item.created_by.username,
             status: item.status.name,
+            status_id: item.status_id,
             category: item.category.name,
             condition: item.condition.name,
             name: item.name,
