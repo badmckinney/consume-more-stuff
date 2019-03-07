@@ -29,7 +29,7 @@ class ItemEdit extends Component {
     };
 
     this.form = React.createRef();
-    this.validate = this.validate.bind(this)
+    this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -48,18 +48,18 @@ class ItemEdit extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const item = this.props.item;
-
     if (prevProps === this.props) {
       return;
     }
 
+    const item = this.props.item;
+
     if (item.createdBy !== this.props.currentUser) {
-      return this.setState({ isOwner: true });
+      return;
     }
 
     return this.setState({
-      isOwner: false,
+      isOwner: true,
       id: item.id,
       category_id: item.category_id,
       name: item.name,
@@ -78,7 +78,7 @@ class ItemEdit extends Component {
   }
 
   validate() {
-    return this.form.current.reportValidity()
+    return this.form.current.reportValidity();
   }
 
   error() {
@@ -102,9 +102,9 @@ class ItemEdit extends Component {
     e.preventDefault();
 
     if (!this.validate()) {
-      return 
+      return;
     }
-    
+
     this.props.editItem(editedItem).then(data => {
       if (!data) {
         return this.setState({ editError: true });
@@ -120,9 +120,10 @@ class ItemEdit extends Component {
       return <div className="error">Item not found</div>;
     }
 
-    if (this.state.isOwner) {
+    if (!this.state.isOwner) {
       return <div className="error">Denied: user does not own this post</div>;
     }
+
     return (
       <div className="edit-container">
         {this.error()}
@@ -241,6 +242,21 @@ class ItemEdit extends Component {
                 </select>
               </div>
             </div>
+
+            <div className="status">
+              <div>
+                <label htmlFor="status_id">Status</label>
+              </div>
+              <select
+                name="status_id"
+                value={this.state.status_id}
+                onChange={this.handleInputOnChange}
+              >
+                <option value="1">for sale</option>
+                <option value="3">sold</option>
+              </select>
+            </div>
+
             <div className="notes-container">
               <label className="notes">Notes</label>
               <textarea
@@ -251,17 +267,18 @@ class ItemEdit extends Component {
             </div>
           </div>
           <div className="button-container">
-          <div className="submit">
-          <button className="btn" onClick={this.handleSubmit}>Submit Changes</button>
-          </div>
-      <div className="cancel">
-          <Link to={`/items/${this.state.id}`}>
-            <button className="btn">Cancel Changes</button>
-          </Link>
-          </div>
+            <div className="submit">
+              <button className="btn" onClick={this.handleSubmit}>
+                Submit Changes
+              </button>
+            </div>
+            <div className="cancel">
+              <Link to={`/items/${this.state.id}`}>
+                <button className="btn">Cancel Changes</button>
+              </Link>
+            </div>
           </div>
         </form>
-
       </div>
     );
   }
