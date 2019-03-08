@@ -153,7 +153,7 @@ class NewItem extends Component {
 
               <div className="select-container">
                 <div className="category">
-                  <label>Category</label>
+                  <label>Category: </label>
                   <select
                     name="category_id"
                     value={this.state.category_id}
