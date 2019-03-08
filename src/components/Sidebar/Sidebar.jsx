@@ -80,9 +80,6 @@ const Sidebar = props => {
           <Link to="/profile">
             <button>My Profile</button>
           </Link>
-          <Link to="/messages">
-            <button>Messages</button>
-          </Link>
           <Link to="/create-posting">
             <button>Create a posting</button>
           </Link>
