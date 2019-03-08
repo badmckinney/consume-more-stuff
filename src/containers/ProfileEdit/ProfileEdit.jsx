@@ -62,7 +62,7 @@ class ProfileEdit extends Component {
 
   error() {
     if (this.state.isError) {
-      return <div className="error">error editing profile</div>;
+      return <div className="error">Could not edit profile</div>;
     }
 
     return <></>;
@@ -165,7 +165,7 @@ class ProfileEdit extends Component {
     if (!this.props.currentUser) {
       return (
         <div className="profile-edit-page">
-          <div className="error">You must be logged in to edit profile</div>
+          <div className="error">You must be logged in to do that!</div>
         </div>
       );
     }

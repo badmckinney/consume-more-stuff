@@ -48,7 +48,7 @@ class Profile extends Component {
     if (!this.props.currentUser) {
       return (
         <div className="profile-info">
-          <div className="error">You must be logged in to view profile</div>
+          <div className="error">You must be logged in to do that!</div>
         </div>
       );
     }
