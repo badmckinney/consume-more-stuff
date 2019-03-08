@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProfile, getUsersItems } from '../../actions';
+import { getProfile, getUsersItems, editItem } from '../../actions';
 import ProfileItemList from '../../components/ProfileItemList';
 import './Profile.scss';
 
@@ -9,6 +9,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
 
+    this.toggleStatus = this.toggleStatus.bind(this);
     this.forSale = this.forSale.bind(this);
     this.sold = this.sold.bind(this);
   }
@@ -16,6 +17,23 @@ class Profile extends Component {
   componentDidMount() {
     this.props.getProfile();
     this.props.getUsersItems();
+  }
+
+  toggleStatus(e) {
+    e.preventDefault();
+
+    const id = e.target.dataset.id;
+    const status_id = e.target.dataset.status;
+
+    if (status_id !== '1') {
+      return this.props.editItem({ id: id, status_id: 1 }).then(data => {
+        return this.props.history.push(`/items/${id}`);
+      });
+    } else {
+      return this.props.editItem({ id: id, status_id: 3 }).then(data => {
+        return this.props.history.push(`/items/${id}`);
+      });
+    }
   }
 
   forSale() {
@@ -62,7 +80,6 @@ class Profile extends Component {
             </div>
           </div>
           <div className="status-container">
-
             <div className="columns-container">
               <div className="column">
                 <div className="status-column">Status</div>
@@ -88,11 +105,16 @@ class Profile extends Component {
               <div className="column">
                 <div className="id-column">Post Id</div>
               </div>
-        
             </div>
             <div className="item-list-container">
-              <ProfileItemList items={this.forSale()} />
-              <ProfileItemList items={this.sold()} />
+              <ProfileItemList
+                items={this.forSale()}
+                toggleStatus={this.toggleStatus}
+              />
+              <ProfileItemList
+                items={this.sold()}
+                toggleStatus={this.toggleStatus}
+              />
             </div>
           </div>
         </div>
@@ -112,7 +134,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProfile: () => dispatch(getProfile()),
-    getUsersItems: () => dispatch(getUsersItems())
+    getUsersItems: () => dispatch(getUsersItems()),
+    editItem: item => dispatch(editItem(item))
   };
 };
 
