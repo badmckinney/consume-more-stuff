@@ -45,6 +45,42 @@ html {
                     margin-bottom: 15px;
                     font-size: 16px;
                   }
+                  
+                  .input-container {
+                    width: 70%;
+                    margin-bottom: 15px;
+
+                    .nested-input {
+                      position: relative;
+                      z-index: 0;
+                      width: 100%;
+                      padding: 15px;
+                      margin-bottom: 0;
+                      border-radius: 2px;
+                      border: 1px solid $primary-color;
+                      font-size: 16px;
+                    }
+
+                    span {
+                      font-family: $body-font;
+                      position: relative;
+                      background: white;
+                      bottom: 35px;
+                      left: 250px;
+                    }
+
+                    .hide {
+                      display: none;
+                    }
+
+                    .valid {
+                      color: green;
+                    }
+
+                    .invalid {
+                      color: red;
+                    }
+                  }
                 }
 
                 .button-container {

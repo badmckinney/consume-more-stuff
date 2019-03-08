@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './ProfileEdit.scss';
 
-import { getProfile, editProfile } from '../../actions';
+import {
+  getProfile,
+  editProfile,
+  checkUniqueEmail,
+  checkUniqueUsername
+} from '../../actions';
 
 class ProfileEdit extends Component {
   constructor(props) {
@@ -11,15 +16,25 @@ class ProfileEdit extends Component {
 
     this.state = {
       isError: false,
+      isEmailUnique: false,
+      isUsernameUnique: false,
       email: '',
       username: '',
       first_name: '',
-      last_name: ''
+      last_name: '',
+      touched: {
+        email: false,
+        username: false
+      }
     };
 
     this.form = React.createRef();
     this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
+    this.checkUniqueEmail = this.checkUniqueEmail.bind(this);
+    this.checkUniqueUsername = this.checkUniqueUsername.bind(this);
+    this.makeEmailSpanClassName = this.makeEmailSpanClassName.bind(this);
+    this.makeUsernameSpanClassName = this.makeUsernameSpanClassName.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -42,7 +57,7 @@ class ProfileEdit extends Component {
   }
 
   validate() {
-    return this.form.current.reportValidity()
+    return this.form.current.reportValidity();
   }
 
   error() {
@@ -51,6 +66,74 @@ class ProfileEdit extends Component {
     }
 
     return <></>;
+  }
+
+  makeEmailSpanClassName() {
+    let className;
+
+    this.state.touched.email ? (className = 'show') : (className = 'hide');
+
+    this.state.isEmailUnique
+      ? (className += ' valid')
+      : (className += ' invalid');
+
+    return className;
+  }
+
+  makeUsernameSpanClassName() {
+    let className;
+
+    this.state.touched.username ? (className = 'show') : (className = 'hide');
+
+    this.state.isUsernameUnique
+      ? (className += ' valid')
+      : (className += ' invalid');
+
+    return className;
+  }
+
+  checkUniqueEmail(e) {
+    const email = e.target.value;
+
+    this.setState({
+      touched: { ...this.state.touched, email: true }
+    });
+
+    if (this.state.email === '') {
+      this.setState({
+        touched: { ...this.state.touched, email: false }
+      });
+    }
+
+    this.props.checkUniqueEmail(email).then(exists => {
+      if (exists) {
+        return this.setState({ isEmailUnique: true });
+      }
+
+      return this.setState({ isEmailUnique: false });
+    });
+  }
+
+  checkUniqueUsername(e) {
+    const username = e.target.value;
+
+    this.setState({
+      touched: { ...this.state.touched, username: true }
+    });
+
+    if (this.state.email === '') {
+      this.setState({
+        touched: { ...this.state.touched, email: false }
+      });
+    }
+
+    this.props.checkUniqueUsername(username).then(exists => {
+      if (exists) {
+        return this.setState({ isUsernameUnique: true });
+      }
+
+      return this.setState({ isUsernameUnique: false });
+    });
   }
 
   handleInputOnChange(e) {
@@ -64,7 +147,7 @@ class ProfileEdit extends Component {
     const editedProfile = this.state;
 
     if (!this.validate()) {
-      return
+      return;
     }
 
     e.preventDefault();
@@ -110,24 +193,40 @@ class ProfileEdit extends Component {
             required
             pattern="[A-Za-z]{1,30}"
           />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleInputOnChange}
-            required
-          />
 
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={this.state.username}
-            onChange={this.handleInputOnChange}
-            required
-            pattern="[A-Za-z0-9_]{6,30}"
-          />
+          <div className="input-container">
+            <input
+              className="nested-input"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={this.state.email}
+              onChange={this.handleInputOnChange}
+              onKeyUp={this.checkUniqueEmail}
+              required
+            />
+            <span className={this.makeEmailSpanClassName()}>
+              {this.state.isEmailUnique ? 'Available!' : 'Taken'}
+            </span>
+          </div>
+
+          <div className="input-container">
+            <input
+              className="nested-input"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleInputOnChange}
+              onKeyUp={this.checkUniqueUsername}
+              required
+              pattern="[A-Za-z0-9_]{6,30}"
+            />
+            <span className={this.makeUsernameSpanClassName()}>
+              {this.state.isUsernameUnique ? 'Available!' : 'Taken'}
+            </span>
+          </div>
+
           <div className="button-container">
             <Link to="/password"><div>Change password</div></Link>
             <button className="btn" onClick={this.handleSubmit}>Edit Profile</button>
@@ -148,7 +247,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProfile: () => dispatch(getProfile()),
-    editProfile: editedProfile => dispatch(editProfile(editedProfile))
+    editProfile: editedProfile => dispatch(editProfile(editedProfile)),
+    checkUniqueEmail: email => dispatch(checkUniqueEmail(email)),
+    checkUniqueUsername: username => dispatch(checkUniqueUsername(username))
   };
 };
 

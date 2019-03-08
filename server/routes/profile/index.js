@@ -28,6 +28,42 @@ router.get('/profile', (req, res) => {
     });
 });
 
+router.get('/profile/username/:username/isunique', (req, res) => {
+  const username = req.params.username;
+
+  User.where('username', username)
+    .fetch()
+    .then(user => {
+      if (user) {
+        return res.json({ exists: true });
+      }
+
+      return res.json({ exists: false });
+    })
+    .catch(err => {
+      res.status(500);
+      res.json(err);
+    });
+});
+
+router.get('/profile/email/:email/isunique', (req, res) => {
+  const email = req.params.email;
+
+  User.where('email', email)
+    .fetch()
+    .then(user => {
+      if (user) {
+        return res.json({ exists: true });
+      }
+
+      return res.json({ exists: false });
+    })
+    .catch(err => {
+      res.status(500);
+      res.json(err);
+    });
+});
+
 /************************
  *  PUT
  ************************/
