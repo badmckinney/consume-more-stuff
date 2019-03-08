@@ -1,6 +1,6 @@
 $logo-font: 'Staatliches', sans-serif;
 $body-font: 'Roboto', sans-serif;
-$primary-color: #304FFE;
+$primary-color: #304ffe;
 $secondary-color: #424242;
 $tertiary-color: #eee;
 $hover-color: lighten($primary-color, 10%);
@@ -21,6 +21,23 @@ html {
               justify-content: center;
               align-items: center;
 
+              .message-container {
+                width: 45%;
+                margin-bottom: 15px;
+                .message {
+                  background: #fff;
+                  text-align: center;
+                  margin-bottom: 10px;
+                  padding: 10px;
+                  border-radius: 3px;
+                  box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
+                  color: $primary-color;
+                  font-family: $body-font;
+                  font-weight: 500;
+                  text-transform: uppercase;
+                }
+              }
+
               .error {
                 color: red;
                 text-align: center;
@@ -28,15 +45,15 @@ html {
               }
 
               form {
-                  width: 45%;
-                  height: 50%;
-                  background: #fff;
-                  border-radius: 3px;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-                  box-shadow: 5px 5px 28px rgba(0,0,0,0.2);
+                width: 45%;
+                height: 50%;
+                background: #fff;
+                border-radius: 3px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
               }
 
               h1 {

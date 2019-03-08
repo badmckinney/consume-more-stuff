@@ -19,6 +19,27 @@ class Profile extends Component {
     this.props.getUsersItems();
   }
 
+  componentWillUnmount() {
+    if (this.props.isMessages.editProfile) {
+      this.props.toggleMsg('editProfile');
+    }
+    if (this.props.isMessages.passwordUpdated) {
+      this.props.toggleMsg('passwordUpdated');
+    }
+  }
+
+  showMessage() {
+    if (this.props.isMessages.editProfile) {
+      return <div className="message">You profile has been updated.</div>;
+    }
+
+    if (this.props.isMessages.passwordUpdated) {
+      return <div className="message">Your password has been updated.</div>;
+    }
+
+    return <></>;
+  }
+
   toggleStatus(e) {
     e.preventDefault();
 
@@ -27,10 +48,12 @@ class Profile extends Component {
 
     if (status_id !== '1') {
       return this.props.editItem({ id: id, status_id: 1 }).then(data => {
+        this.props.toggleMsg('editItemStatus');
         return this.props.history.push(`/items/${id}`);
       });
     } else {
       return this.props.editItem({ id: id, status_id: 3 }).then(data => {
+        this.props.toggleMsg('editItemStatus');
         return this.props.history.push(`/items/${id}`);
       });
     }
@@ -59,11 +82,14 @@ class Profile extends Component {
       <>
         <div className="title">My Account</div>
         <div className="profile-container">
+          <div className="message-container">{this.showMessage()}</div>
           <div className="user-info-container">
             <div className="left">
               <div className="email">Email: {profile.email}</div>
               <div className="username">Username: {profile.username}</div>
-              <Link to="/password"><button className="btn">Change Password</button></Link>
+              <Link to="/password">
+                <button className="btn">Change Password</button>
+              </Link>
             </div>
 
             <div className="right">

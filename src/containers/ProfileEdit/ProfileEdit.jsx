@@ -157,6 +157,7 @@ class ProfileEdit extends Component {
       }
 
       this.setState({ isError: false });
+      this.props.toggleMsg('editProfile');
       return this.props.history.push('/profile');
     });
   }
@@ -173,7 +174,7 @@ class ProfileEdit extends Component {
     return (
       <div className="edit-profile-container">
         {this.error()}
-        <form className="edit-profile">
+        <form className="edit-profile" ref={this.form}>
           <input
             type="text"
             name="first_name"
@@ -228,8 +229,12 @@ class ProfileEdit extends Component {
           </div>
 
           <div className="button-container">
-            <Link to="/password"><div>Change password</div></Link>
-            <button className="btn" onClick={this.handleSubmit}>Edit Profile</button>
+            <Link to="/password">
+              <div>Change password</div>
+            </Link>
+            <button className="btn" onClick={this.handleSubmit}>
+              Edit Profile
+            </button>
           </div>
         </form>
       </div>
