@@ -1,3 +1,10 @@
+$logo-font: 'Staatliches', sans-serif;
+$body-font: 'Roboto', sans-serif;
+$primary-color: #304ffe;
+$secondary-color: #424242;
+$tertiary-color: #eee;
+$hover-color: lighten($primary-color, 10%);
+
 html{
   overflow-x: hidden;
   body{
@@ -10,9 +17,13 @@ html{
           width: 100vw;
 
           .app-body{
-            width: 80%;
-            height:100%;
-            max-width: 80%;
+            display: flex;
+            flex-direction: column;
+            width: 80.1%;
+            height: 100%;
+            margin-left: calc(100vw - 80.3%);
+            background: $tertiary-color;
+            min-height: 94.5vh;
           }
         }
       }

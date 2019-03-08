@@ -57,18 +57,13 @@ class Profile extends Component {
 
     return (
       <>
+        <div className="title">My Account</div>
         <div className="profile-container">
-          <div className="title-container">
-            <div className="title">My Account</div>
-          </div>
           <div className="user-info-container">
             <div className="left">
               <div className="email">Email: {profile.email}</div>
               <div className="username">Username: {profile.username}</div>
-              {/* <div className="password">
-                Password:
-                <Link to="/password"> change password</Link>
-              </div> */}
+              <Link to="/password"><button className="btn">Change Password</button></Link>
             </div>
 
             <div className="right">
@@ -81,41 +76,23 @@ class Profile extends Component {
           </div>
           <div className="status-container">
             <div className="columns-container">
-              <div className="column">
-                <div className="status-column">Status</div>
-              </div>
-              <div className="column">
-                <div className="manage-column">Manage</div>
-              </div>
-              <div className="column">
-                <div className="title-column">Post Title</div>
-              </div>
-              <div className="column">
-                <div className="category-column">Category</div>
-              </div>
-              <div className="column">
-                <div className="date-column">Date Posted</div>
-              </div>
-              <div className="column">
-                <div className="update-column">Last Updated At</div>
-              </div>
-              <div className="column">
-                <div className="views-column">views</div>
-              </div>
-              <div className="column">
-                <div className="id-column">Post Id</div>
-              </div>
+              <div className="status-column">Status</div>
+              <div className="manage-column">Manage</div>
+              <div className="title-column">Post Title</div>
+              <div className="category-column">Category</div>
+              <div className="date-column">Date Posted</div>
+              <div className="update-column">Last Updated At</div>
+              <div className="views-column">views</div>
+              <div className="id-column">Post Id</div>
             </div>
-            <div className="item-list-container">
-              <ProfileItemList
-                items={this.forSale()}
-                toggleStatus={this.toggleStatus}
-              />
-              <ProfileItemList
-                items={this.sold()}
-                toggleStatus={this.toggleStatus}
-              />
-            </div>
+            <ProfileItemList
+              items={this.forSale()}
+              toggleStatus={this.toggleStatus}
+            />
+            <ProfileItemList
+              items={this.sold()}
+              toggleStatus={this.toggleStatus}
+            />
           </div>
         </div>
       </>
