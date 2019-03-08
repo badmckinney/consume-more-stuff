@@ -25,7 +25,6 @@ class App extends Component {
     super(props);
 
     this.state = {
-      prevPath: '',
       isMessage: {
         addItem: false,
         editItem: false,
