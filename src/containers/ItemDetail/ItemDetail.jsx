@@ -88,9 +88,8 @@ class ItemDetail extends Component {
 
     return (
       <div className="detail-container">
-      <div className="message-container">
-      <div className="message">i am a message</div>
-      </div>
+        <div className="message-container">
+        </div>
         <div className="header-container">
           <div className="header-left">
             <h1> {item.name} –</h1>
