@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadSingleItem } from '../../actions';
+import { loadSingleItem, incrementViews } from '../../actions';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import './ItemDetail.scss';
@@ -17,13 +17,14 @@ class ItemDetail extends Component {
   }
 
   componentDidMount() {
-    const item = this.props.match.params.id;
-    this.props.loadItem(item).then(data => {
+    const id = this.props.match.params.id;
+    this.props.loadItem(id).then(data => {
       if (!data) {
         return this.setState({ notFound: true });
       }
 
-      return this.setState({ notFound: false });
+      this.setState({ notFound: false });
+      return this.props.incrementViews(id);
     });
   }
 
@@ -87,20 +88,22 @@ class ItemDetail extends Component {
 
     return (
       <div className="detail-container">
-        {this.editButton()}
         <div className="header-container">
-          <h3> {item.name} </h3>
-          <h3> {item.price ? `$${item.price}` : ''} </h3>
-
-          <h3>
-            Posted <Moment fromNow>{localCreatedAt}</Moment>
-          </h3>
+          <div className="header-left">
+            <h1> {item.name} –</h1>
+            <h2> {item.price ? `$${item.price}` : ''} </h2>
+            <h4>
+              Posted <Moment fromNow>{localCreatedAt}</Moment>
+            </h4>
+          </div>
+          {this.editButton()}
         </div>
         <div className="content-wrapper">
-          <div className="detail-image">
+          <div className="detail-left">
             <img alt={item.name} src={item.image} />
+            <div className="description">{item.description}</div>
           </div>
-          <div className="detail-wrapper">
+          <div className="detail-right">
             <div className="detail">
               <p>Manufacturer: </p>
               <p>{item.manufacturer}</p>
@@ -111,19 +114,14 @@ class ItemDetail extends Component {
               <p> {item.model} </p>
             </div>
 
-            <div className="detail">Length: {item.length}</div>
-            <div className="detail">Width: {item.width}</div>
-            <div className="detail">Height: {item.height}</div>
+            <div className="detail"><p>Length:</p> {item.length}</div>
+            <div className="detail"><p>Width:</p> {item.width}</div>
+            <div className="detail"><p>Height:</p> {item.height}</div>
 
             <div className="detail">
-              <p> Additional information</p>
+              <p> Additional notes: </p>
               <p> {item.notes} </p>
             </div>
-          </div>
-        </div>
-        <div className="description-container">
-          <div className="description">
-            <div>{item.description}</div>
           </div>
         </div>
         <div className="additional-details">
@@ -144,7 +142,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadItem: item => dispatch(loadSingleItem(item))
+    loadItem: item => dispatch(loadSingleItem(item)),
+    incrementViews: id => dispatch(incrementViews(id))
   };
 };
 

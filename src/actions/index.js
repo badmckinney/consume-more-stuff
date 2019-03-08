@@ -13,6 +13,7 @@ export const EDIT_PROFILE = 'EDIT_PROFILE';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const CHECK_UNIQUE_USERNAME = 'CHECK_UNIQUE_USERNAME';
 export const CHECK_UNIQUE_EMAIL = 'CHECK_UNIQUE_EMAIL';
+export const INCREMENT_VIEWS = 'INCREMENT_VIEWS';
 
 export const register = newUser => {
   return () => {
@@ -331,5 +332,11 @@ export const checkUniqueEmail = email => {
         return false;
       })
       .catch(err => false);
+export const incrementViews = id => {
+  return () => {
+    return fetch(`/api/items/${id}/views`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }
+    });
   };
 };

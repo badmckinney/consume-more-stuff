@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { searchItems } from '../../actions';
 import { connect } from 'react-redux';
 import ItemList from '../../components/ItemList';
+import './SearchDisplay.scss';
 
 class SearchDisplay extends Component {
   constructor(props) {

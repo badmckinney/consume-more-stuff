@@ -39,53 +39,62 @@ class Profile extends Component {
 
     return (
       <>
-        <div className="profile-info">
-          <div className="title">My Account</div>
+        <div className="profile-container">
+          <div className="title-container">
+            <div className="title">My Account</div>
+          </div>
+          <div className="user-info-container">
+            <div className="left">
+              <div className="email">Email: {profile.email}</div>
+              <div className="username">Username: {profile.username}</div>
+              {/* <div className="password">
+                Password:
+                <Link to="/password"> change password</Link>
+              </div> */}
+            </div>
 
-          <div className="left">
-            <div className="email">Email: {profile.email}</div>
-            <div className="username">Username: {profile.username}</div>
-            <div className="password">
-              Password:
-              <Link to="/password"> change password</Link>
+            <div className="right">
+              <div className="first-name">First Name: {profile.first_name}</div>
+              <div className="last-name">Last Name: {profile.last_name}</div>
+              <Link to="/profile/edit">
+                <button className="btn">Edit Profile</button>
+              </Link>
             </div>
           </div>
+          <div className="status-container">
 
-          <div className="right">
-            <div className="first-name">First Name: {profile.first_name}</div>
-            <div className="last-name">Last Name: {profile.last_name}</div>
-            <Link to="/profile/edit">
-              <button>edit profile</button>
-            </Link>
+            <div className="columns-container">
+              <div className="column">
+                <div className="status-column">Status</div>
+              </div>
+              <div className="column">
+                <div className="manage-column">Manage</div>
+              </div>
+              <div className="column">
+                <div className="title-column">Post Title</div>
+              </div>
+              <div className="column">
+                <div className="category-column">Category</div>
+              </div>
+              <div className="column">
+                <div className="date-column">Date Posted</div>
+              </div>
+              <div className="column">
+                <div className="update-column">Last Updated At</div>
+              </div>
+              <div className="column">
+                <div className="views-column">views</div>
+              </div>
+              <div className="column">
+                <div className="id-column">Post Id</div>
+              </div>
+        
+            </div>
+            <div className="item-list-container">
+              <ProfileItemList items={this.forSale()} />
+              <ProfileItemList items={this.sold()} />
+            </div>
           </div>
-        </div>
-
-        <div className="forsale">
-          <div className="title">For Sale</div>
-          <div className="column-titles">
-            <div className="status">status</div>
-            <div className="manage">manage</div>
-            <div className="name">posting title</div>
-            <div className="category">category</div>
-            <div className="timestamps">posted date</div>
-            <div className="views">views</div>
-            <div className="id">id</div>
-          </div>
-          <ProfileItemList items={this.forSale()} />
-        </div>
-
-        <div className="sold">
-          <div className="title">Sold</div>
-          <div className="column-titles">
-            <div className="status">status</div>
-            <div className="manage">manage</div>
-            <div className="name">posting title</div>
-            <div className="category">category</div>
-            <div className="timestamps">posted date</div>
-            <div className="views">views</div>
-            <div className="id">id</div>
-          </div>
-          <ProfileItemList items={this.sold()} />
         </div>
       </>
     );

@@ -5,6 +5,10 @@ $secondary-color: #424242;
 $tertiary-color: #eee;
 $hover-color: lighten($primary-color, 5%);
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   body {
    width: 100%;
