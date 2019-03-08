@@ -16,7 +16,7 @@ const ProfileItemList = props => {
             data-id={id}
             data-status={status_id}
           >
-            re-publish posting
+            Re-publish
           </button>
         </div>
       );
@@ -29,7 +29,7 @@ const ProfileItemList = props => {
             data-id={id}
             data-status={status_id}
           >
-            mark as sold
+            Mark as sold
           </button>
         </div>
       );
@@ -42,55 +42,32 @@ const ProfileItemList = props => {
 
     return (
       <div className="item" key={item.id}>
-        <Link className="item-detail-container" to={`/items/${item.id}`}>
-          <div className="item-columns">
-            <div className="item-status">{item.status.name}</div>
-          </div>
-        </Link>
-
-        <div className="item-columns manage">
+        <div className="status-column">{item.status.name}</div>
+        <div className="manage-column">
           <Link className="item-detail-container" to={`/items/${item.id}`}>
-            <div className="item-display">
-              <button className="btn">Display</button>
-            </div>
+            <button className="btn">View</button>
           </Link>
           <Link className="item-detail-container" to={`/items/${item.id}/edit`}>
-            <div className="item-edit">
-              <button className="btn">Edit</button>
-            </div>
+            <button className="btn">Edit</button>
           </Link>
           {makeStatusButton(item.status_id, item.id)}
         </div>
+        <div className="title-column">{item.name}</div>
+        <div className="category-column">{item.category.name}</div>
+        <div className="date-column">
+          <Moment format="LLL">{localCreatedAt}</Moment>
+        </div>
+        <div className="update-column">
+          <Moment format="LLL">{localUpdatedAt}</Moment>
+        </div>
+        <div className="views-column">{item.views}</div>
+        <div className="id-column">{item.id}</div>
 
-        <Link className="item-detail-container" to={`/items/${item.id}`}>
-          <div className="item-columns">
-            <div className="item-name">{item.name}</div>
-          </div>
-          <div className="item-columns">
-            <div className="item-category">{item.category.name}</div>
-          </div>
-          <div className="item-columns">
-            <div className="item-date">
-              <Moment format="LLL">{localCreatedAt}</Moment>
-            </div>
-          </div>
-          <div className="item-columns">
-            <div className="item-updated-date">
-              <Moment format="LLL">{localUpdatedAt}</Moment>
-            </div>
-          </div>
-          <div className="item-columns">
-            <div className="item-views">{item.views}</div>
-          </div>
-          <div className="item-columns">
-            <div className="item-id">{item.id}</div>
-          </div>
-        </Link>
       </div>
     );
   });
 
-  return <div className="item-list">{itemList}</div>;
+  return <>{itemList}</>;
 };
 
 export default ProfileItemList;
