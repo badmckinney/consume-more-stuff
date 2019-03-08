@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadSingleItem } from '../../actions';
+import { loadSingleItem, incrementViews } from '../../actions';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import './ItemDetail.scss';
@@ -17,13 +17,14 @@ class ItemDetail extends Component {
   }
 
   componentDidMount() {
-    const item = this.props.match.params.id;
-    this.props.loadItem(item).then(data => {
+    const id = this.props.match.params.id;
+    this.props.loadItem(id).then(data => {
       if (!data) {
         return this.setState({ notFound: true });
       }
 
-      return this.setState({ notFound: false });
+      this.setState({ notFound: false });
+      return this.props.incrementViews(id);
     });
   }
 
@@ -141,7 +142,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadItem: item => dispatch(loadSingleItem(item))
+    loadItem: item => dispatch(loadSingleItem(item)),
+    incrementViews: id => dispatch(incrementViews(id))
   };
 };
 

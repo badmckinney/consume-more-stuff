@@ -399,6 +399,30 @@ router.put('/items/:id', (req, res) => {
     });
 });
 
+router.put('/items/:id/views', (req, res) => {
+  const id = req.params.id;
+
+  Item.where('id', id)
+    .fetch()
+    .then(item => {
+      const newViews = ++item.attributes.views;
+
+      item
+        .save({ views: newViews }, { patch: true })
+        .then(() => {
+          res.json({ success: true });
+        })
+        .catch(err => {
+          res.status(500);
+          res.json(err);
+        });
+    })
+    .catch(err => {
+      res.status(500);
+      res.json(err);
+    });
+});
+
 /************************
  *  DELETE
  ************************/
