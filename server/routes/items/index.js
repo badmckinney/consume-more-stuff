@@ -320,7 +320,6 @@ router.post('/items/new', upload.single('image'), isAuthenticated, (req, res) =>
       }
     });
   } else {
-    console.log('hit', req.body.image);
     const newItem = {
       created_by: user.id,
       category_id: parseInt(req.body.category_id),
