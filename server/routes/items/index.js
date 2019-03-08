@@ -6,7 +6,6 @@ const multer = require('multer');
 const upload = multer({ dest: 'server/uploads/' });
 const isAuthenticated = require('../isAuth');
 
-
 const bookshelf = require('../../../database/models/bookshelf');
 const Item = require('../../../database/models/Item');
 const Category = require('../../../database/models/Category');
@@ -30,9 +29,12 @@ s3 = new AWS.S3({ apiVersion: '2006-03-01' });
  ************************/
 
 router.get('/items', (req, res) => {
-  Item.fetchAll({
-    withRelated: ['createdBy', 'category', 'condition', 'status']
-  })
+  Item
+    .forge()
+    .orderBy('updated_at', 'DESC')
+    .fetchAll({
+      withRelated: ['createdBy', 'category', 'condition', 'status']
+    })
     .then(items => {
       res.json(items);
     })
@@ -46,6 +48,7 @@ router.get('/items/owned', isAuthenticated, (req, res) => {
   const id = req.user.id;
 
   Item.where('created_by', id)
+    .orderBy('updated_at', 'DESC')
     .fetchAll({
       withRelated: ['createdBy', 'category', 'condition', 'status']
     })
@@ -92,6 +95,7 @@ router.get('/items/category/:category', (req, res) => {
   new Category({ name: category_name }).fetch().then(category => {
     category = category.toJSON();
     Item.where('category_id', '=', category.id)
+      .orderBy('updated_at', 'DESC')
       .fetchAll({
         withRelated: ['createdBy', 'category', 'condition', 'status']
       })
@@ -344,13 +348,43 @@ router.post('/items/new', upload.single('image'), isAuthenticated, (req, res) =>
         return res.json({
           id: newItem.id
         });
-      })
-      .catch(err => {
-        res.status(500);
-        res.json(err);
+<<<<<<< HEAD
+      }
+    });
+  } else {
+  const newItem = {
+    created_by: user.id,
+    category_id: parseInt(req.body.category_id),
+    name: req.body.name,
+    price: req.body.price ? parseInt(req.body.price) : null,
+    image: req.body.image,
+    description: req.body.description,
+    manufacturer: req.body.manufacturer,
+    model: req.body.manufacturer,
+    condition_id: parseInt(req.body.condition_id),
+    length: req.body.length ? parseInt(req.body.length) : null,
+    width: req.body.width ? parseInt(req.body.width) : null,
+    height: req.body.height ? parseInt(req.body.height) : null,
+    notes: req.body.notes,
+    status_id: 1,
+    views: 0
+  };
+
+  Item.forge(newItem)
+    .save(null, { method: 'insert' })
+    .then(newItem => {
+      return res.json({
+        id: newItem.id
+=======
+        })
+        .catch(err => {
+          res.status(500);
+          res.json(err);
+>>>>>>> dev
       });
+    }
   }
-});
+);
 
 /************************
  * PUT
