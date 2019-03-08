@@ -105,4 +105,8 @@ $hover-color: lighten($primary-color, 5%);
       }
     }
   }
+  .manage {
+    display: flex;
+    flex-flow: row nowrap;
+  }
 }
