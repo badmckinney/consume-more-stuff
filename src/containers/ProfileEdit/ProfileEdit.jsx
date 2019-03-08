@@ -121,9 +121,9 @@ class ProfileEdit extends Component {
       touched: { ...this.state.touched, username: true }
     });
 
-    if (this.state.email === '') {
+    if (this.state.username === '') {
       this.setState({
-        touched: { ...this.state.touched, email: false }
+        touched: { ...this.state.touched, username: false }
       });
     }
 
