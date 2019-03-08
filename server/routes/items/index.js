@@ -348,42 +348,13 @@ router.post('/items/new', upload.single('image'), isAuthenticated, (req, res) =>
         return res.json({
           id: newItem.id
         });
-<<<<<<< HEAD
-      }
-    });
-  } else {
-  const newItem = {
-    created_by: user.id,
-    category_id: parseInt(req.body.category_id),
-    name: req.body.name,
-    price: req.body.price ? parseInt(req.body.price) : null,
-    image: req.body.image,
-    description: req.body.description,
-    manufacturer: req.body.manufacturer,
-    model: req.body.manufacturer,
-    condition_id: parseInt(req.body.condition_id),
-    length: req.body.length ? parseInt(req.body.length) : null,
-    width: req.body.width ? parseInt(req.body.width) : null,
-    height: req.body.height ? parseInt(req.body.height) : null,
-    notes: req.body.notes,
-    status_id: 1,
-    views: 0
-  };
-
-  Item.forge(newItem)
-    .save(null, { method: 'insert' })
-    .then(newItem => {
-      return res.json({
-        id: newItem.id
-=======
-        })
-        .catch(err => {
-          res.status(500);
-          res.json(err);
->>>>>>> dev
+      })
+      .catch(err => {
+        res.status(500);
+        res.json(err);
       });
-    }
   }
+}
 );
 
 /************************
