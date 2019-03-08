@@ -332,6 +332,9 @@ export const checkUniqueEmail = email => {
         return false;
       })
       .catch(err => false);
+  };
+};
+
 export const incrementViews = id => {
   return () => {
     return fetch(`/api/items/${id}/views`, {
