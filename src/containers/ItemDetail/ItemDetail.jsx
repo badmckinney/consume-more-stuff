@@ -55,34 +55,18 @@ class ItemDetail extends Component {
 
   showMessage(status_id) {
     if (this.props.isMessages.addItem) {
-      return (
-        <div className="message-container">
-          <div className="message">You have created a new post.</div>
-        </div>
-      );
+      return <div className="message">You have created a new post.</div>;
     }
 
     if (this.props.isMessages.editItem) {
-      return (
-        <div className="message-container">
-          <div className="message">Your post has been updated.</div>
-        </div>
-      );
+      return <div className="message">Your post has been updated.</div>;
     }
 
     if (this.props.isMessages.editItemStatus) {
       if (status_id === 1) {
-        return (
-          <div className="message-container">
-            <div className="message">Your post has been re-published.</div>
-          </div>
-        );
+        return <div className="message">Your post has been re-published.</div>;
       }
-      return (
-        <div className="message-container">
-          <div className="message">Your post has been marked as sold.</div>
-        </div>
-      );
+      return <div className="message">Your post has been marked as sold.</div>;
     }
 
     return <></>;
@@ -135,7 +119,9 @@ class ItemDetail extends Component {
 
     return (
       <div className="detail-container">
-        {this.showMessage(item.status_id)}
+        <div className="message-container">
+          {this.showMessage(item.status_id)}
+        </div>
         <div className="header-container">
           <div className="header-left">
             <h1> {item.name} –</h1>
