@@ -67,7 +67,11 @@ class NewItem extends Component {
     }
 
     for (var key in newItem) {
-      formData.append(key, newItem[key]);
+      if (key === 'image' && !newItem[key]) {
+        formData.append(key, '/assets/no-img.jpeg');
+      } else {
+        formData.append(key, newItem[key]);
+      }
     }
 
     this.props.addItem(formData).then(data => {

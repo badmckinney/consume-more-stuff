@@ -44,10 +44,11 @@ html {
                     color: $secondary-color;
 
                     .img-container {
-                      height: 80%;
+                      height: 70%;
 
                       img {
                         width: 100%;
+                        object-fit: contain;
                       }
                     }
 
