@@ -83,7 +83,7 @@ class ItemEdit extends Component {
 
   error() {
     if (this.state.editError) {
-      return <div className="error">error editing post</div>;
+      return <div className="error">Error editing post</div>;
     }
 
     return <></>;
@@ -117,11 +117,11 @@ class ItemEdit extends Component {
 
   render() {
     if (this.state.notFound) {
-      return <div className="error">Item not found</div>;
+      return <div className="error">Post not found</div>;
     }
 
     if (!this.state.isOwner) {
-      return <div className="error">Denied: user does not own this post</div>;
+      return <div className="error"> That post does not belong to you! </div>;
     }
 
     return (
