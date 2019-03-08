@@ -36,7 +36,8 @@ html {
                   align-items: center;
                   font-family: $body-font;
 
-                  h1, h2 {
+                  h1,
+                  h2 {
                     margin-right: 15px;
                     color: $secondary-color;
                   }
@@ -67,8 +68,8 @@ html {
                 .btn:active {
                   background: $secondary-color;
                 }
-                .btn:hover{
-                  background:$hover-color;
+                .btn:hover {
+                  background: $hover-color;
                 }
               }
 
@@ -141,7 +142,6 @@ html {
                   text-transform: uppercase;
                 }
               }
-
             }
           }
         }
