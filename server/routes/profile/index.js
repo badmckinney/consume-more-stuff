@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../../../database/models/User');
-
+const isAuthenticated = require('../isAuth');
 const saltRounds = 12;
 
 /************************
@@ -32,7 +32,7 @@ router.get('/profile', (req, res) => {
  *  PUT
  ************************/
 
-router.put('/profile', (req, res) => {
+router.put('/profile', isAuthenticated, (req, res) => {
   const id = req.user.id;
   const { email, username, first_name, last_name } = req.body;
   const editedProfile = { email, username, first_name, last_name };
