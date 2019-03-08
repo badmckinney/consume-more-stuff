@@ -1,21 +1,36 @@
+$logo-font: 'Staatliches', sans-serif;
+$body-font: 'Roboto', sans-serif;
+$primary-color: #304ffe;
+$secondary-color: #424242;
+$tertiary-color: #eee;
+$hover-color: lighten($primary-color, 10%);
+
 html {
   body {
     #root {
       .app-container {
         .sidebar-app-container {
           .app-body {
-              .logout-container {
-                margin-top: 20%;
-                text-align: center;
-                font-size: 30px;
-                .link {
-                  text-decoration: none;
-                }
-              }
+            .logout-container {
+              margin: auto;
+              font-family: $body-font;
+              max-width: 80%;
+              margin-top: 20%;
+              text-align: center;
+              line-height: 50px;
+              font-size: 30px;
+              margin-bottom: 10px;
+              padding: 35px;
+              border-radius: 3px;
+              border: 1px solid $primary-color;
+              color: $primary-color;
+              font-family: $body-font;
+              font-weight: 500;
+              text-transform: uppercase;
             }
           }
         }
       }
     }
   }
-
+}

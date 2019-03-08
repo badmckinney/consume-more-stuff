@@ -111,6 +111,7 @@ class ItemEdit extends Component {
       }
 
       this.setState({ editError: false });
+      this.props.toggleMsg('editItem');
       return this.props.history.push(`/items/${editedItem.id}`);
     });
   }
@@ -180,7 +181,6 @@ class ItemEdit extends Component {
                   value={this.state.model}
                   onChange={this.handleInputOnChange}
                 />
-
               </div>
               <div className="select-container">
                 <div className="category">

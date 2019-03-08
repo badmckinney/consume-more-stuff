@@ -41,6 +41,37 @@ class ItemDetail extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.props.isMessages.addItem) {
+      this.props.toggleMsg('addItem');
+    }
+    if (this.props.isMessages.editItem) {
+      this.props.toggleMsg('editItem');
+    }
+    if (this.props.isMessages.editItemStatus) {
+      this.props.toggleMsg('editItemStatus');
+    }
+  }
+
+  showMessage(status_id) {
+    if (this.props.isMessages.addItem) {
+      return <div className="message">You have created a new post.</div>;
+    }
+
+    if (this.props.isMessages.editItem) {
+      return <div className="message">Your post has been updated.</div>;
+    }
+
+    if (this.props.isMessages.editItemStatus) {
+      if (status_id === 1) {
+        return <div className="message">Your post has been re-published.</div>;
+      }
+      return <div className="message">Your post has been marked as sold.</div>;
+    }
+
+    return <></>;
+  }
+
   editButton() {
     if (this.props.item.createdBy === this.props.currentUser) {
       return (
@@ -69,10 +100,10 @@ class ItemDetail extends Component {
     return (
       <>
         <div className="created">
-          posted: <Moment fromNow>{localCreatedAt}</Moment>
+          Posted: <Moment fromNow>{localCreatedAt}</Moment>
         </div>
         <div className="updated">
-          updated: <Moment fromNow>{localUpdatedAt}</Moment>
+          Updated: <Moment fromNow>{localUpdatedAt}</Moment>
         </div>
       </>
     );
@@ -89,6 +120,7 @@ class ItemDetail extends Component {
     return (
       <div className="detail-container">
         <div className="message-container">
+          {this.showMessage(item.status_id)}
         </div>
         <div className="header-container">
           <div className="header-left">
@@ -116,9 +148,15 @@ class ItemDetail extends Component {
               <p> {item.model} </p>
             </div>
 
-            <div className="detail"><p>Length:</p> {item.length}</div>
-            <div className="detail"><p>Width:</p> {item.width}</div>
-            <div className="detail"><p>Height:</p> {item.height}</div>
+            <div className="detail">
+              <p>Length:</p> {item.length}
+            </div>
+            <div className="detail">
+              <p>Width:</p> {item.width}
+            </div>
+            <div className="detail">
+              <p>Height:</p> {item.height}
+            </div>
 
             <div className="detail">
               <p> Additional notes: </p>
