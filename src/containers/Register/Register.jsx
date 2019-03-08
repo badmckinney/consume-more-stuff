@@ -27,11 +27,9 @@ class Register extends Component {
     this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
     this.checkUniqueEmail = this.checkUniqueEmail.bind(this);
-    this.makeEmailInputClassName = this.makeEmailInputClassName.bind(this);
-    this.makeUsernameInputClassName = this.makeUsernameInputClassName.bind(
-      this
-    );
     this.checkUniqueUsername = this.checkUniqueUsername.bind(this);
+    this.makeEmailSpanClassName = this.makeEmailSpanClassName.bind(this);
+    this.makeUsernameSpanClassName = this.makeUsernameSpanClassName.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -48,28 +46,28 @@ class Register extends Component {
     return <></>;
   }
 
-  makeEmailInputClassName() {
-    if (!this.state.touched.email) {
-      return 'input-container';
-    }
+  makeEmailSpanClassName() {
+    let className;
 
-    if (this.state.isEmailUnique) {
-      return 'input-container valid';
-    }
+    this.state.touched.email ? (className = 'show') : (className = 'hide');
 
-    return 'input-container invalid';
+    this.state.isEmailUnique
+      ? (className += ' valid')
+      : (className += ' invalid');
+
+    return className;
   }
 
-  makeUsernameInputClassName() {
-    if (!this.state.touched.username) {
-      return 'input-container';
-    }
+  makeUsernameSpanClassName() {
+    let className;
 
-    if (this.state.isUsernameUnique) {
-      return 'input-container valid';
-    }
+    this.state.touched.username ? (className = 'show') : (className = 'hide');
 
-    return 'input-container invalid';
+    this.state.isUsernameUnique
+      ? (className += ' valid')
+      : (className += ' invalid');
+
+    return className;
   }
 
   checkUniqueEmail(e) {
@@ -167,7 +165,7 @@ class Register extends Component {
               required
               pattern="[A-Za-z]{1,30}"
             />
-            <div className={this.makeEmailInputClassName()}>
+            <div className="input-container">
               <input
                 type="email"
                 name="email"
@@ -178,11 +176,11 @@ class Register extends Component {
                 onKeyUp={this.checkUniqueEmail}
                 required
               />
-              <span className={this.state.touched.email ? 'show' : 'hide'}>
+              <span className={this.makeEmailSpanClassName()}>
                 {this.state.isEmailUnique ? 'Available!' : 'Taken'}
               </span>
             </div>
-            <div className={this.makeUsernameInputClassName()}>
+            <div className="input-container">
               <input
                 type="text"
                 name="username"
@@ -194,7 +192,7 @@ class Register extends Component {
                 required
                 pattern="[A-Za-z0-9_]{6,30}"
               />
-              <span className={this.state.touched.username ? 'show' : 'hide'}>
+              <span className={this.makeUsernameSpanClassName()}>
                 {this.state.isUsernameUnique ? 'Available!' : 'Taken'}
               </span>
             </div>
