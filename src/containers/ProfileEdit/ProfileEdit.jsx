@@ -173,84 +173,63 @@ class ProfileEdit extends Component {
     return (
       <div className="edit-profile-container">
         {this.error()}
-        <form ref={this.form} className="edit-profile">
-          <div className="info-container">
-            <div className="left-container">
-              <div>
-                <label htmlFor="email">Email:</label>
-              </div>
-              <div className="input-container">
-                <input
-                  type="email"
-                  name="email"
-                  className="nested-input"
-                  placeholder="Email"
-                  value={this.state.email}
-                  onChange={this.handleInputOnChange}
-                  onKeyUp={this.checkUniqueEmail}
-                  required
-                />
-                <span className={this.makeEmailSpanClassName()}>
-                  {this.state.isEmailUnique ? 'Available!' : 'Taken'}
-                </span>
-              </div>
+        <form className="edit-profile">
+          <input
+            type="text"
+            name="first_name"
+            placeholder="First name"
+            value={this.state.first_name}
+            onChange={this.handleInputOnChange}
+            required
+            pattern="[A-Za-z]{1,30}"
+          />
 
-              <div>
-                <label htmlFor="username">Username:</label>
-              </div>
-              <div className="input-container">
-                <input
-                  type="text"
-                  name="username"
-                  className="nested-input"
-                  placeholder="Username"
-                  value={this.state.username}
-                  onChange={this.handleInputOnChange}
-                  onKeyUp={this.checkUniqueUsername}
-                  required
-                  pattern="[A-Za-z0-9_]{6,30}"
-                />
-                <span className={this.makeUsernameSpanClassName()}>
-                  {this.state.isUsernameUnique ? 'Available!' : 'Taken'}
-                </span>
-              </div>
+          <input
+            type="text"
+            name="last_name"
+            placeholder="Last name"
+            value={this.state.last_name}
+            onChange={this.handleInputOnChange}
+            required
+            pattern="[A-Za-z]{1,30}"
+          />
 
-              <div>
-                <label htmlFor="password">Password:</label>
-              </div>
-              <Link to="/password">change password</Link>
-            </div>
-
-            <div className="right-container">
-              <div>
-                <label htmlFor="first-name">First Name:</label>
-              </div>
-              <input
-                type="text"
-                name="first_name"
-                value={this.state.first_name}
-                onChange={this.handleInputOnChange}
-                required
-                pattern="[A-Za-z]{1,30}"
-              />
-
-              <div>
-                <label htmlFor="last-name">Last Name:</label>
-              </div>
-              <input
-                type="text"
-                name="last_name"
-                value={this.state.last_name}
-                onChange={this.handleInputOnChange}
-                required
-                pattern="[A-Za-z]{1,30}"
-              />
-            </div>
+          <div className="input-container">
+            <input
+              className="nested-input"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={this.state.email}
+              onChange={this.handleInputOnChange}
+              onKeyUp={this.checkUniqueEmail}
+              required
+            />
+            <span className={this.makeEmailSpanClassName()}>
+              {this.state.isEmailUnique ? 'Available!' : 'Taken'}
+            </span>
           </div>
+
+          <div className="input-container">
+            <input
+              className="nested-input"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleInputOnChange}
+              onKeyUp={this.checkUniqueUsername}
+              required
+              pattern="[A-Za-z0-9_]{6,30}"
+            />
+            <span className={this.makeUsernameSpanClassName()}>
+              {this.state.isUsernameUnique ? 'Available!' : 'Taken'}
+            </span>
+          </div>
+
           <div className="button-container">
-            <button className="btn" onClick={this.handleSubmit}>
-              Edit Profile
-            </button>
+            <Link to="/password"><div>Change password</div></Link>
+            <button className="btn" onClick={this.handleSubmit}>Edit Profile</button>
           </div>
         </form>
       </div>
