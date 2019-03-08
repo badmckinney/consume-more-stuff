@@ -44,9 +44,26 @@ html {
               flex-direction: column;
               align-items: center;
 
+              .message-container {
+                width: 45%;
+                margin-bottom: 15px;
+                .message {
+                  background: #fff;
+                  text-align: center;
+                  margin-bottom: 10px;
+                  padding: 10px;
+                  border-radius: 3px;
+                  box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
+                  color: $primary-color;
+                  font-family: $body-font;
+                  font-weight: 500;
+                  text-transform: uppercase;
+                }
+              }
+
               .user-info-container {
                 width: 90%;
-                margin-top: 5em;
+                margin-top: 1em;
                 display: flex;
                 padding: 15px;
                 border: 1px solid $primary-color;
@@ -86,7 +103,7 @@ html {
                 margin-top: 50px;
                 display: flex;
                 flex-direction: column;
-                
+
                 .columns-container,
                 .item {
                   width: 100%;

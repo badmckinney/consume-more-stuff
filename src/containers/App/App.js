@@ -116,12 +116,22 @@ class App extends Component {
                   <Profile
                     {...props}
                     toggleMsg={this.toggleMsg}
-                    isMessages={this.state.isMessage.registered}
+                    isMessages={this.state.isMessage}
                   />
                 )}
               />
-              <Route path="/profile/edit" component={ProfileEdit} />
-              <Route path="/password" component={PasswordEdit} />
+              <Route
+                path="/profile/edit"
+                render={props => (
+                  <ProfileEdit {...props} toggleMsg={this.toggleMsg} />
+                )}
+              />
+              <Route
+                path="/password"
+                render={props => (
+                  <PasswordEdit {...props} toggleMsg={this.toggleMsg} />
+                )}
+              />
               <Route exact path="/" component={Home} />
             </div>
           </div>

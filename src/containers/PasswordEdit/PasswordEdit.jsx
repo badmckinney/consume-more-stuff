@@ -27,7 +27,7 @@ class PasswordEdit extends Component {
     };
 
     this.form = React.createRef();
-    this.validate = this.validate.bind(this)
+    this.validate = this.validate.bind(this);
     this.error = this.error.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
@@ -35,7 +35,7 @@ class PasswordEdit extends Component {
   }
 
   validate() {
-    return this.form.current.reportValidity()
+    return this.form.current.reportValidity();
   }
 
   error() {
@@ -69,7 +69,7 @@ class PasswordEdit extends Component {
     const update = this.state;
 
     if (!this.validate()) {
-      return
+      return;
     }
 
     this.setState({
@@ -88,6 +88,7 @@ class PasswordEdit extends Component {
         case 'error':
           return this.setState({ isError: true });
         case 'success':
+          this.props.toggleMsg('passwordUpdated');
           return this.props.history.push('/profile');
         default:
           return;
@@ -106,7 +107,7 @@ class PasswordEdit extends Component {
       <div className="change-password-container">
         {this.error()}
 
-        <form className="form-container">
+        <form className="form-container" ref={this.form}>
           <div className="input-container">
             <input
               type={this.state.oldType}
