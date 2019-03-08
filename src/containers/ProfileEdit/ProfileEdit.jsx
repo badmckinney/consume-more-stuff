@@ -91,65 +91,46 @@ class ProfileEdit extends Component {
       <div className="edit-profile-container">
         {this.error()}
         <form className="edit-profile">
-        <div className="info-container">
-          <div className="left-container">
-            <div>
-              <label htmlFor="email">Email:</label>
-            </div>
-            <input
-              type="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleInputOnChange}
-              required
-            />
+          <input
+            type="text"
+            name="first_name"
+            placeholder="First name"
+            value={this.state.first_name}
+            onChange={this.handleInputOnChange}
+            required
+            pattern="[A-Za-z]{1,30}"
+          />
 
-            <div>
-              <label htmlFor="username">Username:</label>
-            </div>
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleInputOnChange}
-              required
-              pattern="[A-Za-z0-9_]{6,30}"
-            />
+          <input
+            type="text"
+            name="last_name"
+            placeholder="Last name"
+            value={this.state.last_name}
+            onChange={this.handleInputOnChange}
+            required
+            pattern="[A-Za-z]{1,30}"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={this.state.email}
+            onChange={this.handleInputOnChange}
+            required
+          />
 
-            <div>
-              <label htmlFor="password">Password:</label>
-            </div>
-            <Link to="/password">change password</Link>
-          </div>
-
-          <div className="right-container">
-            <div>
-              <label htmlFor="first-name">First Name:</label>
-            </div>
-            <input
-              type="text"
-              name="first_name"
-              value={this.state.first_name}
-              onChange={this.handleInputOnChange}
-              required
-              pattern="[A-Za-z]{1,30}"
-            />
-
-            <div>
-              <label htmlFor="last-name">Last Name:</label>
-            </div>
-            <input
-              type="text"
-              name="last_name"
-              value={this.state.last_name}
-              onChange={this.handleInputOnChange}
-              required
-              pattern="[A-Za-z]{1,30}"
-            />
-          </div>
-          </div>
-      <div className="button-container">
-          <button className="btn"onClick={this.handleSubmit}>Edit Profile</button>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={this.state.username}
+            onChange={this.handleInputOnChange}
+            required
+            pattern="[A-Za-z0-9_]{6,30}"
+          />
+          <div className="button-container">
+            <Link to="/password"><div>Change password</div></Link>
+            <button className="btn" onClick={this.handleSubmit}>Edit Profile</button>
           </div>
         </form>
       </div>

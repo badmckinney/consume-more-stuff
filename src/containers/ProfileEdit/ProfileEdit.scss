@@ -4,54 +4,64 @@ $primary-color: #304ffe;
 $secondary-color: #424242;
 $tertiary-color: #eee;
 $hover-color: lighten($primary-color, 5%);
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
 html {
   body {
     #root {
       .app-container {
         .sidebar-app-container {
           .app-body {
-            margin-left: auto;
             .edit-profile-container {
-              background: #eee;
-              border-radius: 3px;
-              box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
-              width: 450px;
-              max-width: 450px;
-              margin: auto;
-              margin-top: 20%;
-              margin-bottom: 20.5%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: $tertiary-color;
+              width: 100%;
+              height: 89vh;
 
               .edit-profile {
                 display: flex;
                 flex-direction: column;
-                .info-container {
-                  padding: 15px;
-                  display: flex;
-                  .left-container {
-                    width: 50%;
-                    max-width: 50%;
-                  }
-                  .right-container {
-                    width: 50%;
-                    max-width: 50%;
-                  }
+                justify-content: center;
+                align-items: center;
+                padding: 25px;
+                border-radius: 3px;
+                box-shadow: 5px 5px 28px rgba(0,0,0,0.2);
+                background: #fff;
+                height: 60%;
+                width: 40%;
+
                   input {
-                    width: 90%;
-                    height: 25px;
+                    width: 70%;
+                    padding: 15px;
+                    border-radius: 2px;
+                    border: 1px solid $primary-color;
+                    margin-bottom: 15px;
+                    font-size: 16px;
                   }
                 }
+
                 .button-container {
                   padding: 10px;
-                  margin-right: 20px;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  width: 70%;
+
+                  div {
+                    font-size: 1.2em;
+                    font-family: $body-font;
+                  }
+
                   .btn {
-                    width: 90px;
-                    max-width: 90px;
-                    height: 30px;
+                    width: 100px;
+                    height: 40px;
                     float: right;
                     border: none;
                     border-radius: 2px;
@@ -62,6 +72,7 @@ html {
                     font-weight: 500;
                     transition: background-color 0.24s ease-in-out;
                   }
+
                   .btn:hover {
                     cursor: pointer;
                     background: $hover-color;
@@ -74,4 +85,4 @@ html {
       }
     }
   }
-}
+
