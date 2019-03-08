@@ -11,7 +11,7 @@ html {
       .app-container {
         .sidebar-app-container {
           .app-body {
-            width: 80%; 
+            width: 80%;
             margin-left: calc(100vw - 80.1%);
             background: $tertiary-color;
             min-height: 93.6vh;
@@ -43,6 +43,7 @@ html {
                 margin-top: 5.5em;
 
                 .top-category {
+                  margin-left: 1.5em;
                   .category-name {
                     padding: 0;
                     margin: 1em;
@@ -54,34 +55,34 @@ html {
                     border-radius: 2px;
                     width: 100%;
                     height: 320px;
-  
-                    .item-container{
+
+                    .item-container {
                       display: flex;
                       overflow-x: scroll;
                       width: 100%;
                       max-width: 100%;
                       padding-bottom: 12px;
                       height: 300px;
-  
+
                       a {
                         text-decoration: none;
                         padding: 15px;
 
                         .item {
-                          background:#fff;
-                          box-shadow: 5px 5px 28px rgba(0,0,0,0.2);
+                          background: #fff;
+                          box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
                           display: flex;
                           flex-direction: column;
                           border: 1px solid $tertiary-color;
                           border-radius: 2px;
                           width: 300px;
-                          max-width:300px;
-                          height:100%;
+                          max-width: 300px;
+                          height: 100%;
                           color: $secondary-color;
 
-                          .img-container{
-                            height:70%;
-                          
+                          .img-container {
+                            height: 70%;
+
                             img {
                               width: 100%;
                               object-fit: contain;
@@ -105,9 +106,9 @@ html {
                               color: $secondary-color;
                             }
                           }
-                          
+
                           .item-detail {
-                            display:flex;
+                            display: flex;
                             padding: 0em 1em 0em 1em;
                             width: 100%;
                             height: 15%;
@@ -117,8 +118,8 @@ html {
                               color: #bbb;
                             }
 
-                            .item-name{
-                              margin-left:10px;
+                            .item-name {
+                              margin-left: 10px;
                             }
                           }
                         }
@@ -134,4 +135,3 @@ html {
     }
   }
 }
-
