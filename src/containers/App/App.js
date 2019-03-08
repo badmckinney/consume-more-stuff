@@ -39,16 +39,9 @@ class App extends Component {
   }
 
   toggleMsg(msg) {
-    console.log('hit app');
     this.setState({
       isMessage: { ...this.state.isMessage, [msg]: !this.state.isMessage[msg] }
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location !== this.props.location) {
-      this.setState({ prevPath: this.props.location });
-    }
   }
 
   render() {
