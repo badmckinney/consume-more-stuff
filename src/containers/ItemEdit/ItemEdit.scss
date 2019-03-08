@@ -222,15 +222,16 @@ html {
                   display: flex;
                   justify-content: space-between;
                   width: 100%;
-                  .btn {
-                    width: 150px;
-                    height: 40px;
-                    background: $primary-color;
-                    color: white;
-                    font-size: 16px;
-                    border-radius: 3px;
-                    margin-top: 20px;
-                  }
+                  
+                .btn {
+                  width: 150px;
+                  height: 40px;
+                  background: $primary-color;
+                  color: white;
+                  font-size: 16px;
+                  border-radius: 3px;
+                  margin-top:20px;
+                }
 
                   .btn:active {
                     background: $tertiary-color;
