@@ -69,7 +69,7 @@ class PasswordEdit extends Component {
     const update = this.state;
 
     if (!this.validate()) {
-      return 
+      return
     }
 
     this.setState({
@@ -106,16 +106,14 @@ class PasswordEdit extends Component {
       <div className="change-password-container">
         {this.error()}
 
-        <div className="title">Change Your Password: </div>
         <form className="form-container">
-          <div className="password-container">
-            <div>
-              <label htmlFor="old">old password:</label>
-            </div>
+          <div className="input-container">
             <input
               type={this.state.oldType}
               name="old"
               value={this.state.old}
+              className="nested-input"
+              placeholder="Old password"
               onChange={this.handleInputOnChange}
               required
               minLength="6"
@@ -128,14 +126,15 @@ class PasswordEdit extends Component {
             >
               {this.state.oldWording}
             </span>
+          </div>
 
-            <div>
-              <label htmlFor="new">new password:</label>
-            </div>
+          <div className="input-container">
             <input
               type={this.state.newType}
               name="new"
               value={this.state.new}
+              placeholder="New Password"
+              className="nested-input"
               onChange={this.handleInputOnChange}
               required
               minLength="6"
@@ -148,20 +147,15 @@ class PasswordEdit extends Component {
             >
               {this.state.newWording}
             </span>
+          </div>
 
-            <div>
-              <label
-                htmlFor="confirm"
-                data-name="confirm"
-                onClick={this.handleToggle}
-              >
-                confirm new password:
-              </label>
-            </div>
+          <div className="input-container">
             <input
               type={this.state.confirmType}
               name="confirm"
               value={this.state.confirm}
+              className="nested-input"
+              placeholder="Confirm password"
               onChange={this.handleInputOnChange}
               required
               minLength="6"

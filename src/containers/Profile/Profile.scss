@@ -3,12 +3,14 @@ $body-font: 'Roboto', sans-serif;
 $primary-color: #304ffe;
 $secondary-color: #424242;
 $tertiary-color: #eee;
-$hover-color: lighten($primary-color, 5%);
+$hover-color: lighten($primary-color, 10%);
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
 html {
   body {
     #root {
