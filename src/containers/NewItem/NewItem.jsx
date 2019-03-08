@@ -80,6 +80,7 @@ class NewItem extends Component {
       }
 
       this.setState({ isError: false });
+      this.props.toggleMsg('addItem');
       return this.props.history.push(`/items/${data}`);
     });
   }

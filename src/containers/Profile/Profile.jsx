@@ -27,10 +27,12 @@ class Profile extends Component {
 
     if (status_id !== '1') {
       return this.props.editItem({ id: id, status_id: 1 }).then(data => {
+        this.props.toggleMsg('editItemStatus');
         return this.props.history.push(`/items/${id}`);
       });
     } else {
       return this.props.editItem({ id: id, status_id: 3 }).then(data => {
+        this.props.toggleMsg('editItemStatus');
         return this.props.history.push(`/items/${id}`);
       });
     }

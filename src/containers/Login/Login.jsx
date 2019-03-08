@@ -15,13 +15,34 @@ class Login extends Component {
     };
 
     this.error = this.error.bind(this);
+    this.showMsg = this.showMsg.bind(this);
     this.handleInputOnChange = this.handleInputOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillUnmount() {
+    if (this.props.isRegisteredMsg) {
+      this.props.toggleMsg('registered');
+    }
   }
 
   error() {
     if (this.state.isError) {
       return <div className="error">Invalid username or password</div>;
+    }
+
+    return <></>;
+  }
+
+  showMsg() {
+    if (this.props.isRegisteredMsg) {
+      return (
+        <div className="message-container">
+          <div className="message">
+            You have been successfully registered. Please log in here.
+          </div>
+        </div>
+      );
     }
 
     return <></>;
@@ -53,6 +74,7 @@ class Login extends Component {
     return (
       <div className="login-page">
         {this.error()}
+        {this.showMsg()}
         <form>
           <h1>Login</h1>
           <input

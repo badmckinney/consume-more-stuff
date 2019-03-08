@@ -136,6 +136,7 @@ class Register extends Component {
       }
 
       this.setState({ isError: false });
+      this.props.toggleMsg('registered');
       return this.props.history.push('/login');
     });
   }
