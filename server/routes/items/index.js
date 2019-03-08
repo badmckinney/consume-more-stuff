@@ -42,7 +42,7 @@ router.get('/items', (req, res) => {
     });
 });
 
-router.get('/items/owned',isAuthenticated, (req, res) => {
+router.get('/items/owned', isAuthenticated, (req, res) => {
   const id = req.user.id;
 
   Item.where('created_by', id)
@@ -253,7 +253,7 @@ router.get('/items/:id', (req, res) => {
  * POST
  ************************/
 
-router.post('/items/new', upload.single('image'),isAuthenticated, (req, res) => {
+router.post('/items/new', upload.single('image'), isAuthenticated, (req, res) => {
   const user = req.user;
 
   if (req.file) {
@@ -265,14 +265,14 @@ router.post('/items/new', upload.single('image'),isAuthenticated, (req, res) => 
     const file = path.join(`/src/app/server/uploads/${req.file.filename}`);
     const fileStream = fs.createReadStream(file);
 
-    fileStream.on('error', function(err) {
+    fileStream.on('error', function (err) {
       throw new Error('File Error', err);
     });
 
     uploadParams.Body = fileStream;
     uploadParams.Key = path.basename(file);
 
-    s3.upload(uploadParams, function(err, data) {
+    s3.upload(uploadParams, function (err, data) {
       if (err) {
         fs.unlink(`/src/app/server/uploads/${req.file.filename}`, err => {
           if (err) {
@@ -320,11 +320,13 @@ router.post('/items/new', upload.single('image'),isAuthenticated, (req, res) => 
       }
     });
   } else {
+    console.log('hit', req.body.image);
     const newItem = {
       created_by: user.id,
       category_id: parseInt(req.body.category_id),
       name: req.body.name,
       price: req.body.price ? parseInt(req.body.price) : null,
+      image: req.body.image,
       description: req.body.description,
       manufacturer: req.body.manufacturer,
       model: req.body.manufacturer,
@@ -355,7 +357,7 @@ router.post('/items/new', upload.single('image'),isAuthenticated, (req, res) => 
  * PUT
  ************************/
 
-router.put('/items/:id', isAuthenticated,(req, res) => {
+router.put('/items/:id', isAuthenticated, (req, res) => {
   const item_id = req.params.id;
   const user_id = req.user.id;
   const editedItem = {
@@ -429,7 +431,7 @@ router.put('/items/:id/views', (req, res) => {
  *  DELETE
  ************************/
 
-router.delete('/items/:id',isAuthenticated, (req, res) => {
+router.delete('/items/:id', isAuthenticated, (req, res) => {
   const id = req.params.id;
   const user_id = req.user.id;
 

@@ -80,10 +80,11 @@ html {
                           color: $secondary-color;
 
                           .img-container{
-                            height:85%;
+                            height:70%;
                           
                             img {
                               width: 100%;
+                              object-fit: contain;
                             }
                           }
 
