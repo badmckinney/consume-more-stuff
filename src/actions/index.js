@@ -11,6 +11,8 @@ export const FETCHED_PROFILE = 'FETCHED_PROFILE';
 export const FETCHED_USERS_ITEMS = 'FETCHED_USERS_ITEMS';
 export const EDIT_PROFILE = 'EDIT_PROFILE';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+export const CHECK_UNIQUE_USERNAME = 'CHECK_UNIQUE_USERNAME';
+export const CHECK_UNIQUE_EMAIL = 'CHECK_UNIQUE_EMAIL';
 
 export const register = newUser => {
   return () => {
@@ -287,5 +289,47 @@ export const changePassword = passUpdate => {
         return 'success';
       })
       .catch(err => 'error');
+  };
+};
+
+export const checkUniqueUsername = username => {
+  return () => {
+    return fetch(`/api/profile/username/${username}/isunique`)
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error checking unique username');
+        }
+
+        return res.json();
+      })
+      .then(res => {
+        if (!res.exists) {
+          return true;
+        }
+
+        return false;
+      })
+      .catch(err => false);
+  };
+};
+
+export const checkUniqueEmail = email => {
+  return () => {
+    return fetch(`/api/profile/email/${email}/isunique`)
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error checking unique email');
+        }
+
+        return res.json();
+      })
+      .then(res => {
+        if (!res.exists) {
+          return true;
+        }
+
+        return false;
+      })
+      .catch(err => false);
   };
 };
