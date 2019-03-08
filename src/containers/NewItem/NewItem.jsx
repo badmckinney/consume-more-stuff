@@ -86,7 +86,7 @@ class NewItem extends Component {
 
   render() {
     if (!this.props.currentUser) {
-      return <div className="error">Must be logged in to create post</div>;
+      return <div className="error">You must be logged in to do that!</div>;
     }
 
     return (
@@ -164,7 +164,7 @@ class NewItem extends Component {
                     onChange={this.handleInputOnChange}
                     required
                   >
-                    <option value="">Choose a Category</option>
+                    <option value="">Select a Category</option>
                     <option value="1">Apparel</option>
                     <option value="2">Appliances</option>
                     <option value="3">Automotive</option>
@@ -199,7 +199,7 @@ class NewItem extends Component {
                   <input
                     type="text"
                     name="length"
-                    placeholder="length"
+                    placeholder="Length"
                     value={this.state.length}
                     onChange={this.handleInputOnChange}
                   />
@@ -207,14 +207,14 @@ class NewItem extends Component {
                   <input
                     type="text"
                     name="width"
-                    placeholder="width"
+                    placeholder="Width"
                     value={this.state.width}
                     onChange={this.handleInputOnChange}
                   />
                   <input
                     type="text-area"
                     name="height"
-                    placeholder="height"
+                    placeholder="Height"
                     value={this.state.height}
                     onChange={this.handleInputOnChange}
                   />
