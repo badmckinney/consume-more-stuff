@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const upload = multer({ dest: 'server/uploads/' });
-const isAuth = require('../isAuth');
+const isAuthenticated = require('../isAuth');
 
 
 const bookshelf = require('../../../database/models/bookshelf');
@@ -42,7 +42,7 @@ router.get('/items', (req, res) => {
     });
 });
 
-router.get('/items/owned',isAuth, (req, res) => {
+router.get('/items/owned',isAuthenticated, (req, res) => {
   const id = req.user.id;
 
   Item.where('created_by', id)
@@ -253,7 +253,7 @@ router.get('/items/:id', (req, res) => {
  * POST
  ************************/
 
-router.post('/items/new', upload.single('image'),isAuth, (req, res) => {
+router.post('/items/new', upload.single('image'),isAuthenticated, (req, res) => {
   const user = req.user;
 
   if (req.file) {
@@ -355,7 +355,7 @@ router.post('/items/new', upload.single('image'),isAuth, (req, res) => {
  * PUT
  ************************/
 
-router.put('/items/:id', isAuth,(req, res) => {
+router.put('/items/:id', isAuthenticated,(req, res) => {
   const item_id = req.params.id;
   const user_id = req.user.id;
   const editedItem = {
@@ -405,7 +405,7 @@ router.put('/items/:id', isAuth,(req, res) => {
  *  DELETE
  ************************/
 
-router.delete('/items/:id',isAuth, (req, res) => {
+router.delete('/items/:id',isAuthenticated, (req, res) => {
   const id = req.params.id;
   const user_id = req.user.id;
 
