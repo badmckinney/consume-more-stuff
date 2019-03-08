@@ -47,6 +47,7 @@ html {
               .message-container {
                 width: 45%;
                 margin-bottom: 15px;
+
                 .message {
                   background: #fff;
                   text-align: center;
@@ -201,7 +202,7 @@ html {
 
                   .manage-column {
                     .btn {
-                      border: 1px solid $primary-color;
+                      border: none;
                       padding: 2px;
                       color: $primary-color;
                       font-size: 0.8em;
