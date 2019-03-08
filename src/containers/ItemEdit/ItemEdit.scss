@@ -1,6 +1,6 @@
 $logo-font: 'Staatliches', sans-serif;
 $body-font: 'Roboto', sans-serif;
-$primary-color: #304FFE;
+$primary-color: #304ffe;
 $secondary-color: #424242;
 $tertiary-color: #eee;
 $hover-color: lighten($primary-color, 10%);
@@ -30,7 +30,7 @@ html {
                 justify-content: center;
                 align-items: center;
                 padding: 2em;
-                box-shadow: 5px 5px 28px rgba(0,0,0,0.2);
+                box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
 
                 h1 {
                   font-family: $body-font;
@@ -88,7 +88,7 @@ html {
                     input {
                       width: 170px;
                       margin-left: 15px;
-                    } 
+                    }
                   }
                 }
 
@@ -114,7 +114,7 @@ html {
                     }
 
                     textarea {
-                      resize:none;
+                      resize: none;
                       width: 100%;
                       height: 200px;
                       padding: 10px;
@@ -126,7 +126,6 @@ html {
                   }
                 }
 
-
                 .posting-details {
                   border: 1px solid $secondary-color;
                   width: 100%;
@@ -134,13 +133,13 @@ html {
                   justify-content: space-between;
                   text-align: left;
                   background: $tertiary-color;
-                  border-radius:3px;
+                  border-radius: 3px;
                   height: 210px;
                   padding: 20px;
 
                   .details-left {
                     width: 50%;
-                    display: flex; 
+                    display: flex;
                     flex-direction: column;
                     justify-content: space-between;
                     align-items: center;
@@ -165,7 +164,6 @@ html {
                       width: 90%;
 
                       label {
-
                         font-family: $body-font;
                         color: $secondary-color;
                       }
@@ -187,7 +185,7 @@ html {
                         font-family: $body-font;
                         color: $secondary-color;
                       }
-                      
+
                       div {
                         display: flex;
                         justify-content: space-between;
@@ -220,7 +218,7 @@ html {
                   }
                 }
 
-                .button-container{
+                .button-container {
                   display: flex;
                   justify-content: space-between;
                   width: 100%;
@@ -235,14 +233,14 @@ html {
                   margin-top:20px;
                 }
 
-                .btn:active {
-                  background: $tertiary-color;
-                }
+                  .btn:active {
+                    background: $tertiary-color;
+                  }
 
-                .btn:hover{
-                  background:$hover-color;
+                  .btn:hover {
+                    background: $hover-color;
+                  }
                 }
-              }
               }
             }
           }

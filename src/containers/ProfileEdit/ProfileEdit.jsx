@@ -88,10 +88,11 @@ class ProfileEdit extends Component {
     }
 
     return (
-      <div className="profile-edit-page">
+      <div className="edit-profile-container">
         {this.error()}
-        <form className="profile-edit">
-          <div className="left">
+        <form className="edit-profile">
+        <div className="info-container">
+          <div className="left-container">
             <div>
               <label htmlFor="email">Email:</label>
             </div>
@@ -121,7 +122,7 @@ class ProfileEdit extends Component {
             <Link to="/password">change password</Link>
           </div>
 
-          <div className="right">
+          <div className="right-container">
             <div>
               <label htmlFor="first-name">First Name:</label>
             </div>
@@ -146,8 +147,10 @@ class ProfileEdit extends Component {
               pattern="[A-Za-z]{1,30}"
             />
           </div>
-
-          <button onClick={this.handleSubmit}>Edit Profile</button>
+          </div>
+      <div className="button-container">
+          <button className="btn"onClick={this.handleSubmit}>Edit Profile</button>
+          </div>
         </form>
       </div>
     );
