@@ -39,7 +39,7 @@ class Login extends Component {
       return (
         <div className="message-container">
           <div className="message">
-            You have been successfully registered. Please log in here.
+            Your account has been created. Please log in here.
           </div>
         </div>
       );
