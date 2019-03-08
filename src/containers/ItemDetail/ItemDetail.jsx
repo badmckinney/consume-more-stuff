@@ -87,20 +87,22 @@ class ItemDetail extends Component {
 
     return (
       <div className="detail-container">
-        {this.editButton()}
         <div className="header-container">
-          <h3> {item.name} </h3>
-          <h3> {item.price ? `$${item.price}` : ''} </h3>
-
-          <h3>
-            Posted <Moment fromNow>{localCreatedAt}</Moment>
-          </h3>
+          <div className="header-left">
+            <h1> {item.name} –</h1>
+            <h2> {item.price ? `$${item.price}` : ''} </h2>
+            <h4>
+              Posted <Moment fromNow>{localCreatedAt}</Moment>
+            </h4>
+          </div>
+          {this.editButton()}
         </div>
         <div className="content-wrapper">
-          <div className="detail-image">
+          <div className="detail-left">
             <img alt={item.name} src={item.image} />
+            <div className="description">{item.description}</div>
           </div>
-          <div className="detail-wrapper">
+          <div className="detail-right">
             <div className="detail">
               <p>Manufacturer: </p>
               <p>{item.manufacturer}</p>
@@ -111,19 +113,14 @@ class ItemDetail extends Component {
               <p> {item.model} </p>
             </div>
 
-            <div className="detail">Length: {item.length}</div>
-            <div className="detail">Width: {item.width}</div>
-            <div className="detail">Height: {item.height}</div>
+            <div className="detail"><p>Length:</p> {item.length}</div>
+            <div className="detail"><p>Width:</p> {item.width}</div>
+            <div className="detail"><p>Height:</p> {item.height}</div>
 
             <div className="detail">
-              <p> Additional information</p>
+              <p> Additional notes: </p>
               <p> {item.notes} </p>
             </div>
-          </div>
-        </div>
-        <div className="description-container">
-          <div className="description">
-            <div>{item.description}</div>
           </div>
         </div>
         <div className="additional-details">

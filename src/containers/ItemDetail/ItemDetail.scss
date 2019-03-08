@@ -1,11 +1,10 @@
-$primary-color: #424242;
-$secondary-color: #ccc;
-$hover-color: lighten($primary-color, 20%);
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+$logo-font: 'Staatliches', sans-serif;
+$body-font: 'Roboto', sans-serif;
+$primary-color: #304FFE;
+$secondary-color: #424242;
+$tertiary-color: #eee;
+$hover-color: lighten($primary-color, 10%);
+
 html {
   body {
     #root {
@@ -13,74 +12,135 @@ html {
         .sidebar-app-container {
           .app-body {
             .detail-container {
-              background: #eee;
-              border-radius: 10px;
-              box-shadow: 5px 5px 28px rgba(0, 0, 0, 0.2);
-              width: 70%;
-              margin: auto;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              background: $tertiary-color;
+              width: 100%;
+              height: 100%;
               padding: 50px;
-              margin-top: 5%;
+              margin-top: 4em;
+
               .header-container {
                 display: flex;
-                width: 85%;
-                margin-bottom: 10px;
-                h3 {
-                  margin-left: 5px;
+                align-items: center;
+                width: 80%;
+                justify-content: space-between;
+
+                .header-left {
+                  display: flex;
+                  width: 80%;
+                  justify-content: flex-start;
+                  align-items: center;
+                  font-family: $body-font;
+
+                  h1, h2 {
+                    margin-right: 15px;
+                    color: $secondary-color;
+                  }
+
+                  h2 {
+                    font-weight: 500;
+                  }
+
+                  h4 {
+                    font-size: 0.9em;
+                    color: darken($tertiary-color, 30%);
+                    font-weight: 300;
+                  }
                 }
-                p {
-                  margin-left: auto;
+
+                .btn {
+                  width: 80px;
+                  max-width: 80px;
+                  height: 30px;
+                  float: right;
+                  border: 0px;
+                  background: $primary-color;
+                  color: white;
+                  font-size: 16px;
+                  border-radius: 3px;
+                  transition: background-color 0.25s ease-in-out;
+                }
+                .btn:active {
+                  background: $secondary-color;
+                }
+                .btn:hover{
+                  background:$hover-color;
                 }
               }
+
               .content-wrapper {
                 display: flex;
-                height: 400px;
-                max-height: 400px;
-                .detail-wrapper {
-                  margin-left: 5px;
-                  .detail {
-                    margin-top: 5%;
-                    padding: 2px;
-                    width: 200px;
-                    max-width: 200px;
-                    text-align: center;
-                    background: #eee;
-                    border-radius: 10px;
-                    border: 1px solid grey;
-                  }
-                  .dimension {
-                    margin-top: 2%;
-                  }
-                }
-                .detail-image {
-                  width: 500px;
-                  max-width: 500px;
+                width: 80%;
+
+                .detail-left {
+                  display: flex;
+                  flex-direction: column;
+
                   img {
-                    border: 1px solid black;
-                    width: 100%;
+                    width: 600px;
+                    max-height: 500px;
+                    border-radius: 3px;
+                    margin-bottom: 10px;
+                    border: 1px solid $secondary-color;
+                  }
+
+                  .description {
+                    font-size: 1.2em;
+                    font-family: $body-font;
+                  }
+                }
+
+                .detail-right {
+                  width: calc(100% - 600px);
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-end;
+
+                  .detail {
+                    margin-bottom: 10px;
+                    padding: 10px;
+                    width: 80%;
+                    border-radius: 3px;
+                    border: 1px solid $primary-color;
+                    color: $secondary-color;
+                    font-family: $body-font;
+
+                    p {
+                      margin: 0;
+                    }
+
+                    p:first-child {
+                      font-weight: 800;
+                      font-size: 0.7em;
+                      text-transform: uppercase;
+                      color: $primary-color;
+                    }
                   }
                 }
               }
-              .btn {
-                width: 80px;
-                max-width: 80px;
-                height: 30px;
-                float: right;
-                border: 0px;
-                background: $primary-color;
-                color: white;
-                font-size: 16px;
-                border-radius: 2px;
+
+              .additional-details {
+                display: flex;
+                justify-content: flex-start;
+                margin-top: 10px;
+                width: 80%;
+
+                .id,
+                .created {
+                  margin-right: 15px;
+                  color: $primary-color;
+                  font-family: $body-font;
+                  font-weight: 300;
+                }
+
+                .id {
+                  text-transform: uppercase;
+                }
               }
-              .btn:active {
-                background: $secondary-color;
-              }
-              .btn:hover{
-                background:$hover-color;
-              }
-              .description-container {
-                width: 500px;
-                padding: 15px;
-              }
+
             }
           }
         }
