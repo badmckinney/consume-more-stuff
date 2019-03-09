@@ -28,7 +28,7 @@ if (!SESSION_SECRET) {
 
 const app = express();
 
-app.use(express.static('public'));
+app.use(express.static('build'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -70,7 +70,7 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(
-  new LocalStrategy(function(username, password, done) {
+  new LocalStrategy(function (username, password, done) {
     return User.query(qb => {
       qb.whereRaw(`LOWER(username) LIKE ?`, [username]);
     })
