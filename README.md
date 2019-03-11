@@ -29,6 +29,10 @@ A Craigslist-inspired CMS built with React and PostgreSQL in a Docker container 
 * Moment.js
 * Multer
 
+## How to run?
+
+You can demo the aplication here: [Demo](http://35.162.226.90:8000)
+
 ## Screenshots
 
 ![Home View](./screenshots/home.png "Home view")
