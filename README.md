@@ -1,15 +1,18 @@
 # Edslist
 
-A digital Kanban Board (task manager) built with React, Redux and PostgreSQL 
+A Craigslist-inspired CMS built with React and PostgreSQL in a Docker container and deployed on AWS 
 
 ## Features
 
 - Full authentication & Password encryption
 - Client-side & Server-side Session Management
+- File upload support
+- Search filtering
 
 ## Technologies & Frameworks
 
 * React
+* React-router
 * Redux
 * Redux-thunk
 * AWS
@@ -23,6 +26,8 @@ A digital Kanban Board (task manager) built with React, Redux and PostgreSQL
 * PostgreSQL
 * Docker
 * Sass
+* Moment.js
+* Multer
 
 ## Screenshots
 
