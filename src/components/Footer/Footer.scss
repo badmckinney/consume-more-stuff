@@ -1,0 +1,18 @@
+$logo-font: 'Staatliches', sans-serif;
+$body-font: 'Roboto', sans-serif;
+$primary-color: #304FFE;
+$secondary-color: #424242;
+$tertiary-color: #eee;
+$hover-color: lighten($primary-color, 5%);
+
+
+.footer-container{
+  border: none;
+  height: 60px;
+  padding: 0px;
+  background: $secondary-color;
+  width: 80.2%;
+  position: relative;
+  margin-left: auto;
+  bottom: 0;
+}

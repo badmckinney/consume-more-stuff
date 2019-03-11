@@ -1,0 +1,112 @@
+$logo-font: 'Staatliches', sans-serif;
+$body-font: 'Roboto', sans-serif;
+$primary-color: #304ffe;
+$secondary-color: #424242;
+$tertiary-color: #eee;
+$hover-color: lighten($primary-color, 5%);
+.item {
+  display: flex;
+  height: 40px;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .item-detail-container {
+    display: flex;
+    overflow-y: scroll;
+    .item-columns {
+      border: 1px solid black;
+      border-top: 0px solid black;
+      .item-status {
+        padding: 3px;
+        width: 60px;
+        max-width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-name {
+        padding: 3px;
+        width: 120px;
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-category {
+        padding: 3px;
+        width: 150px;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-date {
+        padding: 3px;
+
+        width: 160px;
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-updated-date {
+        padding: 3px;
+
+        width: 160px;
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-views {
+        padding: 3px;
+
+        width: 60px;
+        max-width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-id {
+        padding: 3px;
+
+        width: 60px;
+        max-width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-edit {
+        padding: 4px;
+
+        width: 119px;
+        max-width: 119px;
+        .btn {
+          margin-top: 5px;
+          width: 80px;
+          max-width: 80px;
+          height: 25px;
+          border: none;
+          border-radius: 2px;
+          background: $primary-color;
+          color: #fff;
+          font-size: 16px;
+          font-family: $body-font;
+          font-weight: 500;
+        }
+        .btn:active {
+          background: $secondary-color;
+        }
+        .btn:hover {
+          background: $hover-color;
+        }
+      }
+    }
+  }
+  .manage {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+}

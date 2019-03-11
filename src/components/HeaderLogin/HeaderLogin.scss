@@ -1,0 +1,58 @@
+$logo-font: 'Staatliches', sans-serif;
+$body-font: 'Roboto', sans-serif;
+$primary-color: #304FFE;
+$secondary-color: #424242;
+$tertiary-color: #eee;
+$hover-color: lighten($primary-color, 5%);
+
+html {
+  body {
+    width: 100%;
+    margin: 0;
+
+    #root {
+      .header {
+        .logged-in,
+        .logged-out {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          color: #fff;
+          font-family: $body-font;
+          text-transform: capitalize;
+          padding: 1em;
+
+          .link {
+            height: 100%;
+            border-radius: 2px;
+            color: #fff;
+            font-family: $body-font;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin-left: 1em;
+            transition: background-color 0.25s ease-in-out;
+          }
+
+          button {
+            height: 100%;
+            width: 70px;
+            border-radius: 2px;
+            background: $primary-color;
+            border: 1px solid #fff;
+            color: #fff;
+            font-family: $body-font;
+            font-weight: 300;
+            font-size: 0.9em;
+            margin-left: 1em;
+            transition: background-color 0.25s ease-in-out;
+          }
+
+          button:hover {
+            background: $hover-color;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
